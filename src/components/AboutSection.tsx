@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import {
@@ -13,11 +14,17 @@ import {
   Code,
   CheckCircle,
   Star,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { TeamMember } from "@/types";
 import AnimatedCounter from "./AnimatedCounter";
 
 const AboutSection = () => {
+  const [visibleCards, setVisibleCards] = useState(3);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
   const teamMembers: TeamMember[] = [
     {
       id: "lubega",
@@ -40,6 +47,35 @@ const AboutSection = () => {
         github: "https://github.com/Lubwama-Emmanuel",
       },
     },
+
+    {
+      id: "solomon",
+      name: "Solomon Kyagulanyi",
+      role: "Software Engineer",
+      image: "/staff/solomon.jpeg",
+      bio: "Software engineer on the Lubech tech team, comfortable across Linux, Python, Java, SQL, and Git, with additional strength in R and Julia for data and analytical work.",
+      social: {},
+    },
+    {
+      id: "dembe",
+      name: "Dembe Oscar",
+      role: "AI/ML Engineer",
+      image: "/staff/oscar.jpeg",
+      bio: "AI/ML Engineer on the Lubech tech team, comfortable across Linux, Python, Java, SQL, and Git, with additional strength in R and Julia for data and analytical work.",
+      social: {
+        linkedin: "https://www.linkedin.com/in/oscardembe/",
+      },
+    },
+    {
+      id: "anncarl",
+      name: "Anncarl Mwendwa",
+      role: "Software Engineer",
+      image: "/staff/anncarl.jpeg",
+      bio: "Software Engineer on the Lubech tech team, comfortable across Linux, Python, Java, SQL, and Git, with additional strength in R and Julia for data and analytical work.",
+      social: {
+        linkedin: "https://www.linkedin.com/in/anncarl-mwendwa/"
+      },
+    },
     {
       id: "isco",
       name: "Ronald Isiko",
@@ -52,6 +88,53 @@ const AboutSection = () => {
       },
     },
   ];
+
+  const maxIndex = Math.max(0, teamMembers.length - visibleCards);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setVisibleCards(1);
+      } else if (window.innerWidth < 1024) {
+        setVisibleCards(2);
+      } else {
+        setVisibleCards(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (currentIndex > maxIndex) {
+      setCurrentIndex(maxIndex);
+    }
+  }, [visibleCards, maxIndex, currentIndex]);
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => {
+        if (prev >= maxIndex) {
+          return 0;
+        }
+        return prev + 1;
+      });
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [isPaused, maxIndex]);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
 
   const values = [
     {
@@ -227,105 +310,162 @@ const AboutSection = () => {
             Our <span className="gradient-text">Team</span>
           </motion.h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {teamMembers.map((member) => (
-              <motion.div
-                key={member.id}
-                variants={itemVariants}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="glass rounded-2xl p-8 border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-300 text-center"
+          <div
+            className="relative max-w-7xl mx-auto px-4 sm:px-12"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {/* Carousel Viewport Container */}
+            <div className="overflow-hidden">
+              <div
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{
+                  transform: `translateX(-${currentIndex * (100 / visibleCards)}%)`
+                }}
               >
-                <div className="relative w-32 h-32 mx-auto mb-6">
-                  <div className="absolute inset-0 glass rounded-full border-2 border-white/20 overflow-hidden">
-                    {member.image &&
-                    member.image !== "/api/placeholder/300/300" ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = "none";
-                          const parent = target.parentElement;
-                          if (parent) {
-                            const fallback =
-                              parent.querySelector(".member-fallback");
-                            if (fallback) {
-                              (fallback as HTMLElement).style.display = "flex";
-                            }
-                          }
-                        }}
-                      />
-                    ) : null}
-                    <div
-                      className="member-fallback absolute inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-500/20 to-orange-500/20"
-                      style={{
-                        display:
-                          member.image &&
-                          member.image !== "/api/placeholder/300/300"
-                            ? "none"
-                            : "flex",
-                      }}
+                {teamMembers.map((member) => (
+                  <div
+                    key={member.id}
+                    className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-4"
+                  >
+                    <motion.div
+                      variants={itemVariants}
+                      whileHover={{ y: -10, scale: 1.02 }}
+                      className="glass rounded-2xl p-8 border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-300 text-center h-full flex flex-col justify-between"
                     >
-                      <Users className="h-12 w-12 text-white/60" />
-                    </div>
+                      <div>
+                        <div className="relative w-32 h-32 mx-auto mb-6">
+                          <div className="absolute inset-0 glass rounded-full border-2 border-white/20 overflow-hidden">
+                            {member.image &&
+                              member.image !== "/api/placeholder/300/300" ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={member.image}
+                                alt={member.name}
+                                className="w-full h-full object-cover"
+                                loading="lazy"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.style.display = "none";
+                                  const parent = target.parentElement;
+                                  if (parent) {
+                                    const fallback =
+                                      parent.querySelector(".member-fallback");
+                                    if (fallback) {
+                                      (fallback as HTMLElement).style.display = "flex";
+                                    }
+                                  }
+                                }}
+                              />
+                            ) : null}
+                            <div
+                              className="member-fallback absolute inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-500/20 to-orange-500/20"
+                              style={{
+                                display:
+                                  member.image &&
+                                    member.image !== "/api/placeholder/300/300"
+                                    ? "none"
+                                    : "flex",
+                              }}
+                            >
+                              <Users className="h-12 w-12 text-white/60" />
+                            </div>
+                          </div>
+                        </div>
+
+                        <h4 className="text-xl font-bold text-white mb-2">
+                          {member.name}
+                        </h4>
+
+                        <p className="text-indigo-400 font-semibold mb-4">
+                          {member.role}
+                        </p>
+
+                        <p className="text-white/80 mb-6 leading-relaxed text-sm">
+                          {member.bio}
+                        </p>
+                      </div>
+
+                      <div className="flex justify-center space-x-4 mt-auto">
+                        {member.social.linkedin && (
+                          <motion.a
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            href={member.social.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 glass text-indigo-400 rounded-full border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-200"
+                          >
+                            <Linkedin className="h-5 w-5" />
+                          </motion.a>
+                        )}
+                        {member.social.twitter && (
+                          <motion.a
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            href={member.social.twitter}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 glass text-indigo-400 rounded-full border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-200"
+                          >
+                            <Twitter className="h-5 w-5" />
+                          </motion.a>
+                        )}
+                        {member.social.github && (
+                          <motion.a
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            href={member.social.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 glass text-white/80 rounded-full border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-200"
+                          >
+                            <Github className="h-5 w-5" />
+                          </motion.a>
+                        )}
+                      </div>
+                    </motion.div>
                   </div>
-                </div>
+                ))}
+              </div>
+            </div>
 
-                <h4 className="text-xl font-bold text-white mb-2">
-                  {member.name}
-                </h4>
+            {/* Navigation Buttons */}
+            {maxIndex > 0 && (
+              <>
+                <button
+                  onClick={handlePrev}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-6 z-10 p-3 rounded-full glass border border-white/20 text-white hover:bg-white/10 hover:border-white/30 transition-all focus:outline-none cursor-pointer"
+                  aria-label="Previous team member"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-6 z-10 p-3 rounded-full glass border border-white/20 text-white hover:bg-white/10 hover:border-white/30 transition-all focus:outline-none cursor-pointer"
+                  aria-label="Next team member"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </>
+            )}
 
-                <p className="text-indigo-400 font-semibold mb-4">
-                  {member.role}
-                </p>
-
-                <p className="text-white/80 mb-6 leading-relaxed">
-                  {member.bio}
-                </p>
-
-                <div className="flex justify-center space-x-4">
-                  {member.social.linkedin && (
-                    <motion.a
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      href={member.social.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 glass text-indigo-400 rounded-full border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-200"
-                    >
-                      <Linkedin className="h-5 w-5" />
-                    </motion.a>
-                  )}
-                  {member.social.twitter && (
-                    <motion.a
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      href={member.social.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 glass text-indigo-400 rounded-full border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-200"
-                    >
-                      <Twitter className="h-5 w-5" />
-                    </motion.a>
-                  )}
-                  {member.social.github && (
-                    <motion.a
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      href={member.social.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 glass text-white/80 rounded-full border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-200"
-                    >
-                      <Github className="h-5 w-5" />
-                    </motion.a>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+            {/* Pagination Dots */}
+            {maxIndex > 0 && (
+              <div className="flex justify-center space-x-2 mt-8">
+                {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentIndex(index)}
+                    className={`h-2 rounded-full transition-all duration-300 focus:outline-none cursor-pointer ${currentIndex === index
+                        ? "w-8 bg-indigo-500"
+                        : "w-2 bg-white/25 hover:bg-white/40"
+                      }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </motion.div>
 
