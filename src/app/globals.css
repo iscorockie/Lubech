@@ -5,8 +5,7 @@
  * Font files live in public/fonts/<family>/ — see public/fonts/README.md.
  *
  *   Sora       → bold texts / headings
- *   PolySans   → body / other text
- *   Nexa       → numbers & digits
+ *   Sen        → body / other text & numbers & digits
  */
 @font-face {
   font-family: "Sora";
@@ -17,31 +16,41 @@
 }
 
 @font-face {
-  font-family: "PolySans";
-  src: url("/fonts/polysans/PolySans-Median.woff2") format("woff2"),
-    url("/fonts/polysans/PolySans-Median.woff") format("woff"),
-    url("/fonts/polysans/PolySans-Median.ttf") format("truetype");
+  font-family: "Sen";
+  src: url("/fonts/sen/sen-latin-400-normal.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "PolySans";
-  src: url("/fonts/polysans/PolySans-Bold.woff2") format("woff2"),
-    url("/fonts/polysans/PolySans-Bold.woff") format("woff"),
-    url("/fonts/polysans/PolySans-Bold.ttf") format("truetype");
+  font-family: "Sen";
+  src: url("/fonts/sen/sen-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sen";
+  src: url("/fonts/sen/sen-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sen";
+  src: url("/fonts/sen/sen-latin-700-normal.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Nexa";
-  src: url("/fonts/nexa/Nexa-Bold.woff2") format("woff2"),
-    url("/fonts/nexa/Nexa-Bold.woff") format("woff"),
-    url("/fonts/nexa/Nexa-Bold.ttf") format("truetype");
-  font-weight: 700;
+  font-family: "Sen";
+  src: url("/fonts/sen/sen-latin-800-normal.woff2") format("woff2");
+  font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
@@ -68,8 +77,7 @@
   --surface: rgba(255, 255, 255, 0.08);
 
   --font-sora: "Sora", "Sora Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-poly: "PolySans", "PolySans Trial", ui-sans-serif, system-ui, sans-serif;
-  --font-nexa: "Nexa", "Nexa-Trial", ui-sans-serif, system-ui, sans-serif;
+  --font-sen: "Sen", "Sen Variable", ui-sans-serif, system-ui, sans-serif;
 }
 
 @theme inline {
@@ -84,9 +92,9 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --font-sans: var(--font-poly);
+  --font-sans: var(--font-sen);
   --font-heading: var(--font-sora);
-  --font-numeric: var(--font-nexa);
+  --font-numeric: var(--font-sen);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 }
@@ -103,7 +111,7 @@ body {
 body {
   min-height: 100vh;
   color: var(--foreground);
-  font-family: var(--font-poly), system-ui, sans-serif;
+  font-family: var(--font-sen), system-ui, sans-serif;
   line-height: 1.6;
   position: relative;
   margin: 0;
@@ -127,7 +135,7 @@ b,
 }
 
 .font-numeric {
-  font-family: var(--font-nexa), system-ui, sans-serif;
+  font-family: var(--font-sen), system-ui, sans-serif;
   font-variant-numeric: lining-nums tabular-nums;
 }
 
