@@ -60,7 +60,7 @@ const HeroSection = () => {
             >
               <Sparkles className="h-4 w-4 text-yellow-400" />
               <span className="text-sm font-semibold tracking-wide text-white/90">
-                Digital Studio · UK
+                Professional Development Services
               </span>
             </motion.div>
 
@@ -78,9 +78,8 @@ const HeroSection = () => {
               variants={itemVariants}
               className="text-lg md:text-xl text-white/80 max-w-xl leading-relaxed mb-9"
             >
-              From concept to deployment, we craft modern websites, mobile apps,
-              and robust backend systems that transform your ideas into digital
-              reality.
+              We build stunning websites, cross-platform mobile applications,
+              and robust backend systems that drive your business forward.
             </motion.p>
 
             <motion.div
