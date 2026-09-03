@@ -9,6 +9,7 @@ import {
   Heart,
   Linkedin,
   Github,
+  Youtube,
   CheckCircle,
   ChevronLeft,
   ChevronRight,
@@ -88,7 +89,9 @@ const AboutSection = () => {
       role: "Tech Consultant & Sports Journalist",
       image: "/staff/daniel.jpg",
       bio: "Tech Consultant and Sports Journalist on the Lubech team, bringing together technical consulting expertise with a passion for sports journalism to deliver insightful, data-driven content and analysis.",
-      social: {},
+      social: {
+        youtube: "https://youtu.be/M0niLgG-QmA?si=8LDcTyDSG15DV45q",
+      },
     },
   ];
 
@@ -365,6 +368,18 @@ const AboutSection = () => {
                               className="w-9 h-9 flex items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/20 hover:bg-[#4676c2] hover:text-white transition-colors"
                             >
                               <Github className="h-4 w-4" />
+                            </motion.a>
+                          )}
+                          {member.social.youtube && (
+                            <motion.a
+                              whileHover={{ scale: 1.15 }}
+                              href={member.social.youtube}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`${member.name} on YouTube`}
+                              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/20 hover:bg-[#4676c2] hover:text-white transition-colors"
+                            >
+                              <Youtube className="h-4 w-4" />
                             </motion.a>
                           )}
                         </div>
