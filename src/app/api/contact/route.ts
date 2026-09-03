@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
     await transporter.sendMail({
       from: `"Lubech" <${process.env.SMTP_USER}>`,
       to: email,
-      subject: "We received your message — Tech Pham",
+      subject: "We received your message — Lubech",
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; background: #0f0f23; color: #fff; border-radius: 16px; overflow: hidden;">
           <div style="background: linear-gradient(135deg, #4676C2, #59C368); padding: 32px; text-align: center;">
@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
               In the meantime, feel free to browse our portfolio or reach out directly at
               <a href="mailto:${process.env.CONTACT_TO}" style="color: #59C368;">${process.env.CONTACT_TO}</a>.
             </p>
-            <p style="color: #888; margin-top: 32px; font-size: 13px;">— The Tech Pham Team</p>
+            <p style="color: #888; margin-top: 32px; font-size: 13px;">— The Lubech Team</p>
           </div>
         </div>
       `,

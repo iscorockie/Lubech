@@ -291,6 +291,11 @@ b,
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
+/*** Scroll progress bar background ***/
+.gradient-bg {
+  background: linear-gradient(90deg, #4676c2 0%, #59c368 100%);
+}
+
 /*** Gradient text ***/
 .gradient-text {
   background: linear-gradient(135deg, #4676c2 0%, #59c368 100%);
