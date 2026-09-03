@@ -183,7 +183,7 @@ const ContactSection = () => {
   ];
 
   const inputBase =
-    "w-full px-4 py-3 rounded-xl border border-white/10 bg-white/10 transition-all duration-200 text-white placeholder-white/30 outline-none";
+    "w-full pl-11 pr-4 py-3 rounded-xl border border-white/10 bg-white/10 transition-all duration-200 text-white placeholder-white/30 outline-none";
   const inputNormal =
     "border-white/10 focus:border-[#4676c2] focus:ring-2 focus:ring-[#4676c2]/15";
   const inputError =
@@ -304,12 +304,12 @@ const ContactSection = () => {
           >
             {/* Form card */}
             <div className="card rounded-3xl p-8 md:p-10">
-                <h3 className="font-heading text-2xl font-bold text-white mb-2">
-                  Let&apos;s start your growth today
-                </h3>
-                <p className="text-white/55 text-sm mb-8">
-                  Fill in the details below and we&apos;ll be in touch shortly.
-                </p>
+              <h3 className="font-heading text-2xl font-bold text-white mb-2">
+                Let&apos;s start your growth today
+              </h3>
+              <p className="text-white/55 text-sm mb-8">
+                Fill in the details below and we&apos;ll be in touch shortly.
+              </p>
 
                 {isSubmitted ? (
                   <motion.div
