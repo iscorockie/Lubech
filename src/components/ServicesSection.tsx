@@ -411,7 +411,7 @@ const ServicesSection = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
-            {processSteps.map((process, index) => (
+            {processSteps.map((process) => (
               <motion.div key={process.step} variants={itemVariants} className="relative">
                 <div className="group relative flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/25">
                   <div className="mb-5 flex items-center justify-between">
@@ -426,14 +426,6 @@ const ServicesSection = () => {
                   <p className="mt-2 text-sm leading-relaxed text-white/65">
                     {process.description}
                   </p>
-
-                  {/* Connection arrow */}
-                  {index < processSteps.length - 1 && (
-                    <div
-                      aria-hidden="true"
-                      className="absolute -right-4 top-1/2 hidden h-0.5 w-8 -translate-y-1/2 bg-gradient-to-r from-[#4676c2] to-[#59c368] md:block"
-                    />
-                  )}
                 </div>
               </motion.div>
             ))}
