@@ -1,17 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const BASE_URL = "https://lubech.tech";
 
@@ -102,7 +91,7 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
     other: [
-      { rel: "mask-icon", url: "/web_favicon.svg", color: "#4676C2" },
+      { rel: "mask-icon", url: "/web_favicon.svg", color: "#4676c2" },
     ],
   },
   manifest: "/site.webmanifest",
@@ -296,10 +285,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarning={true}
-      >
+      <body className="antialiased" suppressHydrationWarning={true}>
         <GoogleAnalytics />
         {children}
       </body>

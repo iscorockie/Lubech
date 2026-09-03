@@ -27,5 +27,6 @@ export interface TeamMember {
     linkedin?: string;
     twitter?: string;
     github?: string;
+    youtube?: string;
   };
 }

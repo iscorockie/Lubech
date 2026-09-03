@@ -183,15 +183,15 @@ const ContactSection = () => {
   ];
 
   const inputBase =
-    "w-full pl-10 pr-4 py-3 rounded-xl border bg-white/5 transition-all duration-200 text-white placeholder-white/30 outline-none";
+    "w-full pl-11 pr-4 py-3 rounded-xl border border-white/10 bg-white/10 transition-all duration-200 text-white placeholder-white/30 outline-none";
   const inputNormal =
-    "border-white/10 focus:border-[#4676C2] focus:ring-2 focus:ring-[#4676C2]/20";
+    "border-white/10 focus:border-[#4676c2] focus:ring-2 focus:ring-[#4676c2]/15";
   const inputError =
-    "border-red-400/50 focus:border-red-400 focus:ring-2 focus:ring-red-400/20";
+    "border-red-400/60 focus:border-red-400 focus:ring-2 focus:ring-red-400/20";
 
   const FieldError = ({ field }: { field: string }) =>
     errors[field] && touched[field] ? (
-      <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
+      <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1">
         <FaExclamationCircle className="h-3 w-3 flex-shrink-0" />
         {errors[field]}
       </p>
@@ -206,20 +206,15 @@ const ContactSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-6 border border-white/20">
-            <FaCommentDots className="h-4 w-4 text-[#59C368]" />
-            <span className="text-sm font-medium text-white/90">
-              Get In Touch
-            </span>
-          </div>
-
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-5">
-            Let&apos;s <span className="gradient-text">Work Together</span>
+          <span className="section-label mb-4">Contact</span>
+          <h2 className="font-heading text-4xl md:text-5xl font-extrabold leading-[1.08] tracking-tight text-white mb-5 max-w-2xl">
+            Are you ready to start?{" "}
+            <span className="gradient-text">Submit your request</span>
           </h2>
 
-          <p className="text-xl text-white/70 max-w-2xl mx-auto">
+          <p className="text-lg text-white/60 max-w-xl">
             Ready to bring your ideas to life? Tell us about your project and
             we&apos;ll get back to you within 24 hours.
           </p>
@@ -234,7 +229,9 @@ const ContactSection = () => {
             transition={{ duration: 0.7 }}
             className="lg:col-span-2 flex flex-col gap-6"
           >
-            <h3 className="text-2xl font-bold text-white mb-2">Contact Info</h3>
+            <h3 className="font-heading text-2xl font-bold text-white mb-2">
+              Contact Info
+            </h3>
 
             <div className="space-y-4">
               {contactInfo.map((info) => (
@@ -248,7 +245,7 @@ const ContactSection = () => {
                       : undefined
                   }
                   whileHover={{ x: 6 }}
-                  className="flex items-start gap-4 p-4 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-white/20 transition-all duration-200 cursor-pointer group"
+                  className="card flex items-start gap-4 p-4 rounded-2xl hover:-translate-y-0.5 transition-all duration-200 cursor-pointer group"
                 >
                   <div
                     className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-110"
@@ -263,10 +260,10 @@ const ContactSection = () => {
                     <p className="text-white font-semibold text-sm">
                       {info.title}
                     </p>
-                    <p className="text-white/90 text-sm mt-0.5 group-hover:text-white transition-colors">
+                    <p className="text-white/75 text-sm mt-0.5 font-numeric">
                       {info.details}
                     </p>
-                    <p className="text-white/50 text-xs mt-0.5">
+                    <p className="text-white/45 text-xs mt-0.5">
                       {info.description}
                     </p>
                   </div>
@@ -275,9 +272,9 @@ const ContactSection = () => {
             </div>
 
             {/* Business hours */}
-            <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.03] mt-2">
+            <div className="card p-5 rounded-2xl mt-2">
               <div className="flex items-center gap-2 mb-4">
-                <FaClock className="h-4 w-4 text-[#4676C2]" />
+                <FaClock className="h-4 w-4 text-[#4676c2]" />
                 <h4 className="text-white font-semibold text-sm">
                   Business Hours
                 </h4>
@@ -290,7 +287,7 @@ const ContactSection = () => {
                 ].map(([day, hours]) => (
                   <div key={day} className="flex justify-between text-white/70">
                     <span>{day}</span>
-                    <span className="text-white/90">{hours}</span>
+                    <span className="text-white/90 font-numeric">{hours}</span>
                   </div>
                 ))}
               </div>
@@ -305,21 +302,14 @@ const ContactSection = () => {
             transition={{ duration: 0.7 }}
             className="lg:col-span-3"
           >
-            {/* Card with gradient border effect */}
-            <div
-              className="rounded-3xl p-px"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(70,118,194,0.5), rgba(89,195,104,0.3), rgba(255,255,255,0.05))",
-              }}
-            >
-              <div
-                className="rounded-3xl p-8 md:p-10"
-                style={{ background: "#0f1628" }}
-              >
-                <h3 className="text-2xl font-bold text-white mb-8">
-                  Start Your Project
-                </h3>
+            {/* Form card */}
+            <div className="card rounded-3xl p-8 md:p-10">
+              <h3 className="font-heading text-2xl font-bold text-white mb-2">
+                Let&apos;s start your growth today
+              </h3>
+              <p className="text-white/55 text-sm mb-8">
+                Fill in the details below and we&apos;ll be in touch shortly.
+              </p>
 
                 {isSubmitted ? (
                   <motion.div
@@ -327,11 +317,11 @@ const ContactSection = () => {
                     animate={{ scale: 1, opacity: 1 }}
                     className="text-center py-14"
                   >
-                    <FaCheckCircle className="h-16 w-16 text-[#59C368] mx-auto mb-5" />
-                    <h4 className="text-2xl font-bold text-white mb-2">
+                    <FaCheckCircle className="h-16 w-16 text-[#59c368] mx-auto mb-5" />
+                    <h4 className="font-heading text-2xl font-bold text-white mb-2">
                       Message Sent!
                     </h4>
-                    <p className="text-white/70">
+                    <p className="text-white/60">
                       We&apos;ve received your enquiry and will reply within 24
                       hours.
                     </p>
@@ -343,13 +333,13 @@ const ContactSection = () => {
                       <div>
                         <label
                           htmlFor="name"
-                          className="block text-sm font-medium text-white/80 mb-2"
+                          className="block text-sm font-medium text-white/75 mb-2"
                         >
-                          Full Name <span className="text-[#59C368]">*</span>
+                          Full Name <span className="text-[#59c368]">*</span>
                         </label>
                         <div className="relative">
                           <FaUser
-                            className={`absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 ${errors.name && touched.name ? "text-red-400" : "text-white/30"}`}
+                            className={`absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 ${errors.name && touched.name ? "text-red-400" : "text-white/35"}`}
                           />
                           <input
                             type="text"
@@ -369,14 +359,14 @@ const ContactSection = () => {
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-sm font-medium text-white/80 mb-2"
+                          className="block text-sm font-medium text-white/75 mb-2"
                         >
                           Email Address{" "}
-                          <span className="text-[#59C368]">*</span>
+                          <span className="text-[#59c368]">*</span>
                         </label>
                         <div className="relative">
                           <FaEnvelope
-                            className={`absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 ${errors.email && touched.email ? "text-red-400" : "text-white/30"}`}
+                            className={`absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 ${errors.email && touched.email ? "text-red-400" : "text-white/35"}`}
                           />
                           <input
                             type="email"
@@ -399,12 +389,12 @@ const ContactSection = () => {
                     <div>
                       <label
                         htmlFor="phone"
-                        className="block text-sm font-medium text-white/80 mb-2"
+                        className="block text-sm font-medium text-white/75 mb-2"
                       >
                         Phone Number
                       </label>
                       <div className="relative">
-                        <FaPhone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
+                        <FaPhone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/35" />
                         <input
                           type="tel"
                           id="phone"
@@ -422,9 +412,9 @@ const ContactSection = () => {
                       <div>
                         <label
                           htmlFor="project"
-                          className="block text-sm font-medium text-white/80 mb-2"
+                          className="block text-sm font-medium text-white/75 mb-2"
                         >
-                          Project Type <span className="text-[#59C368]">*</span>
+                          Project Type <span className="text-[#59c368]">*</span>
                         </label>
                         <select
                           id="project"
@@ -433,13 +423,13 @@ const ContactSection = () => {
                           value={formData.project}
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          className={`w-full px-4 py-3 rounded-xl border bg-white/5 transition-all duration-200 text-white outline-none ${errors.project && touched.project ? inputError : inputNormal}`}
+                          className={`w-full px-4 py-3 rounded-xl border border-white/10 bg-white/10 transition-all duration-200 text-white outline-none ${errors.project && touched.project ? inputError : inputNormal}`}
                         >
-                          <option value="" className="bg-[#0f1628]">
+                          <option value="" className="bg-[#10143a] text-white">
                             Select type
                           </option>
                           {projectTypes.map((t) => (
-                            <option key={t} value={t} className="bg-[#0f1628]">
+                            <option key={t} value={t} className="bg-[#10143a] text-white">
                               {t}
                             </option>
                           ))}
@@ -450,7 +440,7 @@ const ContactSection = () => {
                       <div>
                         <label
                           htmlFor="budget"
-                          className="block text-sm font-medium text-white/80 mb-2"
+                          className="block text-sm font-medium text-white/75 mb-2"
                         >
                           Budget Range
                         </label>
@@ -459,13 +449,13 @@ const ContactSection = () => {
                           name="budget"
                           value={formData.budget}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 focus:border-[#4676C2] focus:ring-2 focus:ring-[#4676C2]/20 transition-all duration-200 text-white outline-none"
+                          className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/10 focus:border-[#4676c2] focus:ring-2 focus:ring-[#4676c2]/15 transition-all duration-200 text-white outline-none"
                         >
-                          <option value="" className="bg-[#0f1628]">
+                          <option value="" className="bg-[#10143a] text-white">
                             Select budget
                           </option>
                           {budgetRanges.map((r) => (
-                            <option key={r} value={r} className="bg-[#0f1628]">
+                            <option key={r} value={r} className="bg-[#10143a] text-white">
                               {r}
                             </option>
                           ))}
@@ -477,14 +467,14 @@ const ContactSection = () => {
                     <div>
                       <label
                         htmlFor="message"
-                        className="block text-sm font-medium text-white/80 mb-2"
+                        className="block text-sm font-medium text-white/75 mb-2"
                       >
                         Project Details{" "}
-                        <span className="text-[#59C368]">*</span>
+                        <span className="text-[#59c368]">*</span>
                       </label>
                       <div className="relative">
                         <FaFileAlt
-                          className={`absolute left-3.5 top-3.5 h-4 w-4 ${errors.message && touched.message ? "text-red-400" : "text-white/30"}`}
+                          className={`absolute left-3.5 top-3.5 h-4 w-4 ${errors.message && touched.message ? "text-red-400" : "text-white/35"}`}
                         />
                         <textarea
                           id="message"
@@ -515,7 +505,7 @@ const ContactSection = () => {
                       disabled={isSubmitting}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.97 }}
-                      className="w-full btn-gradient-animated text-white py-4 rounded-full font-semibold text-base flex items-center justify-center gap-3 shadow-lg shadow-[#4676C2]/25 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity duration-200"
+                      className="w-full pill pill-dark py-4 rounded-full text-base shadow-lg shadow-black/20 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity duration-200"
                     >
                       {isSubmitting ? (
                         <>
@@ -531,7 +521,6 @@ const ContactSection = () => {
                     </motion.button>
                   </form>
                 )}
-              </div>
             </div>
           </motion.div>
         </div>

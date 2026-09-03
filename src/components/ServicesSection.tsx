@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import {
   SiReact,
   SiNextdotjs,
@@ -32,7 +31,8 @@ import {
   Smartphone,
   Server,
   Cloud,
-  Zap,
+  ArrowUpRight,
+  ArrowRight,
   Users,
   CheckCircle,
 } from "lucide-react";
@@ -117,13 +117,44 @@ const ServicesSection = () => {
     { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
   ];
 
+  const processSteps = [
+    {
+      step: "01",
+      title: "Discovery",
+      description:
+        "We understand your vision, goals, and requirements through detailed consultation.",
+      icon: Users,
+    },
+    {
+      step: "02",
+      title: "Design",
+      description:
+        "We create wireframes, prototypes, and design systems that align with your brand.",
+      icon: Code,
+    },
+    {
+      step: "03",
+      title: "Development",
+      description:
+        "We build your solution using best practices and modern development methodologies.",
+      icon: Server,
+    },
+    {
+      step: "04",
+      title: "Deployment",
+      description:
+        "We deploy your solution and provide ongoing support and maintenance.",
+      icon: Cloud,
+    },
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
+        staggerChildren: 0.14,
+        delayChildren: 0.1,
       },
     },
   };
@@ -134,7 +165,8 @@ const ServicesSection = () => {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.8,
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1] as const,
       },
     },
   };
@@ -149,41 +181,36 @@ const ServicesSection = () => {
   };
 
   return (
-    <section id="services" className="py-20 relative overflow-hidden">
-      {/* Watermark */}
-      <div className="pointer-events-none select-none absolute top-0 left-0 opacity-[0.07] -translate-x-1/4 -translate-y-1/4">
-        <div className="relative w-96 h-96 overflow-hidden">
-          <Image src="/logo_icon.png" alt="" fill className="object-contain scale-[3] origin-center" aria-hidden />
-        </div>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="relative overflow-hidden py-24 md:py-32">
+      {/* Decorative background glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-[420px] w-[720px] rounded-full opacity-25 blur-[120px]"
+        style={{
+          background:
+            "radial-gradient(circle at center, rgba(70,118,194,0.6), rgba(89,195,104,0.35) 55%, transparent 78%)",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-16"
+          className="mb-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-end"
         >
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center space-x-2 glass rounded-full px-4 py-2 mb-6 border border-white/20"
-          >
-            <Zap className="h-4 w-4 text-indigo-400" />
-            <span className="text-sm font-medium text-white/90">
-              Our Services
-            </span>
+          <motion.div variants={itemVariants}>
+            <span className="section-label mb-4">Services</span>
+            <h2 className="font-heading text-4xl font-extrabold leading-[1.08] tracking-tight text-white md:text-5xl">
+              What We <span className="gradient-text">Build</span>
+            </h2>
           </motion.div>
-
-          <motion.h2
-            variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
-          >
-            What We <span className="gradient-text">Build</span>
-          </motion.h2>
 
           <motion.p
             variants={itemVariants}
-            className="text-xl text-white/80 max-w-3xl mx-auto"
+            className="max-w-md text-lg text-white/60 lg:justify-self-end"
           >
             From concept to deployment, we provide end-to-end development
             services that transform your ideas into powerful digital solutions.
@@ -196,78 +223,125 @@ const ServicesSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20"
+          className="mb-24 grid grid-cols-1 gap-6 lg:grid-cols-3"
         >
-          {services.map((service) => {
+          {services.map((service, index) => {
             const IconComponent = getIcon(service.icon);
             return (
               <motion.div
                 key={service.id}
                 variants={itemVariants}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="glass rounded-2xl p-8 border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-300"
+                whileHover={{ y: -10 }}
+                className="group relative flex flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.06] p-8 backdrop-blur-xl transition-all duration-300 hover:border-white/25"
+                style={{
+                  boxShadow:
+                    "0 20px 60px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08)",
+                }}
               >
-                <div className="flex items-center justify-center w-16 h-16 glass rounded-2xl mb-6 border border-white/20">
-                  <IconComponent className="h-8 w-8 text-indigo-400" />
+                {/* Hover gradient wash */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "linear-gradient(160deg, rgba(70,118,194,0.18), rgba(89,195,104,0.14))",
+                  }}
+                />
+
+                <div className="relative flex items-center justify-between">
+                  <div
+                    className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/15 transition-all duration-300 group-hover:scale-105 group-hover:border-white/25"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(70,118,194,0.35), rgba(89,195,104,0.28))",
+                      boxShadow:
+                        "0 8px 24px rgba(70,118,194,0.25), inset 0 1px 0 rgba(255,255,255,0.2)",
+                    }}
+                  >
+                    <IconComponent className="h-7 w-7 text-white" />
+                  </div>
+                  <span className="font-numeric text-5xl font-extrabold leading-none text-white/10">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
 
-                <h3 className="text-2xl font-bold text-white mb-4">
+                <h3 className="relative mt-6 font-heading text-2xl font-bold text-white">
                   {service.title}
                 </h3>
 
-                <p className="text-white/80 mb-6 leading-relaxed">
+                <p className="relative mt-3 text-sm leading-relaxed text-white/65">
                   {service.description}
                 </p>
 
-                <ul className="space-y-3">
+                <ul className="relative mt-6 space-y-2.5">
                   {service.features.map((feature, featureIndex) => (
                     <li
                       key={featureIndex}
-                      className="flex items-center space-x-3"
+                      className="flex items-center gap-3 text-sm text-white/75"
                     >
-                      <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0" />
-                      <span className="text-white/90">{feature}</span>
+                      <CheckCircle className="h-4 w-4 shrink-0 text-emerald-400" />
+                      {feature}
                     </li>
                   ))}
                 </ul>
+
+                <div className="relative mt-auto flex items-center justify-between pt-6">
+                  <motion.a
+                    href="#contact"
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.96 }}
+                    className="pill pill-dark px-5 py-2.5 text-sm"
+                  >
+                    Get Started
+                    <ArrowRight className="h-4 w-4" />
+                  </motion.a>
+                  <motion.a
+                    href="#contact"
+                    aria-label={`Start a ${service.title} project`}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="arrow-circle"
+                  >
+                    <ArrowUpRight className="h-5 w-5" />
+                  </motion.a>
+                </div>
               </motion.div>
             );
           })}
         </motion.div>
-
       </div>
-
-      {/* ── Section Divider ── */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent my-4" />
 
       {/* Technologies We Master — full-width marquee */}
       <div
+        className="relative py-24"
         style={{
-          background: "linear-gradient(180deg, rgba(70,118,194,0.08) 0%, rgba(89,195,104,0.06) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(70,118,194,0.08) 0%, rgba(89,195,104,0.05) 100%)",
           borderTop: "1px solid rgba(255,255,255,0.08)",
           borderBottom: "1px solid rgba(255,255,255,0.08)",
         }}
-        className="py-24"
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16 px-4"
+          className="mb-16 px-4 text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <span className="section-label mb-4">Stack</span>
+          <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
             Technologies We <span className="gradient-text">Master</span>
           </h2>
-          <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            We stay at the forefront of technology to deliver cutting-edge solutions
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/60">
+            We stay at the forefront of technology to deliver cutting-edge
+            solutions
           </p>
         </motion.div>
 
         {/* Row 1 — scrolls left */}
-        <div className="overflow-hidden mb-6">
+        <div className="mb-6 overflow-hidden">
           <div
-            className="flex gap-6 w-max"
+            className="flex w-max gap-5"
             style={{ animation: "marquee 40s linear infinite", willChange: "transform" }}
           >
             {[...techRow1, ...techRow1].map((tech, i) => {
@@ -275,10 +349,15 @@ const ServicesSection = () => {
               return (
                 <div
                   key={i}
-                  className="flex items-center gap-4 glass px-8 py-5 rounded-2xl border border-white/10 hover:border-white/30 hover:glass-strong transition-all duration-200 whitespace-nowrap flex-shrink-0 cursor-default"
+                  className="flex shrink-0 cursor-default items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.06] px-7 py-5 backdrop-blur-xl whitespace-nowrap transition-colors duration-200 hover:border-white/25"
                 >
-                  <Icon style={{ color: tech.color, fontSize: "2rem" }} className="flex-shrink-0" />
-                  <span className="text-white font-semibold text-lg">{tech.name}</span>
+                  <Icon
+                    style={{ color: tech.color, fontSize: "2rem" }}
+                    className="shrink-0"
+                  />
+                  <span className="text-lg font-semibold text-white">
+                    {tech.name}
+                  </span>
                 </div>
               );
             })}
@@ -288,7 +367,7 @@ const ServicesSection = () => {
         {/* Row 2 — scrolls right */}
         <div className="overflow-hidden">
           <div
-            className="flex gap-6 w-max"
+            className="flex w-max gap-5"
             style={{ animation: "marquee-reverse 40s linear infinite", willChange: "transform" }}
           >
             {[...techRow2, ...techRow2].map((tech, i) => {
@@ -296,10 +375,15 @@ const ServicesSection = () => {
               return (
                 <div
                   key={i}
-                  className="flex items-center gap-4 glass px-8 py-5 rounded-2xl border border-white/10 hover:border-white/30 hover:glass-strong transition-all duration-200 whitespace-nowrap flex-shrink-0 cursor-default"
+                  className="flex shrink-0 cursor-default items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.06] px-7 py-5 backdrop-blur-xl whitespace-nowrap transition-colors duration-200 hover:border-white/25"
                 >
-                  <Icon style={{ color: tech.color, fontSize: "2rem" }} className="flex-shrink-0" />
-                  <span className="text-white font-semibold text-lg">{tech.name}</span>
+                  <Icon
+                    style={{ color: tech.color, fontSize: "2rem" }}
+                    className="shrink-0"
+                  />
+                  <span className="text-lg font-semibold text-white">
+                    {tech.name}
+                  </span>
                 </div>
               );
             })}
@@ -307,75 +391,42 @@ const ServicesSection = () => {
         </div>
       </div>
 
-      {/* ── Section Divider ── */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Process Section */}
+      {/* Process Section */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mt-20 text-center"
+          className="mt-24"
         >
-          <motion.h3
-            variants={itemVariants}
-            className="text-3xl md:text-4xl font-bold text-white mb-12"
-          >
-            Our <span className="gradient-text">Process</span>
-          </motion.h3>
+          <div className="mb-14 text-center">
+            <span className="section-label mb-4">Process</span>
+            <h3 className="font-heading text-3xl font-extrabold text-white md:text-4xl">
+              How We <span className="gradient-text">Work</span>
+            </h3>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-white/60">
+              A proven, transparent process that takes you from idea to launch.
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Discovery",
-                description:
-                  "We understand your vision, goals, and requirements through detailed consultation.",
-                icon: Users,
-              },
-              {
-                step: "02",
-                title: "Design",
-                description:
-                  "We create wireframes, prototypes, and design systems that align with your brand.",
-                icon: Code,
-              },
-              {
-                step: "03",
-                title: "Development",
-                description:
-                  "We build your solution using best practices and modern development methodologies.",
-                icon: Server,
-              },
-              {
-                step: "04",
-                title: "Deployment",
-                description:
-                  "We deploy your solution and provide ongoing support and maintenance.",
-                icon: Cloud,
-              },
-            ].map((process, index) => (
-              <motion.div
-                key={process.step}
-                variants={itemVariants}
-                className="relative"
-              >
-                <div className="glass rounded-2xl p-6 border border-white/20">
-                  <div className="text-4xl font-bold gradient-text mb-4">
-                    {process.step}
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+            {processSteps.map((process) => (
+              <motion.div key={process.step} variants={itemVariants} className="relative">
+                <div className="group relative flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/25">
+                  <div className="mb-5 flex items-center justify-between">
+                    <span className="font-numeric text-4xl font-extrabold gradient-text">
+                      {process.step}
+                    </span>
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/[0.08]">
+                      <process.icon className="h-5 w-5 text-[#4676c2]" />
+                    </div>
                   </div>
-                  <process.icon className="h-12 w-12 text-indigo-400 mx-auto mb-4" />
-                  <h4 className="text-xl font-semibold text-white mb-3">
-                    {process.title}
-                  </h4>
-                  <p className="text-white/80">{process.description}</p>
+                  <h4 className="text-lg font-semibold text-white">{process.title}</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-white/65">
+                    {process.description}
+                  </p>
                 </div>
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-indigo-500 to-orange-500 transform -translate-y-1/2" />
-                )}
               </motion.div>
             ))}
           </div>

@@ -77,7 +77,7 @@ const ProjectCard = ({
     <motion.div
       variants={variants}
       whileHover={{ y: -6 }}
-      className="group glass rounded-3xl border border-white/10 hover:border-white/25 hover:glass-strong transition-all duration-300 overflow-hidden flex flex-col"
+      className="group card rounded-3xl overflow-hidden flex flex-col"
     >
       {/* Thumbnail */}
       <div className={`relative ${imgHeight} overflow-hidden flex-shrink-0`}>
@@ -144,11 +144,11 @@ const ProjectCard = ({
       {/* Content */}
       <div className="p-6 flex flex-col flex-1">
         <h3
-          className={`font-bold text-white mb-2 ${featured ? "text-2xl" : "text-xl"}`}
+          className={`font-heading font-bold text-white mb-2 ${featured ? "text-2xl" : "text-xl"}`}
         >
           {project.title}
         </h3>
-        <p className="text-white/70 leading-relaxed mb-5 flex-1 text-sm">
+        <p className="text-white/65 leading-relaxed mb-5 flex-1 text-sm">
           {project.description}
         </p>
 
@@ -171,7 +171,7 @@ const ProjectCard = ({
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-semibold text-sm text-white border border-[#4676C2]/50 bg-[#4676C2]/15 hover:bg-[#4676C2]/30 hover:border-[#4676C2] transition-all duration-200"
+              className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-semibold text-sm text-white border border-[#4676c2]/30 bg-[#4676c2]/5 hover:bg-[#4676c2]/10 hover:border-[#4676c2] transition-all duration-200"
             >
               {project.category === "mobile" ? (
                 <>
@@ -191,7 +191,7 @@ const ProjectCard = ({
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-semibold text-sm text-white border border-[#59C368]/50 bg-[#59C368]/10 hover:bg-[#59C368]/25 hover:border-[#59C368] transition-all duration-200"
+              className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-semibold text-sm text-white border border-[#59c368]/40 bg-[#59c368]/5 hover:bg-[#59c368]/15 hover:border-[#59c368] transition-all duration-200"
             >
               <FaApple className="h-4 w-4" />
               <span>App Store</span>
@@ -271,6 +271,16 @@ const PortfolioSection = () => {
       technologies: ["Next.js", "React", "Tailwind CSS", "Vercel"],
       category: "web",
       liveUrl: "https://theactualisationproject.vercel.app",
+    },
+    {
+      id: "hope4nxtgen",
+      title: "Hope for the Next Generation",
+      description:
+        "Non-profit platform harnessing sport, education, and community to build confident, resilient leaders across Mbale City, Uganda — highlighting impact, programme areas, and SDG commitments.",
+      image: "/projects/hope4nxtgen.png",
+      technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
+      category: "web",
+      liveUrl: "https://hope4nxtgen.org",
     },
 
     // ── Mobile projects ──
@@ -384,19 +394,6 @@ const PortfolioSection = () => {
 
   return (
     <section id="portfolio" className="py-24 relative overflow-hidden">
-      {/* Watermark */}
-      <div className="pointer-events-none select-none absolute bottom-0 right-0 opacity-[0.07] translate-x-1/4 translate-y-1/4">
-        <div className="relative w-96 h-96 overflow-hidden">
-          <NextImage
-            src="/logo_icon.png"
-            alt=""
-            fill
-            className="object-contain scale-[3] origin-center"
-            aria-hidden
-          />
-        </div>
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -406,18 +403,12 @@ const PortfolioSection = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-6 border border-white/20">
-            <FaCode className="h-4 w-4 text-[#59C368]" />
-            <span className="text-sm font-medium text-white/90">
-              Our Portfolio
-            </span>
-          </div>
-
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-5">
+          <span className="section-label mb-4">Portfolio</span>
+          <h2 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-5">
             Featured <span className="gradient-text">Projects</span>
           </h2>
 
-          <p className="text-xl text-white/70 max-w-2xl mx-auto">
+          <p className="text-lg text-white/60 max-w-2xl mx-auto">
             Real products, real impact — from web platforms to mobile apps
             shipped to thousands of users.
           </p>
@@ -440,8 +431,8 @@ const PortfolioSection = () => {
               }}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-200 ${
                 activeFilter === f.id
-                  ? "bg-[#4676C2] text-white border border-[#4676C2] shadow-lg shadow-[#4676C2]/25"
-                  : "glass text-white/70 border border-white/10 hover:border-white/25 hover:text-white"
+                  ? "bg-[#4676c2] text-white border border-[#4676c2] shadow-lg shadow-[#4676c2]/25"
+                  : "card text-white/70 border border-white/10 hover:border-white/25 hover:text-white"
               }`}
             >
               {f.icon}
@@ -479,7 +470,7 @@ const PortfolioSection = () => {
           >
             <button
               onClick={() => setShowAll((prev) => !prev)}
-              className="flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm text-white border border-white/20 glass hover:glass-strong hover:border-white/40 transition-all duration-200"
+              className="pill pill-dark px-8 py-3.5 text-sm"
             >
               {showAll ? (
                 <>
@@ -505,14 +496,10 @@ const PortfolioSection = () => {
           className="mt-20 text-center"
         >
           <div
-            className="rounded-3xl p-10 md:p-14 border border-white/10 relative overflow-hidden"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(70,118,194,0.15) 0%, rgba(89,195,104,0.10) 100%)",
-            }}
+            className="rounded-3xl p-10 md:p-14 relative overflow-hidden section-deep"
           >
-            <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="relative z-10 text-center">
+              <h3 className="font-heading text-3xl md:text-4xl font-extrabold text-white mb-4">
                 Ready to Build Something{" "}
                 <span className="gradient-text">Amazing?</span>
               </h3>
@@ -522,7 +509,7 @@ const PortfolioSection = () => {
               </p>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-lg border border-[#4676C2] bg-[#4676C2]/20 hover:bg-[#4676C2]/40 transition-all duration-200 shadow-lg shadow-[#4676C2]/20"
+                className="pill pill-light px-8 py-4 text-lg"
               >
                 Start Your Project
                 <FaExternalLinkAlt className="h-4 w-4" />

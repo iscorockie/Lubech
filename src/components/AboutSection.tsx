@@ -2,18 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import {
   Users,
   Target,
   Award,
   Heart,
   Linkedin,
-  Twitter,
   Github,
-  Code,
+  Youtube,
   CheckCircle,
-  Star,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -30,7 +27,7 @@ const AboutSection = () => {
       id: "lubega",
       name: "Lubega Faizal",
       role: "CEO",
-      image: "/staff/lubega.jpeg",
+      image: "/staff/lubega.jpg",
       bio: "Chief Executive Officer dedicated to building exceptional digital experiences. Focused on driving innovation and delivering solutions that make a meaningful impact on businesses and communities.",
       social: {
         linkedin: "https://linkedin.com/in/lubega-faizal",
@@ -47,7 +44,6 @@ const AboutSection = () => {
         github: "https://github.com/Lubwama-Emmanuel",
       },
     },
-
     {
       id: "solomon",
       name: "Solomon Kyagulanyi",
@@ -73,7 +69,7 @@ const AboutSection = () => {
       image: "/staff/anncarl.jpeg",
       bio: "Software Engineer on the Lubech tech team, comfortable across Linux, Python, Java, SQL, and Git, with additional strength in R and Julia for data and analytical work.",
       social: {
-        linkedin: "https://www.linkedin.com/in/anncarl-mwendwa/"
+        linkedin: "https://www.linkedin.com/in/anncarl-mwendwa/",
       },
     },
     {
@@ -83,8 +79,18 @@ const AboutSection = () => {
       image: "/staff/isco.jpeg",
       bio: "UI / UX Visual alchemist | Photographer, video editor & graphic designer | NFT creator & Web3 explorer on Farcaster, Zeroone, Zora, Foundation & Rodeo.",
       social: {
-        linkedin: "https://www.linkedin.com/in/isco-ronald-247865222/",
+        linkedin: "https://www.linkedin.com/in/isiko-ronald-247865222/",
         github: "https://github.com/iscorockie",
+      },
+    },
+    {
+      id: "daniel",
+      name: "Web Daniel Sebakijje",
+      role: "Tech Consultant & Sports Journalist",
+      image: "/staff/daniel.jpg",
+      bio: "Tech Consultant and Sports Journalist on the Lubech team, bringing together technical consulting expertise with a passion for sports journalism to deliver insightful, data-driven content and analysis.",
+      social: {
+        youtube: "https://youtu.be/M0niLgG-QmA?si=8LDcTyDSG15DV45q",
       },
     },
   ];
@@ -164,46 +170,28 @@ const AboutSection = () => {
   ];
 
   const stats = [
-    { number: "30+", label: "Projects Delivered", icon: Code },
-    { number: "100%", label: "Client Satisfaction", icon: Star },
-    { number: "7+", label: "Years Experience", icon: Award },
-    { number: "24/7", label: "Support Available", icon: Heart },
+    { number: "30+", label: "Projects Delivered" },
+    { number: "100%", label: "Client Satisfaction" },
+    { number: "7+", label: "Years Experience" },
+    { number: "24/7", label: "Support Available" },
   ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
+      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
     },
   };
 
   const itemVariants = {
     hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
+    visible: { y: 0, opacity: 1 },
   };
 
   return (
-    <section id="about" className="py-20 relative overflow-hidden">
-      {/* Watermark */}
-      <div className="pointer-events-none select-none absolute top-1/2 right-0 opacity-[0.07] translate-x-1/3 -translate-y-1/2">
-        <div className="relative w-80 h-80 overflow-hidden">
-          <Image
-            src="/logo_icon.png"
-            alt=""
-            fill
-            className="object-contain scale-[3] origin-center"
-            aria-hidden
-          />
-        </div>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="section-deep relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         {/* Header */}
         <motion.div
           variants={containerVariants}
@@ -212,43 +200,40 @@ const AboutSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
         >
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center space-x-2 glass rounded-full px-4 py-2 mb-6 border border-white/20"
-          >
-            <Users className="h-4 w-4 text-emerald-400" />
-            <span className="text-sm font-medium text-white/90">About Us</span>
+          <motion.div variants={itemVariants}>
+            <span className="section-label mb-4">Team</span>
           </motion.div>
 
           <motion.h2
             variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
+            className="font-heading text-4xl md:text-5xl font-extrabold leading-[1.1] tracking-tight text-white max-w-4xl mx-auto mb-6"
           >
-            Meet the <span className="gradient-text">Team</span>
+            People Who Don&apos;t Follow Trends —{" "}
+            <span className="gradient-text">They Create Them</span>
           </motion.h2>
 
           <motion.p
             variants={itemVariants}
-            className="text-xl text-white/80 max-w-3xl mx-auto"
+            className="text-lg text-white/65 max-w-2xl mx-auto"
           >
             We are a passionate team of developers, designers, and innovators
             dedicated to transforming your ideas into digital reality.
           </motion.p>
         </motion.div>
 
-        {/* Company Story */}
+        {/* Story + Stats */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24"
         >
           <motion.div variants={itemVariants}>
-            <h3 className="text-3xl font-bold text-white mb-6">
+            <h3 className="font-heading text-3xl font-bold text-white mb-6">
               Our <span className="gradient-text">Story</span>
             </h3>
-            <div className="space-y-4 text-white/80 leading-relaxed">
+            <div className="space-y-4 text-white/70 leading-relaxed">
               <p>
                 Founded in 2021, Lubech started as a passionate team of
                 developers with a mission to create exceptional digital
@@ -276,26 +261,22 @@ const AboutSection = () => {
             variants={itemVariants}
             className="grid grid-cols-2 gap-6"
           >
-            {stats.map((stat) => {
-              const IconComponent = stat.icon;
-              return (
-                <motion.div
-                  key={stat.label}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="glass rounded-2xl p-6 border border-white/20 text-center"
-                >
-                  <IconComponent className="h-8 w-8 text-indigo-400 mx-auto mb-3" />
-                  <div className="text-3xl font-bold gradient-text mb-2">
-                    <AnimatedCounter value={stat.number} />
-                  </div>
-                  <div className="text-white/80 font-medium">{stat.label}</div>
-                </motion.div>
-              );
-            })}
+            {stats.map((stat) => (
+              <motion.div
+                key={stat.label}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="rounded-2xl p-6 bg-white/[0.06] border border-white/10 text-center"
+              >
+                <div className="font-numeric text-3xl md:text-4xl font-bold gradient-text mb-2">
+                  <AnimatedCounter value={stat.number} />
+                </div>
+                <div className="text-white/70 font-medium">{stat.label}</div>
+              </motion.div>
+            ))}
           </motion.div>
         </motion.div>
 
-        {/* Team Members */}
+        {/* Team Members carousel */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -305,7 +286,7 @@ const AboutSection = () => {
         >
           <motion.h3
             variants={itemVariants}
-            className="text-3xl font-bold text-white text-center mb-12"
+            className="font-heading text-3xl font-bold text-white text-center mb-12"
           >
             Our <span className="gradient-text">Team</span>
           </motion.h3>
@@ -315,12 +296,12 @@ const AboutSection = () => {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            {/* Carousel Viewport Container */}
+            {/* Carousel Viewport */}
             <div className="overflow-hidden">
               <div
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{
-                  transform: `translateX(-${currentIndex * (100 / visibleCards)}%)`
+                  transform: `translateX(-${currentIndex * (100 / visibleCards)}%)`,
                 }}
               >
                 {teamMembers.map((member) => (
@@ -330,99 +311,84 @@ const AboutSection = () => {
                   >
                     <motion.div
                       variants={itemVariants}
-                      whileHover={{ y: -10, scale: 1.02 }}
-                      className="glass rounded-2xl p-8 border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-300 text-center h-full flex flex-col justify-between"
+                      whileHover={{ y: -10 }}
+                      className="group h-full flex flex-col"
                     >
-                      <div>
-                        <div className="relative w-32 h-32 mx-auto mb-6">
-                          <div className="absolute inset-0 glass rounded-full border-2 border-white/20 overflow-hidden">
-                            {member.image &&
-                              member.image !== "/api/placeholder/300/300" ? (
-                              // eslint-disable-next-line @next/next/no-img-element
-                              <img
-                                src={member.image}
-                                alt={member.name}
-                                className="w-full h-full object-cover"
-                                loading="lazy"
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement;
-                                  target.style.display = "none";
-                                  const parent = target.parentElement;
-                                  if (parent) {
-                                    const fallback =
-                                      parent.querySelector(".member-fallback");
-                                    if (fallback) {
-                                      (fallback as HTMLElement).style.display = "flex";
-                                    }
-                                  }
-                                }}
-                              />
-                            ) : null}
-                            <div
-                              className="member-fallback absolute inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-500/20 to-orange-500/20"
-                              style={{
-                                display:
-                                  member.image &&
-                                    member.image !== "/api/placeholder/300/300"
-                                    ? "none"
-                                    : "flex",
+                      <div className="relative rounded-3xl overflow-hidden border border-white/10">
+                        <div className="relative h-80 md:h-96 w-full">
+                          {member.image ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={member.image}
+                              alt={member.name}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              loading="lazy"
+                              onError={(e) => {
+                                const t = e.target as HTMLImageElement;
+                                t.style.display = "none";
                               }}
-                            >
-                              <Users className="h-12 w-12 text-white/60" />
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#4676c2]/40 to-[#59c368]/30">
+                              <Users className="h-16 w-16 text-white/60" />
                             </div>
+                          )}
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#0d1030]/80 via-transparent to-transparent" />
+                          <div className="absolute bottom-0 left-0 right-0 p-5">
+                            <h4 className="font-heading text-xl font-bold text-white">
+                              {member.name}
+                            </h4>
+                            <p className="text-indigo-300 font-medium text-sm mt-1">
+                              {member.role}
+                            </p>
                           </div>
                         </div>
 
-                        <h4 className="text-xl font-bold text-white mb-2">
-                          {member.name}
-                        </h4>
-
-                        <p className="text-indigo-400 font-semibold mb-4">
-                          {member.role}
-                        </p>
-
-                        <p className="text-white/80 mb-6 leading-relaxed text-sm">
-                          {member.bio}
-                        </p>
+                        {/* Socials */}
+                        <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          {member.social.linkedin && (
+                            <motion.a
+                              whileHover={{ scale: 1.15 }}
+                              href={member.social.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`${member.name} on LinkedIn`}
+                              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/20 hover:bg-[#4676c2] hover:text-white transition-colors"
+                            >
+                              <Linkedin className="h-4 w-4" />
+                            </motion.a>
+                          )}
+                          {member.social.github && (
+                            <motion.a
+                              whileHover={{ scale: 1.15 }}
+                              href={member.social.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`${member.name} on GitHub`}
+                              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/20 hover:bg-[#4676c2] hover:text-white transition-colors"
+                            >
+                              <Github className="h-4 w-4" />
+                            </motion.a>
+                          )}
+                          {member.social.youtube && (
+                            <motion.a
+                              whileHover={{ scale: 1.15 }}
+                              href={member.social.youtube}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`${member.name} on YouTube`}
+                              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/20 hover:bg-[#4676c2] hover:text-white transition-colors"
+                            >
+                              <Youtube className="h-4 w-4" />
+                            </motion.a>
+                          )}
+                        </div>
                       </div>
 
-                      <div className="flex justify-center space-x-4 mt-auto">
-                        {member.social.linkedin && (
-                          <motion.a
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            href={member.social.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 glass text-indigo-400 rounded-full border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-200"
-                          >
-                            <Linkedin className="h-5 w-5" />
-                          </motion.a>
-                        )}
-                        {member.social.twitter && (
-                          <motion.a
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            href={member.social.twitter}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 glass text-indigo-400 rounded-full border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-200"
-                          >
-                            <Twitter className="h-5 w-5" />
-                          </motion.a>
-                        )}
-                        {member.social.github && (
-                          <motion.a
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            href={member.social.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 glass text-white/80 rounded-full border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-200"
-                          >
-                            <Github className="h-5 w-5" />
-                          </motion.a>
-                        )}
+                      <div className="mt-4 px-2">
+                        <p className="text-white/65 text-sm leading-relaxed">
+                          {member.bio}
+                        </p>
                       </div>
                     </motion.div>
                   </div>
@@ -435,14 +401,14 @@ const AboutSection = () => {
               <>
                 <button
                   onClick={handlePrev}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-6 z-10 p-3 rounded-full glass border border-white/20 text-white hover:bg-white/10 hover:border-white/30 transition-all focus:outline-none cursor-pointer"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-6 z-10 arrow-circle arrow-circle-light"
                   aria-label="Previous team member"
                 >
                   <ChevronLeft className="h-6 w-6" />
                 </button>
                 <button
                   onClick={handleNext}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-6 z-10 p-3 rounded-full glass border border-white/20 text-white hover:bg-white/10 hover:border-white/30 transition-all focus:outline-none cursor-pointer"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-6 z-10 arrow-circle arrow-circle-light"
                   aria-label="Next team member"
                 >
                   <ChevronRight className="h-6 w-6" />
@@ -457,10 +423,11 @@ const AboutSection = () => {
                   <button
                     key={index}
                     onClick={() => setCurrentIndex(index)}
-                    className={`h-2 rounded-full transition-all duration-300 focus:outline-none cursor-pointer ${currentIndex === index
-                        ? "w-8 bg-indigo-500"
+                    className={`h-2 rounded-full transition-all duration-300 focus:outline-none cursor-pointer ${
+                      currentIndex === index
+                        ? "w-8 bg-white"
                         : "w-2 bg-white/25 hover:bg-white/40"
-                      }`}
+                    }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />
                 ))}
@@ -478,28 +445,28 @@ const AboutSection = () => {
         >
           <motion.h3
             variants={itemVariants}
-            className="text-3xl font-bold text-white text-center mb-12"
+            className="font-heading text-3xl font-bold text-white text-center mb-12"
           >
             Our <span className="gradient-text">Values</span>
           </motion.h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value) => (
               <motion.div
                 key={value.title}
                 variants={itemVariants}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="glass rounded-2xl p-6 border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-300 text-center"
+                whileHover={{ y: -10 }}
+                className="rounded-2xl p-6 bg-white/[0.06] border border-white/10 text-center"
               >
-                <div className="w-16 h-16 glass rounded-2xl mx-auto mb-6 flex items-center justify-center border border-white/20">
-                  <value.icon className="h-8 w-8 text-indigo-400" />
+                <div className="w-16 h-16 rounded-2xl mx-auto mb-6 flex items-center justify-center bg-white/10 border border-white/10">
+                  <value.icon className="h-8 w-8 text-indigo-300" />
                 </div>
 
-                <h4 className="text-xl font-bold text-white mb-4">
+                <h4 className="font-heading text-xl font-bold text-white mb-4">
                   {value.title}
                 </h4>
 
-                <p className="text-white/80 leading-relaxed">
+                <p className="text-white/70 leading-relaxed">
                   {value.description}
                 </p>
               </motion.div>
@@ -513,13 +480,13 @@ const AboutSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mt-20 glass-strong rounded-3xl p-8 md:p-12 border border-white/20"
+          className="mt-20 rounded-3xl p-8 md:p-12 bg-white/[0.06] border border-white/10"
         >
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
               Why Choose <span className="gradient-text">Lubech</span>?
             </h3>
-            <p className="text-white/80 text-lg">
+            <p className="text-white/70 text-lg">
               We combine technical expertise with creative vision to deliver
               exceptional results
             </p>

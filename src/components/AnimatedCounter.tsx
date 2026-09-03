@@ -21,8 +21,14 @@ const AnimatedCounter = ({
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const hasAnimated = useRef(false);
 
-  // Extract numeric value from string (handles "30+", "100%", etc.)
+  // Extract numeric value from string (handles "30+", "100%", "24/7", etc.)
   const getNumericValue = (val: string): number => {
+    // For ratios like "24/7", use the numerator so the counter lands on 24.
+    if (val.includes("/")) {
+      const [numerator] = val.split("/");
+      const num = parseFloat(numerator.replace(/[^0-9.]/g, ""));
+      return Number.isNaN(num) ? 0 : num;
+    }
     const numStr = val.replace(/[^0-9.]/g, "");
     return parseFloat(numStr) || 0;
   };
@@ -30,6 +36,7 @@ const AnimatedCounter = ({
   const numericValue = getNumericValue(value);
   const isPercentage = value.includes("%");
   const hasPlus = value.includes("+");
+  const isRatio = value.includes("/");
 
   useEffect(() => {
     if (isInView && !hasAnimated.current) {
@@ -61,6 +68,11 @@ const AnimatedCounter = ({
   }, [isInView, numericValue, duration]);
 
   const formatValue = (num: number): string => {
+    if (isRatio) {
+      // Preserve the full ratio text, replacing the animated numerator.
+      const [, denominator] = value.split("/");
+      return `${Math.round(num)}/${denominator ?? ""}`;
+    }
     if (isPercentage) {
       return Math.round(num).toString() + "%";
     }
@@ -71,7 +83,7 @@ const AnimatedCounter = ({
   };
 
   return (
-    <span ref={ref}>
+    <span ref={ref} className="font-numeric">
       {prefix}
       {isInView ? formatValue(count) : "0"}
       {suffix}
