@@ -272,6 +272,16 @@ const PortfolioSection = () => {
       category: "web",
       liveUrl: "https://theactualisationproject.vercel.app",
     },
+    {
+      id: "hope4nxtgen",
+      title: "Hope for the Next Generation",
+      description:
+        "Non-profit platform harnessing sport, education, and community to build confident, resilient leaders across Mbale City, Uganda — highlighting impact, programme areas, and SDG commitments.",
+      image: "/projects/hope4nxtgen.png",
+      technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
+      category: "web",
+      liveUrl: "https://hope4nxtgen.org",
+    },
 
     // ── Mobile projects ──
     {

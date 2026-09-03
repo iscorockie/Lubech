@@ -79,7 +79,7 @@ const AboutSection = () => {
       image: "/staff/isco.jpeg",
       bio: "UI / UX Visual alchemist | Photographer, video editor & graphic designer | NFT creator & Web3 explorer on Farcaster, Zeroone, Zora, Foundation & Rodeo.",
       social: {
-        linkedin: "https://www.linkedin.com/in/isco-ronald-247865222/",
+        linkedin: "https://www.linkedin.com/in/isiko-ronald-247865222/",
         github: "https://github.com/iscorockie",
       },
     },
