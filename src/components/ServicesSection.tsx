@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import {
   SiReact,
   SiNextdotjs,
@@ -32,7 +31,7 @@ import {
   Smartphone,
   Server,
   Cloud,
-  Zap,
+  ArrowUpRight,
   Users,
   CheckCircle,
 } from "lucide-react";
@@ -149,41 +148,25 @@ const ServicesSection = () => {
   };
 
   return (
-    <section id="services" className="py-20 relative overflow-hidden">
-      {/* Watermark */}
-      <div className="pointer-events-none select-none absolute top-0 left-0 opacity-[0.07] -translate-x-1/4 -translate-y-1/4">
-        <div className="relative w-96 h-96 overflow-hidden">
-          <Image src="/logo_icon.png" alt="" fill className="object-contain scale-[3] origin-center" aria-hidden />
-        </div>
-      </div>
+    <section id="services" className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-16"
+          className="mb-16 grid grid-cols-1 lg:grid-cols-2 gap-8 items-end"
         >
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center space-x-2 glass rounded-full px-4 py-2 mb-6 border border-white/20"
-          >
-            <Zap className="h-4 w-4 text-indigo-400" />
-            <span className="text-sm font-medium text-white/90">
-              Our Services
-            </span>
+          <motion.div variants={itemVariants}>
+            <span className="section-label mb-4">Services</span>
+            <h2 className="font-heading text-4xl md:text-5xl font-extrabold leading-[1.08] tracking-tight text-white mb-5">
+              What We <span className="gradient-text">Build</span>
+            </h2>
           </motion.div>
-
-          <motion.h2
-            variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
-          >
-            What We <span className="gradient-text">Build</span>
-          </motion.h2>
 
           <motion.p
             variants={itemVariants}
-            className="text-xl text-white/80 max-w-3xl mx-auto"
+            className="text-lg text-white/60 max-w-md lg:justify-self-end"
           >
             From concept to deployment, we provide end-to-end development
             services that transform your ideas into powerful digital solutions.
@@ -196,7 +179,7 @@ const ServicesSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-20"
         >
           {services.map((service) => {
             const IconComponent = getIcon(service.icon);
@@ -204,32 +187,51 @@ const ServicesSection = () => {
               <motion.div
                 key={service.id}
                 variants={itemVariants}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="glass rounded-2xl p-8 border border-white/20 hover:glass-strong hover:border-white/30 transition-all duration-300"
+                whileHover={{ y: -10 }}
+                className="card p-7 flex flex-col"
               >
-                <div className="flex items-center justify-center w-16 h-16 glass rounded-2xl mb-6 border border-white/20">
-                  <IconComponent className="h-8 w-8 text-indigo-400" />
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-2xl glass border border-white/20">
+                    <IconComponent className="h-6 w-6 text-indigo-400" />
+                  </div>
                 </div>
 
-                <h3 className="text-2xl font-bold text-white mb-4">
+                <h3 className="font-heading text-xl font-bold text-white mb-3">
                   {service.title}
                 </h3>
 
-                <p className="text-white/80 mb-6 leading-relaxed">
+                <p className="text-white/65 mb-6 leading-relaxed text-sm">
                   {service.description}
                 </p>
 
-                <ul className="space-y-3">
+                <ul className="space-y-2.5 mb-6">
                   {service.features.map((feature, featureIndex) => (
-                    <li
-                      key={featureIndex}
-                      className="flex items-center space-x-3"
-                    >
-                      <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0" />
-                      <span className="text-white/90">{feature}</span>
+                    <li key={featureIndex} className="flex items-center space-x-2.5">
+                      <CheckCircle className="h-4 w-4 text-emerald-400 flex-shrink-0" />
+                      <span className="text-white/75 text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
+
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/10">
+                  <motion.a
+                    href="#contact"
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.96 }}
+                    className="pill pill-dark px-5 py-2.5 text-sm"
+                  >
+                    Start Your Brand Journey
+                  </motion.a>
+                  <motion.a
+                    href="#contact"
+                    aria-label={`Start a ${service.title} project`}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="arrow-circle"
+                  >
+                    <ArrowUpRight className="h-5 w-5" />
+                  </motion.a>
+                </div>
               </motion.div>
             );
           })}
@@ -237,13 +239,11 @@ const ServicesSection = () => {
 
       </div>
 
-      {/* ── Section Divider ── */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent my-4" />
-
       {/* Technologies We Master — full-width marquee */}
       <div
         style={{
-          background: "linear-gradient(180deg, rgba(70,118,194,0.08) 0%, rgba(89,195,104,0.06) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(70,118,194,0.08) 0%, rgba(89,195,104,0.05) 100%)",
           borderTop: "1px solid rgba(255,255,255,0.08)",
           borderBottom: "1px solid rgba(255,255,255,0.08)",
         }}
@@ -256,10 +256,11 @@ const ServicesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16 px-4"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <span className="section-label mb-4">Stack</span>
+          <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-white mb-4">
             Technologies We <span className="gradient-text">Master</span>
           </h2>
-          <p className="text-white/70 text-lg max-w-2xl mx-auto">
+          <p className="text-white/60 text-lg max-w-2xl mx-auto">
             We stay at the forefront of technology to deliver cutting-edge solutions
           </p>
         </motion.div>
@@ -275,7 +276,7 @@ const ServicesSection = () => {
               return (
                 <div
                   key={i}
-                  className="flex items-center gap-4 glass px-8 py-5 rounded-2xl border border-white/10 hover:border-white/30 hover:glass-strong transition-all duration-200 whitespace-nowrap flex-shrink-0 cursor-default"
+                  className="flex items-center gap-4 card px-8 py-5 rounded-2xl whitespace-nowrap flex-shrink-0 cursor-default"
                 >
                   <Icon style={{ color: tech.color, fontSize: "2rem" }} className="flex-shrink-0" />
                   <span className="text-white font-semibold text-lg">{tech.name}</span>
@@ -296,7 +297,7 @@ const ServicesSection = () => {
               return (
                 <div
                   key={i}
-                  className="flex items-center gap-4 glass px-8 py-5 rounded-2xl border border-white/10 hover:border-white/30 hover:glass-strong transition-all duration-200 whitespace-nowrap flex-shrink-0 cursor-default"
+                  className="flex items-center gap-4 card px-8 py-5 rounded-2xl whitespace-nowrap flex-shrink-0 cursor-default"
                 >
                   <Icon style={{ color: tech.color, fontSize: "2rem" }} className="flex-shrink-0" />
                   <span className="text-white font-semibold text-lg">{tech.name}</span>
@@ -307,9 +308,6 @@ const ServicesSection = () => {
         </div>
       </div>
 
-      {/* ── Section Divider ── */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Process Section */}
@@ -318,16 +316,16 @@ const ServicesSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mt-20 text-center"
+          className="mt-20"
         >
-          <motion.h3
-            variants={itemVariants}
-            className="text-3xl md:text-4xl font-bold text-white mb-12"
-          >
-            Our <span className="gradient-text">Process</span>
-          </motion.h3>
+          <div className="text-center mb-12">
+            <span className="section-label mb-4">Process</span>
+            <h3 className="font-heading text-3xl md:text-4xl font-extrabold text-white">
+              How We <span className="gradient-text">Work</span>
+            </h3>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
               {
                 step: "01",
@@ -363,18 +361,18 @@ const ServicesSection = () => {
                 variants={itemVariants}
                 className="relative"
               >
-                <div className="glass rounded-2xl p-6 border border-white/20">
-                  <div className="text-4xl font-bold gradient-text mb-4">
+                <div className="card p-6 h-full">
+                  <div className="text-4xl font-heading font-extrabold gradient-text mb-4 font-numeric">
                     {process.step}
                   </div>
-                  <process.icon className="h-12 w-12 text-indigo-400 mx-auto mb-4" />
-                  <h4 className="text-xl font-semibold text-white mb-3">
+                  <process.icon className="h-10 w-10 text-[#4676c2] mx-auto mb-4" />
+                  <h4 className="text-xl font-semibold text-white mb-3 text-center">
                     {process.title}
                   </h4>
-                  <p className="text-white/80">{process.description}</p>
+                  <p className="text-white/65 text-center">{process.description}</p>
                 </div>
                 {index < 3 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-indigo-500 to-orange-500 transform -translate-y-1/2" />
+                  <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-[#4676c2] to-[#59c368] transform -translate-y-1/2" />
                 )}
               </motion.div>
             ))}

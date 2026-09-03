@@ -71,7 +71,7 @@ const AnimatedCounter = ({
   };
 
   return (
-    <span ref={ref}>
+    <span ref={ref} className="font-numeric">
       {prefix}
       {isInView ? formatValue(count) : "0"}
       {suffix}

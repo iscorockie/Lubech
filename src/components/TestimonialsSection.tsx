@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { FaStar, FaQuoteLeft } from "react-icons/fa";
 
 interface Testimonial {
@@ -71,11 +70,8 @@ const testimonials: Testimonial[] = [
 ];
 
 const TestimonialCard = ({ t }: { t: Testimonial }) => (
-  <div className="flex-shrink-0 w-80 md:w-96 p-6 rounded-2xl border border-white/10 bg-white/[0.03]">
-    <FaQuoteLeft
-      className="h-6 w-6 mb-4 opacity-30"
-      style={{ color: "#4676C2" }}
-    />
+  <div className="flex-shrink-0 w-80 md:w-96 card p-6 rounded-2xl">
+    <FaQuoteLeft className="h-6 w-6 mb-4" style={{ color: "#4676c2", opacity: 0.7 }} />
     <p className="text-white/80 leading-relaxed mb-6 text-sm">
       &ldquo;{t.content}&rdquo;
     </p>
@@ -101,19 +97,6 @@ const TestimonialsSection = () => {
 
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
-      {/* Watermark */}
-      <div className="pointer-events-none select-none absolute top-1/2 left-1/2 opacity-[0.05] -translate-x-1/2 -translate-y-1/2">
-        <div className="relative w-96 h-96 overflow-hidden">
-          <Image
-            src="/logo_icon.png"
-            alt=""
-            fill
-            className="object-contain scale-[3] origin-center"
-            aria-hidden
-          />
-        </div>
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-14">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -122,18 +105,12 @@ const TestimonialsSection = () => {
           transition={{ duration: 0.7 }}
           className="text-center"
         >
-          <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-6 border border-white/20">
-            <FaStar className="h-4 w-4 text-yellow-400" />
-            <span className="text-sm font-medium text-white/90">
-              Client Reviews
-            </span>
-          </div>
-
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-5">
+          <span className="section-label mb-4">Testimonials</span>
+          <h2 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-5">
             What Our <span className="gradient-text">Clients Say</span>
           </h2>
 
-          <p className="text-xl text-white/70 max-w-2xl mx-auto">
+          <p className="text-lg text-white/60 max-w-2xl mx-auto">
             Don&apos;t just take our word for it — here&apos;s what our clients
             say about working with us.
           </p>

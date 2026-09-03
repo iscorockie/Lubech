@@ -58,9 +58,9 @@ const FloatingMenu = () => {
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ delay: index * 0.1 }}
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center space-x-3 glass-strong text-white px-4 py-3 rounded-full border border-white/30 hover:border-white/50 transition-all duration-200 min-w-[140px]"
+                  className="flex items-center space-x-3 glass-strong text-white px-4 py-3 rounded-full border border-white/15 hover:border-white/30 transition-all duration-200 min-w-[140px] shadow-lg"
                 >
-                  <IconComponent className="h-5 w-5" />
+                  <IconComponent className="h-5 w-5 text-[#4676c2]" />
                   <span className="font-medium">{item.name}</span>
                 </motion.a>
               );
@@ -78,7 +78,7 @@ const FloatingMenu = () => {
             exit={{ opacity: 0, scale: 0 }}
             onClick={scrollToTop}
             aria-label="Scroll to top"
-            className="absolute bottom-16 right-0 glass text-white p-3 rounded-full border border-white/20 hover:glass-strong hover:border-white/40 transition-all duration-200 mb-3"
+            className="absolute bottom-16 right-0 glass-strong text-white p-3 rounded-full border border-white/15 transition-all duration-200 mb-3 shadow-lg"
           >
             <ChevronUp className="h-6 w-6" aria-hidden="true" />
           </motion.button>
@@ -92,7 +92,7 @@ const FloatingMenu = () => {
         onClick={() => setIsOpen(!isOpen)}
         aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
         aria-expanded={isOpen}
-        className="glass-strong text-white p-4 rounded-full border border-white/30 hover:border-white/50 transition-all duration-200 shadow-lg"
+        className="glass-strong text-white p-4 rounded-full border border-white/15 transition-all duration-200 shadow-xl"
       >
         <motion.div
           animate={{ rotate: isOpen ? 45 : 0 }}
