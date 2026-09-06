@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import Providers from "@/components/Providers";
 
 const BASE_URL = "https://lubech.tech";
 
@@ -8,7 +9,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#0f0f23",
+  themeColor: "#05050a",
 };
 
 export const metadata: Metadata = {
@@ -91,7 +92,7 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
     other: [
-      { rel: "mask-icon", url: "/web_favicon.svg", color: "#4676c2" },
+      { rel: "mask-icon", url: "/web_favicon.svg", color: "#7c3aed" },
     ],
   },
   manifest: "/site.webmanifest",
@@ -273,13 +274,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-GB">
+    <html lang="en-GB" className="dark">
       <head>
         <link rel="icon" href="/web_favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" sizes="32x32" type="image/png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -287,7 +286,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased" suppressHydrationWarning={true}>
         <GoogleAnalytics />
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

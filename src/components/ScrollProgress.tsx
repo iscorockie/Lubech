@@ -1,43 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 
-const ScrollProgress = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const updateScrollProgress = () => {
-      const scrollPx = document.documentElement.scrollTop;
-      const winHeightPx =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const scrolled = (scrollPx / winHeightPx) * 100;
-      setScrollProgress(scrolled);
-    };
-
-    window.addEventListener("scroll", updateScrollProgress);
-    updateScrollProgress();
-
-    return () => window.removeEventListener("scroll", updateScrollProgress);
-  }, []);
+/** Thin gradient bar at the very top that tracks page scroll (transform-only). */
+export default function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-1 z-50 pointer-events-none">
-      <motion.div
-        className="h-full gradient-bg"
-        style={{
-          width: `${scrollProgress}%`,
-        }}
-        initial={{ width: 0 }}
-        animate={{ width: `${scrollProgress}%` }}
-        transition={{ duration: 0.1, ease: "linear" }}
-      />
-    </div>
+    <motion.div
+      aria-hidden
+      style={{ scaleX }}
+      className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 shadow-[0_0_12px_rgba(192,38,211,0.9)]"
+    />
   );
-};
-
-export default ScrollProgress;
-
-
-
+}
