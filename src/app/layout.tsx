@@ -87,9 +87,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/web_favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "32x32", type: "image/png" },
     ],
-    shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
     other: [
       { rel: "mask-icon", url: "/web_favicon.svg", color: "#7c3aed" },
@@ -137,7 +135,7 @@ const jsonLd = {
       url: BASE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${BASE_URL}/logo_icon.png`,
+        url: `${BASE_URL}/icon-512.png`,
         width: 512,
         height: 512,
       },
@@ -277,7 +275,6 @@ export default function RootLayout({
     <html lang="en-GB" className="dark">
       <head>
         <link rel="icon" href="/web_favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/favicon.ico" sizes="32x32" type="image/png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <script
           type="application/ld+json"

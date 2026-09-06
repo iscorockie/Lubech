@@ -90,6 +90,10 @@ viewport, the render loop pauses when it's off-screen, textures are brand-graded
 - `public/space-purple.jpg` – hero / CTA backdrop (purple-graded version of the original space photo).
 - `public/stars.svg` – tiling star field used as a subtle texture layer.
 - `public/textures/` – brand-graded Earth colour + city-lights maps for the 3D globe (see README there).
+- `public/og.png` – 1200×630 social-share card (Open Graph / Twitter), rendered from the hero design.
+- `public/web_favicon.svg` (SVG favicon + Safari mask icon), `public/icon-512.png` (PWA, maskable-safe),
+  `public/apple-touch-icon.png`, `src/app/favicon.ico` (multi-size, served automatically by the App Router).
+  All carry the violet → magenta version of the Lubech mark; `public/techvector.svg` is the white word-mark used in the nav/footer.
 - `public/projects/*`, `public/staff/*` – portfolio screenshots and team portraits.
 
 Deployed on Vercel (`vercel.json`).
