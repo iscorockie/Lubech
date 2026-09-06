@@ -27,11 +27,14 @@ src/
 ├─ app/
 │  ├─ layout.tsx          # metadata, JSON-LD, <Providers> (MotionConfig reducedMotion="user")
 │  ├─ page.tsx            # section order for the landing page
+│  ├─ not-found.tsx       # branded 404 (also used for stale links from the old site)
+│  ├─ error.tsx           # branded client error boundary with "Try again"
 │  ├─ globals.css         # design tokens (@theme), base styles, component classes
 │  └─ api/contact/        # e-mail endpoint
 ├─ components/
 │  ├─ Navigation.tsx      # floating glass pill nav + full-screen mobile menu
 │  ├─ ScrollProgress.tsx  # gradient scroll bar (transform-only)
+│  ├─ StatusPage.tsx      # shared shell for the 404 / error routes
 │  ├─ Footer.tsx
 │  ├─ Providers.tsx
 │  ├─ ui/                 # primitives: Button, GlowCard, SectionHeader, Orbs/GridPattern
