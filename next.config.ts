@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  // Lets a production audit build live next to the dev server's .next folder.
+  distDir: process.env.NEXT_DIST_DIR ?? ".next",
 };
 
 export default nextConfig;

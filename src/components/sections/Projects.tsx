@@ -33,8 +33,11 @@ function PhoneArt({ project }: { project: Project }) {
   const gradient = project.mock?.gradient ?? "from-violet-600/40 via-fuchsia-600/25 to-pink-600/30";
 
   return (
-    <div className="relative flex h-full w-full items-end justify-center overflow-hidden bg-[radial-gradient(ellipse_at_top,rgba(124,58,237,0.35),rgba(10,10,18,0.2)_60%)]">
-      <div aria-hidden className="absolute inset-0 bg-[url('/stars.svg')] bg-[length:600px_600px] opacity-30" />
+    <div
+      aria-hidden
+      className="relative flex h-full w-full items-end justify-center overflow-hidden bg-[radial-gradient(ellipse_at_top,rgba(124,58,237,0.35),rgba(10,10,18,0.2)_60%)]"
+    >
+      <div className="absolute inset-0 bg-[url('/stars.svg')] bg-[length:600px_600px] opacity-30" />
       {/* floating accent chips */}
       <span aria-hidden className="absolute left-[12%] top-[22%] h-10 w-10 rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-md" style={{ animation: "float 7s ease-in-out infinite" }} />
       <span aria-hidden className="absolute right-[12%] top-[38%] h-7 w-7 rounded-full border border-fuchsia-300/30 bg-fuchsia-500/20 backdrop-blur-md" style={{ animation: "float 9s ease-in-out infinite 1.5s" }} />
@@ -77,13 +80,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         href={primaryHref}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Open ${project.title}`}
         className="relative block aspect-[16/11] overflow-hidden rounded-t-[1.5rem] border-b border-white/[0.06]"
       >
+        <span className="sr-only">Open {project.title} (opens in a new tab)</span>
         {project.image ? (
           <Image
             src={project.image}
-            alt={`${project.title} screenshot`}
+            alt=""
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
             className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.05]"
@@ -93,7 +96,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         )}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a12] via-[#0a0a12]/20 to-transparent opacity-80" />
 
-        <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white/85 backdrop-blur-md">
+        <span
+          aria-hidden
+          className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white/85 backdrop-blur-md"
+        >
           {isWeb ? <Globe className="h-3 w-3" aria-hidden /> : <Smartphone className="h-3 w-3" aria-hidden />}
           {isWeb ? "Web app" : "Mobile app"}
         </span>

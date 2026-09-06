@@ -77,7 +77,7 @@ export default function WhyLubech() {
           {TESTIMONIALS.map((t) => (
             <GlowCard key={t.id} as="article" hoverLift={false} className="flex h-full flex-col p-7">
               <div className="flex items-center justify-between">
-                <div className="flex gap-0.5" aria-label="5 out of 5 stars">
+                <div className="flex gap-0.5" role="img" aria-label="5 out of 5 stars">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-fuchsia-400 text-fuchsia-400" aria-hidden />
                   ))}
