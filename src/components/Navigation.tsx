@@ -51,7 +51,7 @@ const Navigation = () => {
             whileHover={{ scale: 1.02 }}
             className="flex items-center flex-shrink-0"
           >
-            <div className="relative h-12 w-40 overflow-hidden flex items-center">
+            <div className="relative flex h-9 w-32 items-center overflow-hidden sm:h-10 sm:w-36">
               <Image
                 src="/techvector.svg"
                 alt="Lubech"
