@@ -283,15 +283,13 @@ b,
   border-radius: 0 0 2rem 2rem;
 }
 .hero-sky {
-  background:
-    radial-gradient(ellipse at 12% 77%, rgba(255, 255, 255, .85) 0 8%, transparent 22%),
-    radial-gradient(ellipse at 88% 72%, rgba(255, 255, 255, .75) 0 9%, transparent 23%),
-    radial-gradient(ellipse at 50% 100%, rgba(238, 252, 255, .75) 0 15%, transparent 41%),
-    linear-gradient(180deg, #0879b8 0%, #05a8e1 54%, #56c8e9 100%);
+  background-image: linear-gradient(180deg, rgba(1, 5, 18, .08), rgba(1, 10, 28, .12)), url('/hero-space.jpg');
+  background-position: center;
+  background-size: cover;
 }
-.hero-cloud { filter: blur(14px); background: rgba(255,255,255,.55); border-radius: 50%; }
-.hero-cloud-one { width: 28rem; height: 6rem; left: -8rem; bottom: 4rem; transform: rotate(-8deg); }
-.hero-cloud-two { width: 32rem; height: 7rem; right: -10rem; bottom: 6rem; transform: rotate(7deg); }
+.hero-space-glow {
+  background: radial-gradient(ellipse at 50% 83%, rgba(26, 136, 255, .34), transparent 34%), linear-gradient(180deg, rgba(1, 5, 18, .02), rgba(1, 5, 18, .25));
+}
 
 
 /*** Glassmorphism utilities ***/

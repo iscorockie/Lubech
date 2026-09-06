@@ -43,7 +43,7 @@ const Navigation = () => {
         }),
       }}
     >
-      <div className="rounded-full border border-white/10 bg-[#0a1c29]/80 px-4 shadow-[0_12px_35px_rgba(0,0,0,.22)] backdrop-blur-xl sm:px-6">
+      <div className="rounded-full border border-white/20 bg-[#082a40]/60 px-4 shadow-[0_12px_35px_rgba(0,0,0,.16)] backdrop-blur-xl sm:px-6">
         <div className="flex h-16 items-center justify-between relative">
           {/* Logo — left */}
           <motion.a
