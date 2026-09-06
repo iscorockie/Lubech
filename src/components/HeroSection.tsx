@@ -16,7 +16,6 @@ const orbitAngles = [-150, -65, 25, 115];
 
 const HeroSection = () => {
   const [activeProject, setActiveProject] = useState(0);
-  const [isOrbitPaused, setIsOrbitPaused] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const project = projects[activeProject];
 
@@ -41,10 +40,9 @@ const HeroSection = () => {
         <div className="relative mx-auto mt-14 h-[330px] max-w-4xl sm:h-[390px] md:mt-16" aria-label="Featured Lubech projects">
           <motion.div
             className="absolute left-1/2 top-1/2 h-[225px] w-[min(92vw,670px)] -translate-x-1/2 -translate-y-1/2 sm:h-[270px]"
-            animate={prefersReducedMotion || isOrbitPaused ? undefined : { rotate: 360 }}
-            transition={prefersReducedMotion || isOrbitPaused ? undefined : { duration: 34, ease: "linear", repeat: Infinity }}
-            onMouseEnter={() => setIsOrbitPaused(true)}
-            onMouseLeave={() => setIsOrbitPaused(false)}
+            animate={prefersReducedMotion ? undefined : { rotate: 360 }}
+            transition={prefersReducedMotion ? undefined : { duration: 34, ease: "linear", repeat: Infinity }}
+            style={{ transformStyle: "preserve-3d", perspective: 1100 }}
           >
             <div className="absolute inset-0 rounded-[50%] border border-white/20 bg-white/[.04] shadow-[0_0_80px_rgba(255,255,255,.15)]" />
             <div className="absolute inset-[17%] rounded-[50%] border border-dashed border-white/20" />
@@ -53,7 +51,10 @@ const HeroSection = () => {
               const radians = (angle * Math.PI) / 180;
               const left = 50 + Math.cos(radians) * 47;
               const top = 50 + Math.sin(radians) * 43;
-              return <button key={item.title} type="button" onClick={() => setActiveProject(index)} aria-label={`Feature ${item.title}`} className="absolute hidden w-40 -translate-x-1/2 -translate-y-1/2 text-left transition-transform hover:scale-110 sm:block" style={{ left: `${left}%`, top: `${top}%`, transform: `translate(-50%, -50%) rotate(${-angle * .12}deg)` }}><div className={`overflow-hidden rounded-2xl border p-1.5 shadow-2xl backdrop-blur-xl ${activeProject === index ? "border-[#d6ff63] bg-[#d6ff63]/20" : "border-white/30 bg-white/20"}`}><div className="relative h-24 overflow-hidden rounded-xl"><Image src={item.image} alt="" fill className="object-cover" sizes="160px" /><div className="absolute inset-0 bg-[#102431]/25" /></div><p className="truncate px-1 pb-1 pt-2 text-[10px] font-bold text-white">{item.title}</p></div></button>;
+              const depth = (Math.cos(radians) + 1) / 2;
+              const scale = 0.78 + depth * 0.22;
+              const opacity = 0.5 + depth * 0.5;
+              return <button key={item.title} type="button" onClick={() => setActiveProject(index)} aria-label={`Feature ${item.title}`} className="absolute hidden w-40 -translate-x-1/2 -translate-y-1/2 text-left transition-transform hover:scale-110 sm:block" style={{ left: `${left}%`, top: `${top}%`, opacity, transform: `translate(-50%, -50%) rotate(${-angle * .12}deg) scale(${scale})`, transformOrigin: "center" }}><div className={`overflow-hidden rounded-2xl border p-1.5 shadow-2xl backdrop-blur-xl ${activeProject === index ? "border-[#d6ff63] bg-[#d6ff63]/20" : "border-white/30 bg-white/20"}`}><div className="relative h-24 overflow-hidden rounded-xl"><Image src={item.image} alt="" fill className="object-cover" sizes="160px" /><div className="absolute inset-0 bg-[#102431]/25" /></div><p className="truncate px-1 pb-1 pt-2 text-[10px] font-bold text-white">{item.title}</p></div></button>;
             })}
           </motion.div>
 
