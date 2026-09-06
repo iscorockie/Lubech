@@ -14,6 +14,9 @@ const Navigation = () => {
       setScrolled(window.scrollY > 40);
     };
     handleScroll();
+    // Always start a fresh page preview at the top instead of restoring the
+    // previous iframe/browser scroll position.
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -30,11 +33,7 @@ const Navigation = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-white/10"
-          : "bg-transparent"
-      }`}
+      className="fixed left-1/2 top-4 z-50 w-[calc(100%-2rem)] max-w-7xl -translate-x-1/2 transition-all duration-300"
       style={{
         paddingTop: "env(safe-area-inset-top)",
         ...(scrolled && {
@@ -44,15 +43,15 @@ const Navigation = () => {
         }),
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 relative">
+      <div className="rounded-full border border-white/20 bg-[#082a40]/60 px-4 shadow-[0_12px_35px_rgba(0,0,0,.16)] backdrop-blur-xl sm:px-6">
+        <div className="flex h-16 items-center justify-between relative">
           {/* Logo — left */}
           <motion.a
             href="#home"
             whileHover={{ scale: 1.02 }}
             className="flex items-center flex-shrink-0"
           >
-            <div className="relative h-12 w-40 overflow-hidden flex items-center">
+            <div className="relative flex h-9 w-32 items-center overflow-hidden sm:h-10 sm:w-36">
               <Image
                 src="/techvector.svg"
                 alt="Lubech"
