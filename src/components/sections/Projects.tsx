@@ -89,7 +89,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             alt=""
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-            className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+            className="object-cover object-bottom transition-transform duration-700 ease-out group-hover:scale-[1.05]"
           />
         ) : (
           <PhoneArt project={project} />

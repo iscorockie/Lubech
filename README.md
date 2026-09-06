@@ -93,6 +93,10 @@ viewport, the render loop pauses when it's off-screen, textures are brand-graded
 - `public/space-purple.jpg` – hero / CTA backdrop (purple-graded version of the original space photo).
 - `public/stars.svg` – tiling star field used as a subtle texture layer.
 - `public/textures/` – brand-graded Earth colour + city-lights maps for the 3D globe (see README there).
+- `public/projects/*.webp`, `public/staff/*.webp` – portfolio screenshots and team portraits, stored as
+  WebP (≤ 1200 px, q 84). When adding new ones convert first, e.g.
+  `npx sharp-cli -i shot.png -o public/projects/shot.webp -f webp -q 84 resize 1200` — the whole set is ~0.5 MB
+  instead of the 5 MB of source PNG/JPEGs it replaced.
 - `public/og.png` – 1200×630 social-share card (Open Graph / Twitter), rendered from the hero design.
 - `public/web_favicon.svg` (SVG favicon + Safari mask icon), `public/icon-512.png` (PWA, maskable-safe),
   `public/apple-touch-icon.png`, `src/app/favicon.ico` (multi-size, served automatically by the App Router).
