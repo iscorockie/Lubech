@@ -1,7 +1,7 @@
 # Lubech — Web & Mobile App Development Agency
 
 Marketing site for [lubech.tech](https://lubech.tech): a dark, premium landing page built with
-**Next.js 15 (App Router) · React 19 · Tailwind CSS v4 · Framer Motion**.
+**Next.js 15 (App Router) · React 19 · Tailwind CSS v4 · Framer Motion · Three.js (React Three Fiber)**.
 
 ## Getting started
 
@@ -35,10 +35,12 @@ src/
 │  ├─ Footer.tsx
 │  ├─ Providers.tsx
 │  ├─ ui/                 # primitives: Button, GlowCard, SectionHeader, Orbs/GridPattern
+│  ├─ three/Earth3D.tsx   # WebGL night-side Earth horizon (React Three Fiber), lazy-loaded
 │  └─ sections/           # Hero, Services, WhoItsFor, Process, Technologies,
 │                         # Projects, WhyLubech, Team, FinalCTA
 ├─ data/site.ts           # ALL copy & content (services, projects, team, testimonials…)
 ├─ lib/animations.ts      # shared Motion variants / easing / viewport config
+├─ lib/hooks.ts           # useMediaQuery (SSR-safe)
 ├─ lib/utils.ts           # cn()
 └─ types/index.ts
 ```
@@ -65,10 +67,29 @@ Motion rules used throughout:
 - Scroll-linked effects use `useScroll` + `useTransform`/`useSpring` (hero parallax, process timeline).
 - Reduced motion is respected globally (`MotionConfig reducedMotion="user"` + a CSS fallback).
 
+### Pinned "Our Process" timeline
+
+On desktop (≥ 1024 px wide, ≥ 640 px tall, no reduced-motion) the Process section is a
+`position: sticky` stage that stays pinned for ~2.4 viewports. Section scroll progress (0 → 1,
+smoothed with `useSpring`) drives everything in lock-step, with no React re-renders:
+
+| Layer | Driven by progress |
+| --- | --- |
+| 3D Earth (`three/Earth3D.tsx`) | rises into place, then rotates (idle spin + scroll-driven turn, read from the MotionValue inside `useFrame`) |
+| Gradient timeline | `scaleX` fill + a travelling glowing tip |
+| Four steps | each dot ignites, then its card fades/rises within its own slice of the scroll |
+
+The Three.js chunk (~235 kB gz) is `next/dynamic`-loaded only when the section comes within one
+viewport, the render loop pauses when it's off-screen, textures are brand-graded WebP
+(`public/textures`), and a pure-CSS horizon renders while textures load or if WebGL is missing
+(context loss is handled too). Phones/tablets and reduced-motion users get a vertical
+`whileInView` timeline with no WebGL at all.
+
 ## Assets
 
 - `public/space-purple.jpg` – hero / CTA backdrop (purple-graded version of the original space photo).
 - `public/stars.svg` – tiling star field used as a subtle texture layer.
+- `public/textures/` – brand-graded Earth colour + city-lights maps for the 3D globe (see README there).
 - `public/projects/*`, `public/staff/*` – portfolio screenshots and team portraits.
 
 Deployed on Vercel (`vercel.json`).
