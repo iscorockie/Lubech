@@ -1,193 +1,70 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Code, Smartphone, Server, Sparkles } from "lucide-react";
-import AnimatedCounter from "./AnimatedCounter";
+import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Play, Sparkles } from "lucide-react";
+import { useState } from "react";
+
+const projects = [
+  { title: "Space4Climate", type: "Web platform", image: "/projects/space4climate.png", stat: "Climate intelligence" },
+  { title: "Glam n' Go", type: "Mobile commerce", image: "/projects/glam-n-go.jpg", stat: "5K+ downloads" },
+  { title: "Easy Gas", type: "Delivery platform", image: "/projects/easy-gas.jpg", stat: "Live on mobile" },
+  { title: "Masifa", type: "Community platform", image: "/projects/masifa.png", stat: "Built for impact" },
+];
+
+const orbitAngles = [-150, -65, 25, 115];
 
 const HeroSection = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.16, delayChildren: 0.2 },
-    },
-  };
+  const [activeProject, setActiveProject] = useState(0);
+  const [isOrbitPaused, setIsOrbitPaused] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+  const project = projects[activeProject];
 
-  const itemVariants = {
-    hidden: { y: 26, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.7 } },
-  };
-
-  const services = [
-    {
-      icon: Code,
-      title: "Web Development",
-      description: "Modern, responsive websites built with cutting-edge technologies",
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile Apps",
-      description: "Cross-platform mobile applications for iOS and Android",
-    },
-    {
-      icon: Server,
-      title: "Backend Systems",
-      description: "Scalable APIs and server infrastructure for your applications",
-    },
-  ];
-
-  const stats = [
-    { number: "30+", label: "Projects Delivered" },
-    { number: "100%", label: "Client Satisfaction" },
-    { number: "24/7", label: "Support Available" },
-    { number: "7+", label: "Years Experience" },
-  ];
+  const previousProject = () => setActiveProject((current) => (current - 1 + projects.length) % projects.length);
+  const nextProject = () => setActiveProject((current) => (current + 1) % projects.length);
 
   return (
-    <section id="home" className="hero-gradient relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-32 md:pt-40 pb-16 md:pb-24">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-start"
-        >
-          {/* Left — heading + CTA */}
-          <div className="lg:col-span-6">
-            <motion.div
-              variants={itemVariants}
-              className="inline-flex items-center space-x-2 glass rounded-full px-4 py-2 mb-7 border border-white/20"
-            >
-              <Sparkles className="h-4 w-4 text-yellow-400" />
-              <span className="text-sm font-semibold tracking-wide text-white/90">
-                Professional Development Services
-              </span>
-            </motion.div>
+    <section id="home" className="hero-template relative isolate overflow-hidden">
+      <div aria-hidden="true" className="hero-sky pointer-events-none absolute inset-0" />
+      <div aria-hidden="true" className="hero-cloud hero-cloud-one pointer-events-none absolute" />
+      <div aria-hidden="true" className="hero-cloud hero-cloud-two pointer-events-none absolute" />
 
-            <motion.h1
-              variants={itemVariants}
-              className="font-heading text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-white mb-7"
-            >
-              Unleashing The
-              <br />
-              Potential Of Your{" "}
-              <span className="gradient-text">Brand</span>
-            </motion.h1>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-10 pt-32 sm:px-6 md:pb-14 md:pt-36 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="mb-5 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.16em] text-[#d6ff63]"><Sparkles className="h-3.5 w-3.5" /> Lubech digital studio</div>
+          <h1 className="font-heading text-5xl font-extrabold leading-[.98] tracking-[-.055em] text-white sm:text-7xl">Building the future<br /><span className="text-white/55">one bold idea at a time.</span></h1>
+          <p className="mx-auto mt-6 max-w-xl text-sm leading-6 text-white/70 sm:text-base">We help ambitious teams turn complex ideas into clear, useful digital products that people love to use.</p>
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row"><a href="#contact" className="pill bg-[#d6ff63] px-6 py-3 text-xs font-bold uppercase tracking-[.08em] text-[#102431] transition-transform hover:scale-[1.03]">Get started <ArrowUpRight className="h-4 w-4" /></a><a href="#portfolio" className="pill border border-white/25 bg-white/10 px-6 py-3 text-xs font-bold uppercase tracking-[.08em] text-white backdrop-blur-md transition-colors hover:bg-white/20"><Play className="h-3.5 w-3.5 fill-current" /> View our work</a></div>
+        </div>
 
-            <motion.p
-              variants={itemVariants}
-              className="text-lg md:text-xl text-white/80 max-w-xl leading-relaxed mb-9"
-            >
-              We build stunning websites, cross-platform mobile applications,
-              and robust backend systems that drive your business forward.
-            </motion.p>
+        {/* Orbiting project system: cards replace the reference's 3D objects. */}
+        <div className="relative mx-auto mt-14 h-[330px] max-w-4xl sm:h-[390px] md:mt-16" aria-label="Featured Lubech projects">
+          <motion.div
+            className="absolute left-1/2 top-1/2 h-[225px] w-[min(92vw,670px)] -translate-x-1/2 -translate-y-1/2 sm:h-[270px]"
+            animate={prefersReducedMotion || isOrbitPaused ? undefined : { rotate: 360 }}
+            transition={prefersReducedMotion || isOrbitPaused ? undefined : { duration: 34, ease: "linear", repeat: Infinity }}
+            onMouseEnter={() => setIsOrbitPaused(true)}
+            onMouseLeave={() => setIsOrbitPaused(false)}
+          >
+            <div className="absolute inset-0 rounded-[50%] border border-white/20 bg-white/[.04] shadow-[0_0_80px_rgba(255,255,255,.15)]" />
+            <div className="absolute inset-[17%] rounded-[50%] border border-dashed border-white/20" />
+            {projects.map((item, index) => {
+              const angle = orbitAngles[index];
+              const radians = (angle * Math.PI) / 180;
+              const left = 50 + Math.cos(radians) * 47;
+              const top = 50 + Math.sin(radians) * 43;
+              return <button key={item.title} type="button" onClick={() => setActiveProject(index)} aria-label={`Feature ${item.title}`} className="absolute hidden w-40 -translate-x-1/2 -translate-y-1/2 text-left transition-transform hover:scale-110 sm:block" style={{ left: `${left}%`, top: `${top}%`, transform: `translate(-50%, -50%) rotate(${-angle * .12}deg)` }}><div className={`overflow-hidden rounded-2xl border p-1.5 shadow-2xl backdrop-blur-xl ${activeProject === index ? "border-[#d6ff63] bg-[#d6ff63]/20" : "border-white/30 bg-white/20"}`}><div className="relative h-24 overflow-hidden rounded-xl"><Image src={item.image} alt="" fill className="object-cover" sizes="160px" /><div className="absolute inset-0 bg-[#102431]/25" /></div><p className="truncate px-1 pb-1 pt-2 text-[10px] font-bold text-white">{item.title}</p></div></button>;
+            })}
+          </motion.div>
 
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 items-start"
-            >
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
-                className="pill pill-dark px-8 py-4 text-base"
-              >
-                Start Your Brand Journey
-                <ArrowRight className="h-5 w-5" />
-              </motion.a>
-              <motion.a
-                href="#portfolio"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
-                className="pill pill-light px-8 py-4 text-base"
-              >
-                View Our Work
-              </motion.a>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              variants={itemVariants}
-              className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-xl"
-            >
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-white">
-                  <div className="font-numeric text-3xl md:text-4xl font-bold gradient-text">
-                    <AnimatedCounter value={stat.number} />
-                  </div>
-                  <div className="text-white/70 text-sm mt-1">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
+          <div className="absolute left-1/2 top-1/2 w-[min(78vw,330px)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border border-white/45 bg-white/25 p-2 shadow-[0_30px_80px_rgba(0,0,0,.3)] backdrop-blur-xl sm:w-[380px]">
+            <div className="relative h-52 overflow-hidden rounded-2xl sm:h-60"><Image src={project.image} alt={project.title} fill priority={activeProject === 0} className="object-cover" sizes="380px" /><div className="absolute inset-0 bg-gradient-to-t from-[#102431]/90 via-transparent to-transparent" /><div className="absolute bottom-4 left-4 right-4 flex items-end justify-between text-left"><div><p className="text-[10px] font-bold uppercase tracking-[.14em] text-[#d6ff63]">{project.type}</p><p className="mt-1 font-heading text-2xl font-bold text-white">{project.title}</p></div><ArrowUpRight className="h-5 w-5 text-white" /></div></div>
           </div>
 
-          {/* Right — service cards */}
-          <div className="lg:col-span-6 space-y-5">
-            {/* Featured glass card */}
-            <motion.div
-              variants={itemVariants}
-              className="card p-8"
-            >
-              <span className="section-label mb-3">Featured Service</span>
-              <h3 className="font-heading text-2xl font-bold text-white mb-3">
-                Full-stack Product Development
-              </h3>
-              <p className="text-white/70 leading-relaxed">
-                We combine strategy, design, and engineering to ship products
-                people love — from the first wireframe to production deployment
-                and beyond.
-              </p>
-              <div className="flex items-center justify-between mt-6">
-                <motion.a
-                  href="#services"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="pill pill-dark px-6 py-3 text-sm"
-                >
-                  Explore Services
-                  <ArrowUpRight className="h-4 w-4" />
-                </motion.a>
-                <motion.a
-                  href="#contact"
-                  aria-label="Start a project"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="arrow-circle"
-                >
-                  <ArrowUpRight className="h-5 w-5" />
-                </motion.a>
-              </div>
-            </motion.div>
+          <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/25 bg-[#102431]/35 px-2 py-1.5 backdrop-blur-md"><button type="button" onClick={previousProject} aria-label="Previous project" className="flex h-7 w-7 items-center justify-center rounded-full text-white/75 transition hover:bg-white/15 hover:text-white"><ChevronLeft className="h-4 w-4" /></button><div className="flex gap-1.5">{projects.map((item, index) => <button key={item.title} type="button" onClick={() => setActiveProject(index)} aria-label={`Show ${item.title}`} className={`h-1.5 rounded-full transition-all ${index === activeProject ? "w-6 bg-[#d6ff63]" : "w-1.5 bg-white/45"}`} />)}</div><button type="button" onClick={nextProject} aria-label="Next project" className="flex h-7 w-7 items-center justify-center rounded-full text-white/75 transition hover:bg-white/15 hover:text-white"><ChevronRight className="h-4 w-4" /></button></div>
+        </div>
 
-            {/* Secondary tinted cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {services.map((service) => (
-                <motion.div
-                  key={service.title}
-                  variants={itemVariants}
-                  className="card-tint p-6"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <service.icon className="h-8 w-8 text-white" />
-                    <motion.a
-                      href="#services"
-                      aria-label={`Learn about ${service.title}`}
-                      whileHover={{ scale: 1.12 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="arrow-circle arrow-circle-light w-9 h-9"
-                    >
-                      <ArrowUpRight className="h-4 w-4" />
-                    </motion.a>
-                  </div>
-                  <h3 className="card-title font-heading text-lg font-bold mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm">{service.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+        <div className="mx-auto mt-7 flex max-w-lg flex-col items-center justify-center gap-3 text-center text-xs text-white/70 sm:flex-row sm:gap-5"><span className="flex items-center gap-1 text-[#d6ff63]">★★★★★</span><span>Trusted by teams building what&apos;s next</span><span className="hidden h-1 w-1 rounded-full bg-white/40 sm:block" /><span>{project.stat}</span></div>
       </div>
     </section>
   );

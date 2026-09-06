@@ -276,6 +276,24 @@ b,
   background: linear-gradient(150deg, #0f0f23 0%, #16213e 45%, #1a1a2e 100%);
 }
 
+/* Hero template: saturated, open composition ready for a supplied background image. */
+.hero-template {
+  min-height: 760px;
+  background: #0799d4;
+  border-radius: 0 0 2rem 2rem;
+}
+.hero-sky {
+  background:
+    radial-gradient(ellipse at 12% 77%, rgba(255, 255, 255, .85) 0 8%, transparent 22%),
+    radial-gradient(ellipse at 88% 72%, rgba(255, 255, 255, .75) 0 9%, transparent 23%),
+    radial-gradient(ellipse at 50% 100%, rgba(238, 252, 255, .75) 0 15%, transparent 41%),
+    linear-gradient(180deg, #0879b8 0%, #05a8e1 54%, #56c8e9 100%);
+}
+.hero-cloud { filter: blur(14px); background: rgba(255,255,255,.55); border-radius: 50%; }
+.hero-cloud-one { width: 28rem; height: 6rem; left: -8rem; bottom: 4rem; transform: rotate(-8deg); }
+.hero-cloud-two { width: 32rem; height: 7rem; right: -10rem; bottom: 6rem; transform: rotate(7deg); }
+
+
 /*** Glassmorphism utilities ***/
 .glass {
   background: rgba(255, 255, 255, 0.1);
