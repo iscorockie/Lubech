@@ -57,7 +57,7 @@ presentational.
 | Token            | Value                                              |
 | ---------------- | -------------------------------------------------- |
 | Background       | `#05050A` → `#0A0A12`                              |
-| Accent gradient  | `#2563eb` → `#0ea5e9` → `#22d3ee` (blue → sky → cyan; filled buttons/badges use the deeper `#2563eb → #0284c7 → #0891b2` run so white labels keep ≥ 3.7:1 contrast) |
+| Accent gradient  | `#2563eb` → `#0ea5e9` → `#22d3ee` (blue → sky → cyan; filled buttons/badges use the deeper `#2563eb → #0369a1 → #0e7490` run so white labels meet WCAG AA (≥ 4.5:1) along the whole gradient) |
 | Headings         | Bricolage Grotesque (self-hosted, `public/fonts/bricolage`) — 36/48 pt display cut for h1/h2, 14 pt text cut for h3–h6 |
 | Body             | Quicksand (self-hosted, `public/fonts/quicksand`)  |
 | Cards            | `.glow-card` – dark, 1px blue border, soft glow, cursor spotlight |

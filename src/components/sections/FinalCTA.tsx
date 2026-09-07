@@ -153,7 +153,7 @@ export default function FinalCTA() {
               <div className="bg-[#0a0a12]/80 p-8 backdrop-blur-xl sm:p-10">
                 {status === "sent" ? (
                   <div className="flex h-full flex-col items-center justify-center py-10 text-center">
-                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-600 shadow-[0_0_40px_rgba(14,165,233,0.6)]">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-700 shadow-[0_0_40px_rgba(14,165,233,0.6)]">
                       <CheckCircle2 className="h-8 w-8 text-white" aria-hidden />
                     </span>
                     <h3 className="mt-6 font-heading text-2xl font-bold text-white">Message received!</h3>

@@ -196,7 +196,7 @@ function PinnedStep({ index, progress, step, title, description, duration, icon:
             style={{ opacity: ringOpacity }}
             className="animate-pulse-glow absolute inset-1 rounded-full bg-sky-500/25"
           />
-          <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 via-sky-600 to-cyan-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]">
+          <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 via-sky-700 to-cyan-700 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]">
             <Icon className="h-[18px] w-[18px]" aria-hidden />
           </span>
         </motion.span>
@@ -268,7 +268,7 @@ function StackedProcess() {
                 <div className="relative z-10 shrink-0">
                   <span className="relative flex h-14 w-14 items-center justify-center rounded-full border border-sky-300/30 bg-[#0a0a12] shadow-[0_0_0_6px_rgba(37,99,235,0.08),0_0_30px_rgba(14,165,233,0.45)]">
                     <span aria-hidden className="animate-pulse-glow absolute inset-2 rounded-full bg-sky-500/20" />
-                    <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 via-sky-600 to-cyan-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]">
+                    <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 via-sky-700 to-cyan-700 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]">
                       <Icon className="h-[18px] w-[18px]" aria-hidden />
                     </span>
                   </span>

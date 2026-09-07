@@ -24,7 +24,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /* ── E-mail layout (brand: deep black + blue → cyan) ─────────────────── */
 
-const GRADIENT = "linear-gradient(135deg, #2563eb 0%, #0284c7 55%, #0891b2 100%)";
+const GRADIENT = "linear-gradient(135deg, #2563eb 0%, #0369a1 55%, #0e7490 100%)";
 
 function shell(headline: string, body: string): string {
   return `

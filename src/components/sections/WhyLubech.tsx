@@ -94,7 +94,7 @@ export default function WhyLubech() {
                 {`“${t.content}”`}
               </SplitText>
               <figcaption className="mt-6 flex items-center gap-3 border-t border-white/[0.06] pt-5">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-600 font-heading text-sm font-bold text-white">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-700 font-heading text-sm font-bold text-white">
                   {t.name.split(" ").map((n) => n[0]).join("")}
                 </span>
                 <div>

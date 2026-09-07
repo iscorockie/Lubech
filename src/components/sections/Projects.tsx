@@ -226,7 +226,7 @@ export default function Projects() {
                     <motion.span
                       layoutId="filter-pill"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                      className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 via-sky-600 to-cyan-600 shadow-[0_0_24px_-6px_rgba(14,165,233,0.8)]"
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 via-sky-700 to-cyan-700 shadow-[0_0_24px_-6px_rgba(14,165,233,0.8)]"
                     />
                   ) : null}
                   <span className="relative">{f.label}</span>
