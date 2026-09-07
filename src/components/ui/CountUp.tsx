@@ -48,8 +48,11 @@ export default function CountUp({ value, className, duration = 1.6, delay = 0 }:
     return () => controls.stop();
   }, [inView, target, duration, delay, prefix, suffix, decimals, value, reduce]);
 
+  // `aria-label` isn't allowed on a role-less <span>, so assistive tech gets the final value
+  // from a visually-hidden copy while the counting digits stay decorative.
   return (
-    <span ref={ref} className={className} style={{ fontVariantNumeric: "tabular-nums" }} aria-label={value}>
+    <span ref={ref} className={className} style={{ fontVariantNumeric: "tabular-nums" }}>
+      <span className="sr-only">{value}</span>
       <span aria-hidden>{display}</span>
     </span>
   );

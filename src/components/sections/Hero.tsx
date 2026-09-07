@@ -35,7 +35,7 @@ export default function Hero() {
       <motion.div aria-hidden style={{ y: bgY }} className="absolute inset-[-10%] -z-30 will-change-transform">
         <div
           className="absolute inset-0 bg-cover bg-[position:center_35%] opacity-70"
-          style={{ backgroundImage: "url('/space-blue.jpg')" }}
+          style={{ backgroundImage: "url('/space-blue.webp')" }}
         />
       </motion.div>
 

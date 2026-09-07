@@ -8,7 +8,7 @@ Marketing site for [lubech.tech](https://lubech.tech): a dark, premium landing p
 ```bash
 yarn install
 yarn dev        # http://localhost:3000
-yarn build      # production build (Turbopack)
+yarn build      # production build (webpack — dedupes shared chunks; dev uses Turbopack)
 yarn lint
 ```
 
@@ -106,15 +106,15 @@ smoothed with `useSpring`) drives everything in lock-step, with no React re-rend
 | Gradient timeline | `scaleX` fill + a travelling glowing tip |
 | Four steps | each dot ignites, then its card fades/rises within its own slice of the scroll |
 
-The Three.js chunk (~235 kB gz) is `next/dynamic`-loaded only when the section comes within one
-viewport, the render loop pauses when it's off-screen, textures are brand-graded WebP
+The Three.js code (~240 kB gz, split into a few long-cached chunks) is `next/dynamic`-loaded only when
+the section comes within one viewport, the render loop pauses when it's off-screen, textures are brand-graded WebP
 (`public/textures`), and a pure-CSS horizon renders while textures load or if WebGL is missing
 (context loss is handled too). Phones/tablets and reduced-motion users get a vertical
 `whileInView` timeline with no WebGL at all.
 
 ## Assets
 
-- `public/space-blue.jpg` – hero / CTA backdrop (blue-graded version of the original space photo).
+- `public/space-blue.webp` – hero / CTA backdrop (blue-graded version of the original space photo; WebP q80, 46 kB).
 - `public/stars.svg` – tiling star field used as a subtle texture layer.
 - `public/textures/` – brand-graded Earth colour + city-lights maps for the 3D globe (see README there).
 - `public/projects/*.webp`, `public/staff/*.webp` – portfolio screenshots and team portraits, stored as
@@ -126,5 +126,17 @@ viewport, the render loop pauses when it's off-screen, textures are brand-graded
   `public/apple-touch-icon.png`, `src/app/favicon.ico` (multi-size, served automatically by the App Router).
   All carry the blue → cyan version of the Lubech mark; `public/techvector.svg` is the white word-mark used in the nav/footer.
 - `public/projects/*`, `public/staff/*` – portfolio screenshots and team portraits.
+
+## Performance notes
+
+- `yarn build` uses webpack rather than Turbopack on purpose: with Next 15.5 Turbopack emits the
+  Motion runtime twice for this app (the `/` route and the shared 404/500 bundle each get their own copy),
+  which is ~65 kB gz of duplicate JS on first load. Dev still uses `--turbopack`.
+- Initial JS is ~220 kB gz; Three.js/R3F (~240 kB gz) is only fetched when the Process section is about to
+  enter the viewport, and never on phones/tablets.
+- Lighthouse reports a *late* LCP that is an artefact of the entrance animations rather than slow
+  rendering: Chrome ignores elements while they are transparent or translated out of their clip, so the
+  first "counted" paint is the hero paragraph when its line reveal finishes (~2.4 s). Real first paint is
+  ~0.25 s; CLS is 0 and TBT is 0 ms.
 
 Deployed on Vercel (`vercel.json`).

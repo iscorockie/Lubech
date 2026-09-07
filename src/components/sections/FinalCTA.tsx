@@ -53,7 +53,7 @@ export default function FinalCTA() {
       <div
         aria-hidden
         className="absolute inset-0 -z-20 bg-cover bg-[position:center_75%] opacity-50"
-        style={{ backgroundImage: "url('/space-blue.jpg')" }}
+        style={{ backgroundImage: "url('/space-blue.webp')" }}
       />
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-[#05050a] via-[#05050a]/60 to-[#05050a]" />
       <div aria-hidden className="absolute inset-0 -z-10 bg-[url('/stars.svg')] bg-[length:900px_900px] opacity-30" />
