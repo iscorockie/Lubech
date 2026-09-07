@@ -217,6 +217,9 @@
 /* ── Base ─────────────────────────────────────────────────────────────────── */
 @layer base {
   html {
+    /* Motion's useScroll(target) measures offsets up to the scroll container; giving <html>
+       a positioned box keeps that measurement unambiguous (and silences its dev warning). */
+    position: relative;
     scroll-behavior: smooth;
     scroll-padding-top: 6.5rem;
     color-scheme: dark;
