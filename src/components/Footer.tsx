@@ -23,7 +23,7 @@ export default function Footer() {
       <div aria-hidden className="hairline absolute inset-x-[15%] top-0" />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-72 bg-[radial-gradient(ellipse_60%_100%_at_50%_120%,rgba(124,58,237,0.18),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-72 bg-[radial-gradient(ellipse_60%_100%_at_50%_120%,rgba(37,99,235,0.18),transparent_70%)]"
       />
 
       <div className="container-x relative pt-16 pb-8">
@@ -47,7 +47,7 @@ export default function Footer() {
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white/70 transition-all hover:border-fuchsia-400/50 hover:text-white hover:shadow-[0_0_20px_-6px_rgba(192,38,211,0.8)]"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white/70 transition-all hover:border-sky-400/50 hover:text-white hover:shadow-[0_0_20px_-6px_rgba(14,165,233,0.8)]"
                 >
                   <Icon className="h-4 w-4" aria-hidden />
                 </a>
@@ -112,7 +112,7 @@ export default function Footer() {
           <p className="hidden sm:block">Designed &amp; built in-house with Next.js, Tailwind &amp; Motion.</p>
           <a
             href="#home"
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs font-semibold text-white/70 transition-all hover:border-fuchsia-400/50 hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs font-semibold text-white/70 transition-all hover:border-sky-400/50 hover:text-white"
           >
             Back to top <ArrowUp className="h-3.5 w-3.5" aria-hidden />
           </a>

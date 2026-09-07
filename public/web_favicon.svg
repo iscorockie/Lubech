@@ -3,10 +3,10 @@
 <path d="M3.22211 73.1025C6.79133 75.886 11.9191 75.2982 14.7804 71.8166L30.0421 81.2709C28.1657 87.6039 30.1961 94.7126 35.7238 99.0166C42.9244 104.628 53.317 103.337 58.9251 96.1327C64.3072 89.2274 63.3295 79.4044 56.8975 73.6592L71.2422 53.1059C75.2029 54.8043 79.9632 53.7092 82.7398 50.1428C86.0405 45.8996 85.2761 39.7786 81.0413 36.4807C76.7981 33.1701 70.6841 33.9345 67.3819 38.1777C64.3949 42.021 64.7453 47.3988 67.9938 50.8366L53.649 71.3885C46.683 67.6723 37.8602 69.3764 32.8399 75.8097C32.3934 76.3862 32.0034 76.9881 31.6431 77.6014L16.5028 68.2205C17.1288 65.2067 16.0606 61.9596 13.4691 59.9419C9.82927 57.1046 4.58846 57.7574 1.75681 61.393C-1.06917 65.0258 -0.417768 70.2708 3.22211 73.1025Z" fill="url(#lb-nodes)"/>
 <defs>
 <linearGradient id="lb-arcs" x1="75.3447" y1="89.9362" x2="75.3447" y2="-3.38076" gradientUnits="userSpaceOnUse">
-<stop stop-color="#a78bfa"/><stop offset="0.55" stop-color="#8b5cf6"/><stop offset="1" stop-color="#7c3aed"/>
+<stop stop-color="#60a5fa"/><stop offset="0.55" stop-color="#3b82f6"/><stop offset="1" stop-color="#2563eb"/>
 </linearGradient>
 <linearGradient id="lb-nodes" x1="90" y1="80.5" x2="-16.5" y2="45" gradientUnits="userSpaceOnUse">
-<stop stop-color="#f472b6"/><stop offset="0.5" stop-color="#db2777"/><stop offset="1" stop-color="#c026d3"/>
+<stop stop-color="#67e8f9"/><stop offset="0.5" stop-color="#22d3ee"/><stop offset="1" stop-color="#0ea5e9"/>
 </linearGradient>
 </defs>
 </svg>

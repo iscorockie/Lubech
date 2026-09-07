@@ -22,14 +22,14 @@ function clean(input: unknown, field: Field): string {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-/* ── E-mail layout (brand: deep black + violet → magenta) ─────────────────── */
+/* ── E-mail layout (brand: deep black + blue → cyan) ─────────────────── */
 
-const GRADIENT = "linear-gradient(135deg, #7c3aed 0%, #c026d3 55%, #db2777 100%)";
+const GRADIENT = "linear-gradient(135deg, #2563eb 0%, #0284c7 55%, #0891b2 100%)";
 
 function shell(headline: string, body: string): string {
   return `
   <div style="margin:0;padding:24px;background:#05050a;">
-    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto;background:#0a0a12;color:#fff;border:1px solid rgba(139,92,246,0.25);border-radius:20px;overflow:hidden;">
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto;background:#0a0a12;color:#fff;border:1px solid rgba(59,130,246,0.25);border-radius:20px;overflow:hidden;">
       <div style="background:${GRADIENT};padding:32px;text-align:center;">
         <h1 style="margin:0;font-size:22px;line-height:1.3;color:#fff;">${headline}</h1>
       </div>
@@ -112,7 +112,7 @@ export async function POST(req: NextRequest) {
         "New project enquiry",
         `<table style="width:100%;border-collapse:collapse;">
           ${row("Name", `<strong>${esc(name)}</strong>`)}
-          ${row("Email", `<a href="mailto:${esc(email)}" style="color:#e879f9;text-decoration:none;">${esc(email)}</a>`)}
+          ${row("Email", `<a href="mailto:${esc(email)}" style="color:#38bdf8;text-decoration:none;">${esc(email)}</a>`)}
           ${phone ? row("Phone", esc(phone)) : ""}
           ${row("Project type", esc(project))}
           ${budget ? row("Budget", esc(budget)) : ""}
@@ -134,9 +134,9 @@ export async function POST(req: NextRequest) {
         </p>
         <p style="margin:0;color:#c9c9d6;line-height:1.7;font-size:15px;">
           In the meantime, feel free to browse our work at
-          <a href="https://lubech.tech/#work" style="color:#e879f9;text-decoration:none;">lubech.tech</a>
+          <a href="https://lubech.tech/#work" style="color:#38bdf8;text-decoration:none;">lubech.tech</a>
           or reach us directly at
-          <a href="mailto:${esc(to)}" style="color:#e879f9;text-decoration:none;">${esc(to)}</a>.
+          <a href="mailto:${esc(to)}" style="color:#38bdf8;text-decoration:none;">${esc(to)}</a>.
         </p>
         <p style="margin:32px 0 0;color:#8a8a9e;font-size:13px;">— The Lubech Team</p>`,
       ),

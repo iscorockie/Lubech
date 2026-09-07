@@ -119,7 +119,7 @@
 
 /*
  * ── Design tokens ───────────────────────────────────────────────────────────
- * Deep-black canvas, violet → fuchsia → pink accent system, soft neon glows.
+ * Deep-black canvas, blue → sky → cyan accent system, soft neon glows.
  */
 @theme {
   /* Canvas */
@@ -128,10 +128,10 @@
   --color-ink-800: #10101b;
   --color-ink-700: #181827;
 
-  /* Accent gradient stops (#7C3AED → #C026D3 → #DB2777) */
-  --color-brand-violet: #7c3aed;
-  --color-brand-fuchsia: #c026d3;
-  --color-brand-pink: #db2777;
+  /* Accent gradient stops (#2563eb → #0ea5e9 → #22d3ee) */
+  --color-brand-blue: #2563eb;
+  --color-brand-sky: #0ea5e9;
+  --color-brand-cyan: #22d3ee;
 
   /* Typography */
   --font-sans: "Quicksand", "Quicksand Fallback", ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -139,12 +139,12 @@
   --font-display: "Bricolage Display", "Bricolage Text", "Bricolage Fallback", ui-sans-serif, system-ui, sans-serif;
 
   /* Glows */
-  --shadow-glow: 0 0 40px -8px rgba(124, 58, 237, 0.35);
-  --shadow-glow-lg: 0 0 80px -12px rgba(192, 38, 211, 0.45);
-  --shadow-button: 0 0 24px rgba(192, 38, 211, 0.35),
-    0 12px 32px -12px rgba(124, 58, 237, 0.7);
-  --shadow-button-hover: 0 0 40px rgba(192, 38, 211, 0.55),
-    0 16px 40px -12px rgba(124, 58, 237, 0.9);
+  --shadow-glow: 0 0 40px -8px rgba(37, 99, 235, 0.35);
+  --shadow-glow-lg: 0 0 80px -12px rgba(14, 165, 233, 0.45);
+  --shadow-button: 0 0 24px rgba(14, 165, 233, 0.35),
+    0 12px 32px -12px rgba(37, 99, 235, 0.7);
+  --shadow-button-hover: 0 0 40px rgba(14, 165, 233, 0.55),
+    0 16px 40px -12px rgba(37, 99, 235, 0.9);
 
   /* Motion */
   --animate-float: float 8s ease-in-out infinite;
@@ -259,12 +259,12 @@
   }
 
   ::selection {
-    background: rgba(192, 38, 211, 0.4);
+    background: rgba(14, 165, 233, 0.4);
     color: #fff;
   }
 
   :focus-visible {
-    outline: 2px solid rgba(232, 121, 249, 0.8);
+    outline: 2px solid rgba(125, 211, 252, 0.8);
     outline-offset: 3px;
     border-radius: 0.5rem;
   }
@@ -276,7 +276,7 @@
     background: var(--color-ink-950);
   }
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #7c3aed, #db2777);
+    background: linear-gradient(180deg, #2563eb, #22d3ee);
     border-radius: 999px;
     border: 2px solid var(--color-ink-950);
   }
@@ -324,9 +324,9 @@
   .text-gradient {
     background-image: linear-gradient(
       92deg,
-      #a78bfa 0%,
-      #e879f9 48%,
-      #f472b6 100%
+      #60a5fa 0%,
+      #38bdf8 48%,
+      #67e8f9 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -342,7 +342,7 @@
     -webkit-backdrop-filter: blur(18px);
   }
 
-  /* Dark card with subtle purple border + soft outer glow */
+  /* Dark card with subtle blue border + soft outer glow */
   .glow-card {
     position: relative;
     isolation: isolate;
@@ -354,22 +354,22 @@
         rgba(255, 255, 255, 0.015) 100%
       ),
       rgba(10, 10, 18, 0.7);
-    border: 1px solid rgba(139, 92, 246, 0.16);
+    border: 1px solid rgba(59, 130, 246, 0.16);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.05),
       0 24px 60px -30px rgba(0, 0, 0, 0.8),
-      0 0 40px -14px rgba(124, 58, 237, 0.22);
+      0 0 40px -14px rgba(37, 99, 235, 0.22);
     transition:
       border-color 0.35s ease,
       box-shadow 0.35s ease,
       background 0.35s ease;
   }
   .glow-card:hover {
-    border-color: rgba(217, 70, 239, 0.42);
+    border-color: rgba(56, 189, 248, 0.42);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.08),
       0 30px 70px -30px rgba(0, 0, 0, 0.85),
-      0 0 60px -10px rgba(192, 38, 211, 0.38);
+      0 0 60px -10px rgba(14, 165, 233, 0.38);
   }
   /* Mouse-following spotlight inside a glow card */
   .glow-card__spotlight {
@@ -382,7 +382,7 @@
     transition: opacity 0.4s ease;
     background: radial-gradient(
       420px circle at var(--mx, 50%) var(--my, 50%),
-      rgba(192, 38, 211, 0.14),
+      rgba(14, 165, 233, 0.14),
       transparent 62%
     );
   }
@@ -398,18 +398,18 @@
     width: 3.25rem;
     height: 3.25rem;
     border-radius: 1rem;
-    color: #f5d0fe;
+    color: #bae6fd;
     background:
       linear-gradient(#111120, #111120) padding-box,
-      linear-gradient(135deg, rgba(167, 139, 250, 0.7), rgba(244, 114, 182, 0.5))
+      linear-gradient(135deg, rgba(96, 165, 250, 0.7), rgba(103, 232, 249, 0.5))
         border-box;
     border: 1px solid transparent;
     box-shadow:
-      0 0 24px -6px rgba(192, 38, 211, 0.45),
-      inset 0 0 18px rgba(124, 58, 237, 0.18);
+      0 0 24px -6px rgba(14, 165, 233, 0.45),
+      inset 0 0 18px rgba(37, 99, 235, 0.18);
   }
 
-  /* Primary pill button — purple→magenta gradient with soft glow */
+  /* Primary pill button — blue→cyan gradient with soft glow */
   .btn-gradient {
     position: relative;
     overflow: hidden;
@@ -417,9 +417,9 @@
     color: #fff;
     background-image: linear-gradient(
       135deg,
-      #7c3aed 0%,
-      #c026d3 52%,
-      #db2777 100%
+      #2563eb 0%,
+      #0284c7 52%,
+      #0891b2 100%
     );
     box-shadow: var(--shadow-button);
     transition:
@@ -465,8 +465,8 @@
   }
   .btn-ghost:hover {
     background: rgba(255, 255, 255, 0.09);
-    border-color: rgba(217, 70, 239, 0.45);
-    box-shadow: 0 0 30px -10px rgba(192, 38, 211, 0.5);
+    border-color: rgba(56, 189, 248, 0.45);
+    box-shadow: 0 0 30px -10px rgba(14, 165, 233, 0.5);
   }
 
   /* Gradient hairline (section dividers, card top edges) */
@@ -475,8 +475,8 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(167, 139, 250, 0.55) 30%,
-      rgba(244, 114, 182, 0.55) 70%,
+      rgba(96, 165, 250, 0.55) 30%,
+      rgba(103, 232, 249, 0.55) 70%,
       transparent
     );
   }
@@ -488,27 +488,27 @@
     pointer-events: none;
     will-change: transform;
   }
-  .orb-violet {
+  .orb-blue {
     background: radial-gradient(
       circle at center,
-      rgba(124, 58, 237, 0.55) 0%,
-      rgba(124, 58, 237, 0.18) 35%,
+      rgba(37, 99, 235, 0.55) 0%,
+      rgba(37, 99, 235, 0.18) 35%,
       transparent 70%
     );
   }
-  .orb-fuchsia {
+  .orb-sky {
     background: radial-gradient(
       circle at center,
-      rgba(192, 38, 211, 0.5) 0%,
-      rgba(192, 38, 211, 0.16) 35%,
+      rgba(14, 165, 233, 0.5) 0%,
+      rgba(14, 165, 233, 0.16) 35%,
       transparent 70%
     );
   }
-  .orb-pink {
+  .orb-cyan {
     background: radial-gradient(
       circle at center,
-      rgba(219, 39, 119, 0.45) 0%,
-      rgba(219, 39, 119, 0.14) 35%,
+      rgba(6, 182, 212, 0.45) 0%,
+      rgba(6, 182, 212, 0.14) 35%,
       transparent 70%
     );
   }
@@ -533,7 +533,26 @@
     will-change: transform, opacity;
   }
   .split-word::selection {
-    background: rgba(192, 38, 211, 0.4);
+    background: rgba(14, 165, 233, 0.4);
+  }
+  /* Line mode: paragraphs keep their natural wrapping (no `balance`) … */
+  .split-text--lines {
+    text-wrap: pretty;
+  }
+  /* … the measuring pass is laid out but never painted … */
+  .split-probe {
+    opacity: 0;
+  }
+  /* … then each rendered line becomes its own block, clipped with an *outset* clip-path so
+     the line box keeps its exact size/position while descenders and the neon glow still have
+     room to show. (No padding/margin pairs: block margins would collapse between lines.) */
+  .split-linebox {
+    display: block;
+    clip-path: inset(-0.08em -0.2em -0.16em);
+  }
+  .split-lineinner {
+    display: block;
+    will-change: transform, opacity;
   }
 
   /* Horizontal fade mask for marquees */
@@ -567,8 +586,8 @@
     color: rgba(255, 255, 255, 0.35);
   }
   .field:focus {
-    border-color: rgba(217, 70, 239, 0.6);
+    border-color: rgba(56, 189, 248, 0.6);
     background: rgba(255, 255, 255, 0.06);
-    box-shadow: 0 0 0 4px rgba(192, 38, 211, 0.16);
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.16);
   }
 }

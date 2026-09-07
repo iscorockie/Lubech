@@ -6,6 +6,7 @@ import GlowCard from "@/components/ui/GlowCard";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { Orb, GridPattern } from "@/components/ui/Orbs";
 import CountUp from "@/components/ui/CountUp";
+import SplitText from "@/components/ui/SplitText";
 import { REASONS, TESTIMONIALS, HERO_STATS } from "@/data/site";
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 
@@ -13,8 +14,8 @@ export default function WhyLubech() {
   return (
     <section id="why-lubech" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
       <GridPattern className="opacity-40" />
-      <Orb tone="violet" size={800} animate="drift-slow" className="-left-[25%] top-0 opacity-40" />
-      <Orb tone="pink" size={700} animate="drift" className="-right-[20%] bottom-0 opacity-35" />
+      <Orb tone="blue" size={800} animate="drift-slow" className="-left-[25%] top-0 opacity-40" />
+      <Orb tone="cyan" size={700} animate="drift" className="-right-[20%] bottom-0 opacity-35" />
 
       <div className="container-x relative">
         <SectionHeader
@@ -41,7 +42,9 @@ export default function WhyLubech() {
               <span className="icon-tile !h-12 !w-12 !rounded-2xl">
                 <Icon className="h-5 w-5" aria-hidden />
               </span>
-              <h3 className="mt-6 font-heading text-lg font-bold text-white">{title}</h3>
+              <SplitText as="h3" delay={0.2} className="mt-6 font-heading text-lg font-bold text-white">
+                {title}
+              </SplitText>
               <p className="mt-2.5 text-sm leading-relaxed text-white/55">{description}</p>
             </GlowCard>
           ))}
@@ -53,7 +56,7 @@ export default function WhyLubech() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="relative mt-16 overflow-hidden rounded-[1.75rem] border border-fuchsia-400/20 bg-gradient-to-r from-violet-900/30 via-fuchsia-900/20 to-pink-900/30 p-1 shadow-[0_0_80px_-30px_rgba(192,38,211,0.7)]"
+          className="relative mt-16 overflow-hidden rounded-[1.75rem] border border-sky-400/20 bg-gradient-to-r from-blue-900/30 via-sky-900/20 to-cyan-900/30 p-1 shadow-[0_0_80px_-30px_rgba(14,165,233,0.7)]"
         >
           <div className="grid gap-px overflow-hidden rounded-[1.5rem] bg-white/[0.04] sm:grid-cols-2 lg:grid-cols-4">
             {HERO_STATS.map((s, i) => (
@@ -82,16 +85,16 @@ export default function WhyLubech() {
               <div className="flex items-center justify-between">
                 <div className="flex gap-0.5" role="img" aria-label="5 out of 5 stars">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-fuchsia-400 text-fuchsia-400" aria-hidden />
+                    <Star key={i} className="h-4 w-4 fill-sky-400 text-sky-400" aria-hidden />
                   ))}
                 </div>
                 <Quote className="h-6 w-6 text-white/15" aria-hidden />
               </div>
-              <blockquote className="mt-5 flex-1 text-[15px] leading-relaxed text-white/75">
-                “{t.content}”
-              </blockquote>
+              <SplitText as="blockquote" mode="lines" stagger={0.07} className="mt-5 flex-1 text-[15px] leading-relaxed text-white/75">
+                {`“${t.content}”`}
+              </SplitText>
               <figcaption className="mt-6 flex items-center gap-3 border-t border-white/[0.06] pt-5">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-pink-500 font-heading text-sm font-bold text-white">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-600 font-heading text-sm font-bold text-white">
                   {t.name.split(" ").map((n) => n[0]).join("")}
                 </span>
                 <div>

@@ -94,7 +94,7 @@ export const SERVICES: Service[] = [
     description:
       "High-performance websites and web apps built with React and Next.js — fast, accessible, SEO-ready and designed to convert.",
     icon: Code2,
-    accent: "violet",
+    accent: "blue",
     features: [
       "React & Next.js applications",
       "E-commerce & CMS platforms",
@@ -108,7 +108,7 @@ export const SERVICES: Service[] = [
     description:
       "Cross-platform iOS and Android apps with React Native and Flutter — native feel, one codebase, shipped to both stores.",
     icon: Smartphone,
-    accent: "fuchsia",
+    accent: "sky",
     features: [
       "React Native & Flutter",
       "App Store & Play Store launch",
@@ -122,7 +122,7 @@ export const SERVICES: Service[] = [
     description:
       "Secure, scalable APIs, databases and cloud infrastructure that quietly power everything your product needs to do.",
     icon: Server,
-    accent: "pink",
+    accent: "cyan",
     features: [
       "Node.js, Go & Python services",
       "PostgreSQL, MongoDB & Redis",
@@ -312,7 +312,7 @@ export const PROJECTS: Project[] = [
     playStoreUrl:
       "https://play.google.com/store/apps/details?id=com.kenyana.glamngo",
     appStoreUrl: "https://apps.apple.com/ug/app/glam-n-go/id6503872122",
-    mock: { initials: "GG", gradient: "from-pink-500/70 via-fuchsia-600/40 to-violet-700/50" },
+    mock: { initials: "GG", gradient: "from-cyan-400/70 via-sky-500/40 to-blue-700/50" },
   },
   {
     id: "tuwe",
@@ -325,7 +325,7 @@ export const PROJECTS: Project[] = [
     playStoreUrl:
       "https://play.google.com/store/apps/details?id=com.emmanuellubwama.tuwe",
     appStoreUrl: "https://apps.apple.com/ug/app/tuwe/id6752911597",
-    mock: { initials: "Tu", gradient: "from-violet-500/70 via-indigo-600/40 to-fuchsia-700/50" },
+    mock: { initials: "Tu", gradient: "from-blue-500/70 via-blue-700/40 to-sky-600/50" },
   },
   {
     id: "easy-gas",
@@ -338,7 +338,7 @@ export const PROJECTS: Project[] = [
     playStoreUrl:
       "https://play.google.com/store/apps/details?id=com.easygas.mobile.app",
     appStoreUrl: "https://apps.apple.com/ug/app/easy-gas/id6738344020",
-    mock: { initials: "EG", gradient: "from-fuchsia-500/70 via-purple-600/40 to-pink-700/50" },
+    mock: { initials: "EG", gradient: "from-sky-500/70 via-sky-500/40 to-cyan-600/50" },
   },
 ];
 

@@ -20,7 +20,7 @@ interface GlowCardProps {
 const hoverTransition = { type: "spring", stiffness: 300, damping: 24 } as const;
 
 /**
- * Dark card with a subtle purple border and soft outer glow.
+ * Dark card with a subtle blue border and soft outer glow.
  * Uses CSS variables for the spotlight so we never re-render on mouse move.
  */
 export default function GlowCard({

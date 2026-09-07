@@ -27,14 +27,17 @@ export default function CountUp({ value, className, duration = 1.6, delay = 0 }:
   const prefix = match ? value.slice(0, match.index) : value;
   const suffix = match ? value.slice((match.index ?? 0) + match[1].length) : "";
 
-  const [display, setDisplay] = useState(() => (Number.isNaN(target) || reduce ? value : `${prefix}0${suffix}`));
+  // Always start from "0" so the server and client render the same markup; reduced-motion
+  // users are switched to the final value on mount (before anything is scrolled into view).
+  const [display, setDisplay] = useState(() => (Number.isNaN(target) ? value : `${prefix}0${suffix}`));
 
   useEffect(() => {
-    if (!inView || Number.isNaN(target)) return;
+    if (Number.isNaN(target)) return;
     if (reduce) {
       setDisplay(value);
       return;
     }
+    if (!inView) return;
     const controls = animate(0, target, {
       duration,
       delay,

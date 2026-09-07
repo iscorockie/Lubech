@@ -6,6 +6,7 @@ import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { ArrowUpRight, Globe, Smartphone } from "lucide-react";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import SectionHeader from "@/components/ui/SectionHeader";
+import SplitText from "@/components/ui/SplitText";
 import Button from "@/components/ui/Button";
 import { Orb } from "@/components/ui/Orbs";
 import { PROJECTS } from "@/data/site";
@@ -30,22 +31,22 @@ function PhoneArt({ project }: { project: Project }) {
       .slice(0, 2)
       .map((w) => w[0])
       .join("");
-  const gradient = project.mock?.gradient ?? "from-violet-600/40 via-fuchsia-600/25 to-pink-600/30";
+  const gradient = project.mock?.gradient ?? "from-blue-600/40 via-sky-500/25 to-cyan-500/30";
 
   return (
     <div
       aria-hidden
-      className="relative flex h-full w-full items-end justify-center overflow-hidden bg-[radial-gradient(ellipse_at_top,rgba(124,58,237,0.35),rgba(10,10,18,0.2)_60%)]"
+      className="relative flex h-full w-full items-end justify-center overflow-hidden bg-[radial-gradient(ellipse_at_top,rgba(37,99,235,0.35),rgba(10,10,18,0.2)_60%)]"
     >
       <div className="absolute inset-0 bg-[url('/stars.svg')] bg-[length:600px_600px] opacity-30" />
       {/* floating accent chips */}
       <span aria-hidden className="absolute left-[12%] top-[22%] h-10 w-10 rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-md" style={{ animation: "float 7s ease-in-out infinite" }} />
-      <span aria-hidden className="absolute right-[12%] top-[38%] h-7 w-7 rounded-full border border-fuchsia-300/30 bg-fuchsia-500/20 backdrop-blur-md" style={{ animation: "float 9s ease-in-out infinite 1.5s" }} />
+      <span aria-hidden className="absolute right-[12%] top-[38%] h-7 w-7 rounded-full border border-sky-300/30 bg-sky-500/20 backdrop-blur-md" style={{ animation: "float 9s ease-in-out infinite 1.5s" }} />
 
-      <div className="relative h-[86%] w-[46%] translate-y-6 rounded-[2rem] border border-white/15 bg-[#0a0a12] p-2 shadow-[0_30px_80px_-20px_rgba(192,38,211,0.6)] transition-transform duration-700 group-hover:-translate-y-1 group-hover:rotate-[-2deg]">
+      <div className="relative h-[86%] w-[46%] translate-y-6 rounded-[2rem] border border-white/15 bg-[#0a0a12] p-2 shadow-[0_30px_80px_-20px_rgba(14,165,233,0.6)] transition-transform duration-700 group-hover:-translate-y-1 group-hover:rotate-[-2deg]">
         <div className={cn("flex h-full flex-col rounded-[1.5rem] bg-gradient-to-b p-3", gradient)}>
           <span className="mx-auto mt-1 h-1.5 w-12 rounded-full bg-black/60" />
-          <div className="mt-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-white font-heading text-sm font-extrabold text-violet-700 shadow-lg">
+          <div className="mt-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-white font-heading text-sm font-extrabold text-blue-700 shadow-lg">
             {initials}
           </div>
           <div className="mt-4 space-y-2">
@@ -111,14 +112,16 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
       {/* Body */}
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="font-heading text-lg font-bold text-white">{project.title}</h3>
+        <SplitText as="h3" inView delay={0.15 + Math.min(index, 5) * 0.06} className="font-heading text-lg font-bold text-white">
+          {project.title}
+        </SplitText>
         <p className="mt-2 text-sm leading-relaxed text-white/55">{project.description}</p>
 
         <ul className="mt-4 flex flex-wrap gap-1.5">
           {project.technologies.map((t) => (
             <li
               key={t}
-              className="rounded-full border border-violet-400/20 bg-violet-500/[0.08] px-2.5 py-1 text-[11px] font-medium text-violet-100/80"
+              className="rounded-full border border-blue-400/20 bg-blue-500/[0.08] px-2.5 py-1 text-[11px] font-medium text-blue-100/80"
             >
               {t}
             </li>
@@ -131,7 +134,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-fuchsia-200/90 transition-colors hover:text-white"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-sky-200/90 transition-colors hover:text-white"
             >
               View live <ArrowUpRight className="h-4 w-4" aria-hidden />
             </a>
@@ -142,7 +145,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title} on the App Store`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-white/80 transition-all hover:border-fuchsia-400/40 hover:text-white"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-white/80 transition-all hover:border-sky-400/40 hover:text-white"
             >
               <FaApple className="h-3.5 w-3.5" aria-hidden /> App Store
             </a>
@@ -153,7 +156,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title} on Google Play`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-white/80 transition-all hover:border-fuchsia-400/40 hover:text-white"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-white/80 transition-all hover:border-sky-400/40 hover:text-white"
             >
               <FaGooglePlay className="h-3 w-3" aria-hidden /> Google Play
             </a>
@@ -177,8 +180,8 @@ export default function Projects() {
 
   return (
     <section id="work" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
-      <Orb tone="fuchsia" size={800} animate="drift" className="-right-[25%] top-0 opacity-35" />
-      <Orb tone="violet" size={700} animate="drift-slow" className="-left-[20%] bottom-0 opacity-35" />
+      <Orb tone="sky" size={800} animate="drift" className="-right-[25%] top-0 opacity-35" />
+      <Orb tone="blue" size={700} animate="drift-slow" className="-left-[20%] bottom-0 opacity-35" />
 
       <div className="container-x relative">
         <SectionHeader
@@ -223,7 +226,7 @@ export default function Projects() {
                     <motion.span
                       layoutId="filter-pill"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                      className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600 shadow-[0_0_24px_-6px_rgba(192,38,211,0.8)]"
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 via-sky-600 to-cyan-600 shadow-[0_0_24px_-6px_rgba(14,165,233,0.8)]"
                     />
                   ) : null}
                   <span className="relative">{f.label}</span>

@@ -27,7 +27,7 @@ import { cn } from "@/lib/utils";
  *   is unavailable or the textures fail to load.
  */
 
-const MAP_URL = "/textures/earth-night-violet.webp";
+const MAP_URL = "/textures/earth-night-blue.webp";
 const LIGHTS_URL = "/textures/earth-lights.webp";
 
 /** Spin axis leans toward the camera so mid-latitudes (not the pole) ride the horizon. */
@@ -121,7 +121,7 @@ function Globe({ progress, reduced, capFraction, onReady }: GlobeProps) {
         vertexShader: VERT,
         fragmentShader: RIM_FRAG,
         uniforms: {
-          uColor: { value: new THREE.Color("#f5d0fe") },
+          uColor: { value: new THREE.Color("#bae6fd") },
           uPower: { value: 2.6 },
           uIntensity: { value: 1.6 },
         },
@@ -138,8 +138,8 @@ function Globe({ progress, reduced, capFraction, onReady }: GlobeProps) {
         vertexShader: VERT,
         fragmentShader: HALO_FRAG,
         uniforms: {
-          uInner: { value: new THREE.Color("#e879f9") },
-          uOuter: { value: new THREE.Color("#7c3aed") },
+          uInner: { value: new THREE.Color("#38bdf8") },
+          uOuter: { value: new THREE.Color("#2563eb") },
           uEdge: { value: Math.sqrt(1 - 1 / (HALO_SCALE * HALO_SCALE)) },
           uIntensity: { value: 1.35 },
         },
@@ -178,18 +178,18 @@ function Globe({ progress, reduced, capFraction, onReady }: GlobeProps) {
 
   return (
     <group position={[0, centerY, 0]}>
-      {/* Key light: top-left, cool violet-white → lit cap with a soft terminator */}
-      <directionalLight position={[-0.7, 1.2, 0.8]} intensity={2.6} color="#ede9fe" />
-      {/* Fill: warm magenta from the lower right */}
-      <directionalLight position={[1.2, -0.2, 0.5]} intensity={0.9} color="#db2777" />
-      <ambientLight intensity={0.7} color="#8b5cf6" />
+      {/* Key light: top-left, cool blue-white → lit cap with a soft terminator */}
+      <directionalLight position={[-0.7, 1.2, 0.8]} intensity={2.6} color="#dbeafe" />
+      {/* Fill: cyan from the lower right */}
+      <directionalLight position={[1.2, -0.2, 0.5]} intensity={0.9} color="#22d3ee" />
+      <ambientLight intensity={0.7} color="#3b82f6" />
 
       <group rotation={[AXIS_TILT, 0, 0]}>
         <mesh ref={spinRef} geometry={geometry} scale={R} rotation={[0, 0.9, 0]}>
           <meshStandardMaterial
             map={map}
             emissiveMap={lights}
-            emissive="#fce7f3"
+            emissive="#e0f2fe"
             emissiveIntensity={1.7}
             roughness={0.95}
             metalness={0}

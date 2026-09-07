@@ -90,7 +90,7 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
     other: [
-      { rel: "mask-icon", url: "/web_favicon.svg", color: "#7c3aed" },
+      { rel: "mask-icon", url: "/web_favicon.svg", color: "#2563eb" },
     ],
   },
   manifest: "/site.webmanifest",

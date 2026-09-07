@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 interface OrbProps {
   className?: string;
-  tone?: "violet" | "fuchsia" | "pink";
+  tone?: "blue" | "sky" | "cyan";
   /** Diameter in px (rendered via inline style so Tailwind doesn't need arbitrary classes). */
   size?: number;
   animate?: "drift" | "drift-slow" | "float" | "none";
@@ -15,7 +15,7 @@ interface OrbProps {
  */
 export function Orb({
   className,
-  tone = "violet",
+  tone = "blue",
   size = 600,
   animate = "drift",
   style,
@@ -25,9 +25,9 @@ export function Orb({
       aria-hidden
       className={cn(
         "orb",
-        tone === "violet" && "orb-violet",
-        tone === "fuchsia" && "orb-fuchsia",
-        tone === "pink" && "orb-pink",
+        tone === "blue" && "orb-blue",
+        tone === "sky" && "orb-sky",
+        tone === "cyan" && "orb-cyan",
         animate === "drift" && "animate-drift",
         animate === "drift-slow" && "animate-drift-slow",
         animate === "float" && "animate-float-slow",

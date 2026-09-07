@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 function TechChip({ name, icon: Icon, color }: Technology) {
   return (
     <li
-      className="group flex shrink-0 items-center gap-3 rounded-full border border-white/[0.08] bg-white/[0.03] py-2.5 pl-3 pr-5 backdrop-blur-sm transition-all duration-300 hover:border-fuchsia-400/40 hover:bg-white/[0.06] hover:shadow-[0_0_28px_-8px_rgba(192,38,211,0.6)]"
+      className="group flex shrink-0 items-center gap-3 rounded-full border border-white/[0.08] bg-white/[0.03] py-2.5 pl-3 pr-5 backdrop-blur-sm transition-all duration-300 hover:border-sky-400/40 hover:bg-white/[0.06] hover:shadow-[0_0_28px_-8px_rgba(14,165,233,0.6)]"
     >
       <span
         className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0a0a12] ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-110"
@@ -85,7 +85,7 @@ export default function Technologies() {
             transition={{ duration: 0.5, delay: i * 0.08 }}
             className="rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 text-center"
           >
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-fuchsia-200/80">{label}</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-sky-200/80">{label}</p>
             <p className="mt-1.5 text-sm text-white/55">{stack}</p>
           </motion.div>
         ))}

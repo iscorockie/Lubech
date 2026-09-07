@@ -57,10 +57,10 @@ presentational.
 | Token            | Value                                              |
 | ---------------- | -------------------------------------------------- |
 | Background       | `#05050A` → `#0A0A12`                              |
-| Accent gradient  | `#7C3AED` → `#C026D3` → `#DB2777`                  |
+| Accent gradient  | `#2563eb` → `#0ea5e9` → `#22d3ee` (blue → sky → cyan; filled buttons/badges use the deeper `#2563eb → #0284c7 → #0891b2` run so white labels keep ≥ 3.7:1 contrast) |
 | Headings         | Bricolage Grotesque (self-hosted, `public/fonts/bricolage`) — 36/48 pt display cut for h1/h2, 14 pt text cut for h3–h6 |
 | Body             | Quicksand (self-hosted, `public/fonts/quicksand`)  |
-| Cards            | `.glow-card` – dark, 1px violet border, soft glow, cursor spotlight |
+| Cards            | `.glow-card` – dark, 1px blue border, soft glow, cursor spotlight |
 | Buttons          | `.btn-gradient` (pill, gradient, glow) · `.btn-ghost` (frosted glass) |
 | Ambient light    | `<Orb />` radial-gradient orbs (no `filter: blur` → cheap to paint) |
 
@@ -73,14 +73,26 @@ Motion rules used throughout:
 
 ### Text animations
 
-Headlines use `SplitText` (`src/components/ui/SplitText.tsx`): each word rises out of its own
-overflow-clipped line box, staggered left→right / line by line (`y: 110% → 0`, expo-out ease,
-~55 ms between words, 70 ms in the hero). The intact sentence is exposed via `aria-label`; the
-split spans are `aria-hidden`. Gradient runs (`<span className="text-gradient">` / `<Accent>`)
-are re-applied per word because `background-clip: text` does not survive a clipped parent in
-Chrome. Numbers in the stats bands use `CountUp`, which animates the first number in a string
-("30+", "100%", "24/7") when it scrolls into view. Both honour `prefers-reduced-motion`
-through the global `MotionConfig` (words render in place, numbers show their final value).
+`SplitText` (`src/components/ui/SplitText.tsx`) has two modes:
+
+- **`mode="words"`** (default) – every word rises out of its own overflow-clipped box, staggered
+  left→right / line by line (`y: 110% → 0`, expo-out ease, ~55 ms between words, 70 ms in the
+  hero). Used for the hero h1, every section h2, card / project / step titles and team names.
+  Inside a `staggerContainer` it joins the parent cascade; standalone, pass `inView`.
+- **`mode="lines"`** – for paragraphs and quotes. The text is laid out normally first, the
+  browser's own line breaks are read back (`offsetTop` of each word), and the words are regrouped
+  into one clip box per *rendered* line, which then rise in sequence (`delay` sequences it after
+  a sibling headline). Nothing moves between the passes, so there is no layout shift; the wrapping
+  is re-measured on resize / font swap until the reveal starts, and the element drops back to plain
+  text once it has finished. Used for the hero / CTA / section descriptions and the testimonials.
+
+Headings expose the intact sentence via `aria-label`, paragraphs carry a visually-hidden copy, and
+the animated spans are `aria-hidden`. Gradient runs (`<span className="text-gradient">` /
+`<Accent>`) are re-applied per word because `background-clip: text` does not survive a clipped
+parent in Chrome. Numbers in the stats bands use `CountUp`, which animates the first number in a
+string ("30+", "100%", "24/7") when it scrolls into view. Everything honours
+`prefers-reduced-motion` through the global `MotionConfig` (text fades in place, numbers show
+their final value).
 
 ### Pinned "Our Process" timeline
 
@@ -102,7 +114,7 @@ viewport, the render loop pauses when it's off-screen, textures are brand-graded
 
 ## Assets
 
-- `public/space-purple.jpg` – hero / CTA backdrop (purple-graded version of the original space photo).
+- `public/space-blue.jpg` – hero / CTA backdrop (blue-graded version of the original space photo).
 - `public/stars.svg` – tiling star field used as a subtle texture layer.
 - `public/textures/` – brand-graded Earth colour + city-lights maps for the 3D globe (see README there).
 - `public/projects/*.webp`, `public/staff/*.webp` – portfolio screenshots and team portraits, stored as
@@ -112,7 +124,7 @@ viewport, the render loop pauses when it's off-screen, textures are brand-graded
 - `public/og.png` – 1200×630 social-share card (Open Graph / Twitter), rendered from the hero design.
 - `public/web_favicon.svg` (SVG favicon + Safari mask icon), `public/icon-512.png` (PWA, maskable-safe),
   `public/apple-touch-icon.png`, `src/app/favicon.ico` (multi-size, served automatically by the App Router).
-  All carry the violet → magenta version of the Lubech mark; `public/techvector.svg` is the white word-mark used in the nav/footer.
+  All carry the blue → cyan version of the Lubech mark; `public/techvector.svg` is the white word-mark used in the nav/footer.
 - `public/projects/*`, `public/staff/*` – portfolio screenshots and team portraits.
 
 Deployed on Vercel (`vercel.json`).

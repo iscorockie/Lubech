@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Youtube } from "lucide-react";
 import GlowCard from "@/components/ui/GlowCard";
 import SectionHeader from "@/components/ui/SectionHeader";
+import SplitText from "@/components/ui/SplitText";
 import { Orb } from "@/components/ui/Orbs";
 import { TEAM } from "@/data/site";
 import { staggerContainer, viewportOnce } from "@/lib/animations";
@@ -19,7 +20,7 @@ export default function Team() {
   return (
     <section id="team" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
       <div className="hairline absolute inset-x-[10%] top-0" aria-hidden />
-      <Orb tone="fuchsia" size={760} animate="drift-slow" className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30" />
+      <Orb tone="sky" size={760} animate="drift-slow" className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30" />
 
       <div className="container-x relative">
         <SectionHeader
@@ -57,7 +58,7 @@ export default function Team() {
                   />
                   {/* colour wash + fade to card */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a12] via-[#0a0a12]/55 via-35% to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 via-transparent to-pink-600/20 mix-blend-soft-light" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-transparent to-cyan-500/20 mix-blend-soft-light" />
 
                   {/* socials */}
                   {socials.length ? (
@@ -71,7 +72,7 @@ export default function Team() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={`${m.name} on ${key}`}
-                            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-black/50 text-white backdrop-blur-md transition-colors hover:border-fuchsia-400/60 hover:bg-fuchsia-600/40"
+                            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-black/50 text-white backdrop-blur-md transition-colors hover:border-sky-400/60 hover:bg-sky-500/40"
                           >
                             <Icon className="h-3.5 w-3.5" aria-hidden />
                           </a>
@@ -82,7 +83,9 @@ export default function Team() {
                 </div>
 
                 <div className="-mt-10 relative px-5 pb-6">
-                  <h3 className="font-heading text-lg font-bold text-white">{m.name}</h3>
+                  <SplitText as="h3" delay={0.2} className="font-heading text-lg font-bold text-white">
+                    {m.name}
+                  </SplitText>
                   <p className="mt-0.5 text-xs font-bold uppercase tracking-[0.16em] text-gradient">{m.role}</p>
                   <p className="mt-3 text-sm leading-relaxed text-white/50">{m.bio}</p>
                 </div>

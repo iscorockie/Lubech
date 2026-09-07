@@ -15,7 +15,7 @@ export interface Service {
   description: string;
   icon: Icon;
   features: string[];
-  accent: "violet" | "fuchsia" | "pink";
+  accent: "blue" | "sky" | "cyan";
 }
 
 export interface Audience {

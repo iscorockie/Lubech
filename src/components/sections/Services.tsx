@@ -4,21 +4,22 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import GlowCard from "@/components/ui/GlowCard";
 import SectionHeader from "@/components/ui/SectionHeader";
+import SplitText from "@/components/ui/SplitText";
 import { Orb } from "@/components/ui/Orbs";
 import { SERVICES } from "@/data/site";
 import { staggerContainer, viewportOnce } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
 const accentRing: Record<string, string> = {
-  violet: "from-violet-500/60 to-violet-500/0",
-  fuchsia: "from-fuchsia-500/60 to-fuchsia-500/0",
-  pink: "from-pink-500/60 to-pink-500/0",
+  blue: "from-blue-500/60 to-blue-500/0",
+  sky: "from-sky-500/60 to-sky-500/0",
+  cyan: "from-cyan-400/60 to-cyan-400/0",
 };
 
 export default function Services() {
   return (
     <section id="services" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
-      <Orb tone="violet" size={700} animate="drift-slow" className="-left-[20%] top-1/3 opacity-40" />
+      <Orb tone="blue" size={700} animate="drift-slow" className="-left-[20%] top-1/3 opacity-40" />
 
       <div className="container-x relative">
         <SectionHeader
@@ -45,7 +46,7 @@ export default function Services() {
               <span
                 aria-hidden
                 className={cn(
-                  "pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-fuchsia-300/60 to-transparent opacity-60 transition-opacity group-hover:opacity-100",
+                  "pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-sky-300/60 to-transparent opacity-60 transition-opacity group-hover:opacity-100",
                 )}
               />
 
@@ -56,7 +57,9 @@ export default function Services() {
                 <span className="font-heading text-sm font-bold text-white/25">0{i + 1}</span>
               </div>
 
-              <h3 className="mt-8 font-heading text-2xl font-bold text-white">{title}</h3>
+              <SplitText as="h3" delay={0.25} className="mt-8 font-heading text-2xl font-bold text-white">
+                {title}
+              </SplitText>
               <p className="mt-3 text-[15px] leading-relaxed text-white/55">{description}</p>
 
               <ul className="mt-7 space-y-3">
@@ -77,7 +80,7 @@ export default function Services() {
 
               <a
                 href="#contact"
-                className="mt-auto inline-flex items-center gap-1.5 pt-8 text-sm font-semibold text-fuchsia-200/90 transition-colors hover:text-white"
+                className="mt-auto inline-flex items-center gap-1.5 pt-8 text-sm font-semibold text-sky-200/90 transition-colors hover:text-white"
               >
                 Discuss {title.toLowerCase()}
                 <ArrowUpRight

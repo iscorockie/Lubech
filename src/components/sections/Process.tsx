@@ -14,6 +14,7 @@ import {
 } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
+import SplitText from "@/components/ui/SplitText";
 import { GridPattern, Orb } from "@/components/ui/Orbs";
 import { PROCESS } from "@/data/site";
 import { EASE, viewportOnce } from "@/lib/animations";
@@ -76,8 +77,8 @@ function PinnedProcess() {
       <div className="sticky top-0 flex h-screen min-h-[640px] flex-col overflow-hidden">
         {/* ── Background ─────────────────────────────────────────────── */}
         <GridPattern className="opacity-50" />
-        <Orb tone="violet" size={900} animate="drift-slow" className="-left-[15%] top-[10%] opacity-40" />
-        <Orb tone="pink" size={700} animate="drift" className="-right-[12%] top-[30%] opacity-30" />
+        <Orb tone="blue" size={900} animate="drift-slow" className="-left-[15%] top-[10%] opacity-40" />
+        <Orb tone="cyan" size={700} animate="drift" className="-right-[12%] top-[30%] opacity-30" />
 
         <motion.div
           aria-hidden
@@ -91,7 +92,7 @@ function PinnedProcess() {
               earthReady ? "opacity-0" : "opacity-100",
             )}
           >
-            <div className="absolute left-1/2 top-1/2 aspect-square w-[240vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,#120a2a_0%,#150c30_90%,rgba(124,58,237,0.9)_97%,rgba(245,208,254,0.95)_99.4%,transparent_100%)] shadow-[0_0_90px_24px_rgba(168,85,247,0.4),0_0_220px_80px_rgba(124,58,237,0.2)]" />
+            <div className="absolute left-1/2 top-1/2 aspect-square w-[240vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,#0a1230_0%,#0c1738_90%,rgba(37,99,235,0.9)_97%,rgba(186,230,253,0.95)_99.4%,transparent_100%)] shadow-[0_0_90px_24px_rgba(59,130,246,0.4),0_0_220px_80px_rgba(37,99,235,0.2)]" />
           </div>
 
           {mounted ? (
@@ -129,11 +130,11 @@ function PinnedProcess() {
               <div className="absolute inset-0 bg-white/[0.08]" />
               <motion.div
                 style={{ scaleX: lineScale }}
-                className="absolute inset-0 origin-left bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 shadow-[0_0_18px_rgba(192,38,211,0.85)]"
+                className="absolute inset-0 origin-left bg-gradient-to-r from-blue-500 via-sky-500 to-cyan-400 shadow-[0_0_18px_rgba(14,165,233,0.85)]"
               />
               <motion.span
                 style={{ left: tipX, opacity: tipOpacity }}
-                className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-[0_0_20px_6px_rgba(232,121,249,0.75)]"
+                className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-[0_0_20px_6px_rgba(125,211,252,0.75)]"
               />
             </div>
 
@@ -188,14 +189,14 @@ function PinnedStep({ index, progress, step, title, description, duration, icon:
       <div className="relative z-10">
         <motion.span
           style={{ scale: dotScale, opacity: dotOpacity }}
-          className="relative flex h-14 w-14 items-center justify-center rounded-full border border-fuchsia-300/30 bg-[#0a0a12] shadow-[0_0_0_6px_rgba(124,58,237,0.08),0_0_30px_rgba(192,38,211,0.45)]"
+          className="relative flex h-14 w-14 items-center justify-center rounded-full border border-sky-300/30 bg-[#0a0a12] shadow-[0_0_0_6px_rgba(37,99,235,0.08),0_0_30px_rgba(14,165,233,0.45)]"
         >
           <motion.span
             aria-hidden
             style={{ opacity: ringOpacity }}
-            className="animate-pulse-glow absolute inset-1 rounded-full bg-fuchsia-500/25"
+            className="animate-pulse-glow absolute inset-1 rounded-full bg-sky-500/25"
           />
-          <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 via-fuchsia-600 to-pink-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]">
+          <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 via-sky-600 to-cyan-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]">
             <Icon className="h-[18px] w-[18px]" aria-hidden />
           </span>
         </motion.span>
@@ -228,10 +229,10 @@ function StackedProcess() {
   return (
     <div className="relative overflow-hidden py-24 md:py-32">
       <GridPattern className="opacity-60" />
-      <Orb tone="violet" size={800} animate="drift-slow" className="left-1/2 top-[50%] -translate-x-1/2 opacity-40" />
+      <Orb tone="blue" size={800} animate="drift-slow" className="left-1/2 top-[50%] -translate-x-1/2 opacity-40" />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-[radial-gradient(ellipse_60%_80%_at_50%_120%,rgba(124,58,237,0.28),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-[radial-gradient(ellipse_60%_80%_at_50%_120%,rgba(37,99,235,0.28),transparent_70%)]"
       />
 
       <div className="container-x relative">
@@ -250,7 +251,7 @@ function StackedProcess() {
             <div className="absolute inset-0 bg-white/[0.08]" />
             <motion.div
               style={{ scaleY }}
-              className="absolute inset-0 origin-top bg-gradient-to-b from-violet-500 via-fuchsia-500 to-pink-500 shadow-[0_0_18px_rgba(192,38,211,0.8)]"
+              className="absolute inset-0 origin-top bg-gradient-to-b from-blue-500 via-sky-500 to-cyan-400 shadow-[0_0_18px_rgba(14,165,233,0.8)]"
             />
           </div>
 
@@ -265,9 +266,9 @@ function StackedProcess() {
                 className="relative flex gap-5"
               >
                 <div className="relative z-10 shrink-0">
-                  <span className="relative flex h-14 w-14 items-center justify-center rounded-full border border-fuchsia-300/30 bg-[#0a0a12] shadow-[0_0_0_6px_rgba(124,58,237,0.08),0_0_30px_rgba(192,38,211,0.45)]">
-                    <span aria-hidden className="animate-pulse-glow absolute inset-2 rounded-full bg-fuchsia-500/20" />
-                    <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 via-fuchsia-600 to-pink-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]">
+                  <span className="relative flex h-14 w-14 items-center justify-center rounded-full border border-sky-300/30 bg-[#0a0a12] shadow-[0_0_0_6px_rgba(37,99,235,0.08),0_0_30px_rgba(14,165,233,0.45)]">
+                    <span aria-hidden className="animate-pulse-glow absolute inset-2 rounded-full bg-sky-500/20" />
+                    <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 via-sky-600 to-cyan-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]">
                       <Icon className="h-[18px] w-[18px]" aria-hidden />
                     </span>
                   </span>
@@ -280,7 +281,9 @@ function StackedProcess() {
                       {duration}
                     </span>
                   </div>
-                  <h3 className="mt-4 font-heading text-xl font-bold text-white">{title}</h3>
+                  <SplitText as="h3" inView delay={0.1 + i * 0.08} className="mt-4 font-heading text-xl font-bold text-white">
+                    {title}
+                  </SplitText>
                   <p className="mt-2.5 text-sm leading-relaxed text-white/55">{description}</p>
                 </div>
               </motion.li>

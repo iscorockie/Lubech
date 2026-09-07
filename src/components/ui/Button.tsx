@@ -32,7 +32,7 @@ const variants: Record<Variant, string> = {
 };
 
 /**
- * Fully-rounded pill button. `gradient` = purple→magenta with glow, `ghost` = frosted glass.
+ * Fully-rounded pill button. `gradient` = blue→cyan with glow, `ghost` = frosted glass.
  * Renders an <a> when `href` is provided, otherwise a <button>.
  */
 export default function Button({

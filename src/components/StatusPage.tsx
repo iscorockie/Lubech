@@ -36,12 +36,12 @@ export default function StatusPage({
         aria-hidden
         className="absolute inset-0 -z-20 bg-[url('/stars.svg')] bg-[length:900px_900px] opacity-40"
       />
-      <Orb tone="violet" size={760} className="-left-[20%] -top-[30%] opacity-70" />
-      <Orb tone="fuchsia" size={620} animate="drift-slow" className="-right-[18%] top-[10%] opacity-60" />
-      <Orb tone="pink" size={520} animate="float" className="-bottom-[25%] left-[30%] opacity-50" />
+      <Orb tone="blue" size={760} className="-left-[20%] -top-[30%] opacity-70" />
+      <Orb tone="sky" size={620} animate="drift-slow" className="-right-[18%] top-[10%] opacity-60" />
+      <Orb tone="cyan" size={520} animate="float" className="-bottom-[25%] left-[30%] opacity-50" />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(124,58,237,0.16),transparent_60%)]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(37,99,235,0.16),transparent_60%)]"
       />
 
       {/* ── Content ────────────────────────────────────────────────────── */}
@@ -58,18 +58,18 @@ export default function StatusPage({
         <motion.p
           variants={fadeUp}
           aria-hidden
-          className="font-display text-gradient mt-10 text-[7rem] font-extrabold leading-none tracking-[-0.06em] drop-shadow-[0_0_40px_rgba(192,38,211,0.35)] sm:text-[9.5rem]"
+          className="font-display text-gradient mt-10 text-[7rem] font-extrabold leading-none tracking-[-0.06em] drop-shadow-[0_0_40px_rgba(14,165,233,0.35)] sm:text-[9.5rem]"
         >
           {code}
         </motion.p>
 
         <motion.span
           variants={fadeUp}
-          className="glass mt-3 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold tracking-wide text-white/80 shadow-[0_0_30px_-10px_rgba(192,38,211,0.8)]"
+          className="glass mt-3 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold tracking-wide text-white/80 shadow-[0_0_30px_-10px_rgba(14,165,233,0.8)]"
         >
           <span
             aria-hidden
-            className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-violet-400 to-pink-400 shadow-[0_0_10px_rgba(232,121,249,0.9)]"
+            className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-blue-400 to-cyan-300 shadow-[0_0_10px_rgba(125,211,252,0.9)]"
           />
           {eyebrow}
         </motion.span>
@@ -78,11 +78,11 @@ export default function StatusPage({
           {title}
         </SplitText>
 
-        <motion.p variants={fadeUp} custom={0.35} className="mt-5 max-w-md text-base leading-relaxed text-white/60 sm:text-lg">
+        <SplitText as="p" mode="lines" delay={0.85} className="mt-5 max-w-md text-base leading-relaxed text-white/60 sm:text-lg">
           {description}
-        </motion.p>
+        </SplitText>
 
-        <motion.div variants={fadeUp} custom={0.4} className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
+        <motion.div variants={fadeUp} custom={0.75} className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
           {actions}
         </motion.div>
 

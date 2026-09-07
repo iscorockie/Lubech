@@ -39,9 +39,9 @@ export default function SectionHeader({
     >
       <motion.span
         variants={fadeUp}
-        className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/25 bg-fuchsia-500/[0.08] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-200/90 shadow-[0_0_24px_-8px_rgba(192,38,211,0.6)]"
+        className="inline-flex items-center gap-2 rounded-full border border-sky-400/25 bg-sky-500/[0.08] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-sky-200/90 shadow-[0_0_24px_-8px_rgba(14,165,233,0.6)]"
       >
-        <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-violet-400 to-pink-400 shadow-[0_0_10px_rgba(232,121,249,0.9)]" />
+        <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-blue-400 to-cyan-300 shadow-[0_0_10px_rgba(125,211,252,0.9)]" />
         {eyebrow}
       </motion.span>
 
@@ -53,16 +53,17 @@ export default function SectionHeader({
       </SplitText>
 
       {description ? (
-        <motion.p
-          variants={fadeUp}
-          custom={0.35}
+        <SplitText
+          as="p"
+          mode="lines"
+          delay={0.45}
           className={cn(
             "mt-5 text-base leading-relaxed text-white/55 sm:text-lg",
             centered && "mx-auto max-w-2xl",
           )}
         >
           {description}
-        </motion.p>
+        </SplitText>
       ) : null}
     </motion.div>
   );

@@ -53,12 +53,12 @@ export default function FinalCTA() {
       <div
         aria-hidden
         className="absolute inset-0 -z-20 bg-cover bg-[position:center_75%] opacity-50"
-        style={{ backgroundImage: "url('/space-purple.jpg')" }}
+        style={{ backgroundImage: "url('/space-blue.jpg')" }}
       />
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-[#05050a] via-[#05050a]/60 to-[#05050a]" />
       <div aria-hidden className="absolute inset-0 -z-10 bg-[url('/stars.svg')] bg-[length:900px_900px] opacity-30" />
-      <Orb tone="violet" size={900} animate="drift-slow" className="left-1/2 top-[60%] -translate-x-1/2 opacity-60" />
-      <Orb tone="pink" size={600} animate="drift" className="-right-[15%] top-0 opacity-50" />
+      <Orb tone="blue" size={900} animate="drift-slow" className="left-1/2 top-[60%] -translate-x-1/2 opacity-60" />
+      <Orb tone="cyan" size={600} animate="drift" className="-right-[15%] top-0 opacity-50" />
 
       <div className="container-x relative">
         <motion.div
@@ -70,9 +70,9 @@ export default function FinalCTA() {
         >
           <motion.span
             variants={fadeUp}
-            className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/25 bg-fuchsia-500/[0.08] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-fuchsia-200/90"
+            className="inline-flex items-center gap-2 rounded-full border border-sky-400/25 bg-sky-500/[0.08] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-sky-200/90"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-violet-400 to-pink-400 shadow-[0_0_10px_rgba(232,121,249,0.9)]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-blue-400 to-cyan-300 shadow-[0_0_10px_rgba(125,211,252,0.9)]" />
             Let&apos;s build together
           </motion.span>
 
@@ -81,15 +81,15 @@ export default function FinalCTA() {
             className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-[-0.03em] text-white sm:text-5xl md:text-6xl"
           >
             Ready to build something{" "}
-            <Accent className="text-gradient drop-shadow-[0_0_30px_rgba(192,38,211,0.35)]">amazing?</Accent>
+            <Accent className="text-gradient drop-shadow-[0_0_30px_rgba(14,165,233,0.35)]">amazing?</Accent>
           </SplitText>
 
-          <motion.p variants={fadeUp} custom={0.4} className="mx-auto mt-6 max-w-2xl text-base text-white/60 sm:text-lg">
+          <SplitText as="p" mode="lines" delay={0.55} className="mx-auto mt-6 max-w-2xl text-base text-white/60 sm:text-lg">
             Tell us about your idea and we&apos;ll come back within 24 hours with next steps, a rough
             timeline and honest advice — no strings attached.
-          </motion.p>
+          </SplitText>
 
-          <motion.div variants={fadeUp} custom={0.45} className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <motion.div variants={fadeUp} custom={0.8} className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button href="#project-form" size="lg" className="w-full sm:w-auto">
               Start Your Project <ArrowRight className="h-4 w-4" aria-hidden />
             </Button>
@@ -109,12 +109,12 @@ export default function FinalCTA() {
         >
           <div
             aria-hidden
-            className="absolute inset-x-16 -bottom-8 h-28 rounded-full bg-gradient-to-r from-violet-600/40 via-fuchsia-500/40 to-pink-500/40 blur-3xl"
+            className="absolute inset-x-16 -bottom-8 h-28 rounded-full bg-gradient-to-r from-blue-600/40 via-sky-500/40 to-cyan-400/40 blur-3xl"
           />
           <div className="glow-card relative overflow-hidden !rounded-[2rem] p-2">
             <div className="grid overflow-hidden rounded-[1.6rem] lg:grid-cols-[1fr_1.4fr]">
               {/* Left: details */}
-              <div className="relative bg-gradient-to-br from-violet-700/40 via-fuchsia-700/25 to-pink-700/30 p-8 sm:p-10">
+              <div className="relative bg-gradient-to-br from-blue-700/40 via-sky-600/25 to-cyan-600/30 p-8 sm:p-10">
                 <div aria-hidden className="absolute inset-0 bg-[url('/stars.svg')] bg-[length:500px_500px] opacity-25" />
                 <div className="relative">
                   <h3 className="font-heading text-2xl font-bold text-white">Talk to a human</h3>
@@ -153,7 +153,7 @@ export default function FinalCTA() {
               <div className="bg-[#0a0a12]/80 p-8 backdrop-blur-xl sm:p-10">
                 {status === "sent" ? (
                   <div className="flex h-full flex-col items-center justify-center py-10 text-center">
-                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-pink-600 shadow-[0_0_40px_rgba(192,38,211,0.6)]">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-600 shadow-[0_0_40px_rgba(14,165,233,0.6)]">
                       <CheckCircle2 className="h-8 w-8 text-white" aria-hidden />
                     </span>
                     <h3 className="mt-6 font-heading text-2xl font-bold text-white">Message received!</h3>
@@ -228,7 +228,7 @@ export default function FinalCTA() {
                     </div>
 
                     {status === "error" ? (
-                      <p role="alert" className="text-sm text-pink-300 sm:col-span-2">
+                      <p role="alert" className="text-sm text-rose-300 sm:col-span-2">
                         {error}
                       </p>
                     ) : null}

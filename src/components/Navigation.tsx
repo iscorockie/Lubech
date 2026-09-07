@@ -37,7 +37,7 @@ export default function Navigation() {
           className={cn(
             "flex h-16 w-full max-w-6xl items-center justify-between rounded-full border px-3 pl-5 transition-all duration-500 sm:px-4 sm:pl-6",
             scrolled
-              ? "border-white/10 bg-[#0a0a12]/75 shadow-[0_20px_60px_-25px_rgba(124,58,237,0.55)] backdrop-blur-2xl"
+              ? "border-white/10 bg-[#0a0a12]/75 shadow-[0_20px_60px_-25px_rgba(37,99,235,0.55)] backdrop-blur-2xl"
               : "border-white/[0.06] bg-white/[0.02] backdrop-blur-md",
           )}
         >
@@ -107,8 +107,8 @@ export default function Navigation() {
             transition={{ duration: 0.25 }}
             className="fixed inset-0 z-40 bg-[#05050a]/90 backdrop-blur-2xl md:hidden"
           >
-            <span aria-hidden className="orb orb-violet animate-drift left-[-30%] top-[-10%] h-[70vw] w-[70vw]" />
-            <span aria-hidden className="orb orb-pink animate-drift-slow bottom-[-20%] right-[-30%] h-[80vw] w-[80vw]" />
+            <span aria-hidden className="orb orb-blue animate-drift left-[-30%] top-[-10%] h-[70vw] w-[70vw]" />
+            <span aria-hidden className="orb orb-cyan animate-drift-slow bottom-[-20%] right-[-30%] h-[80vw] w-[80vw]" />
 
             <motion.ul
               initial="hidden"
