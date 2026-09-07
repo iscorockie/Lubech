@@ -57,7 +57,7 @@ export default function StatusPage({
         <motion.p
           variants={fadeUp}
           aria-hidden
-          className="font-heading text-gradient mt-10 text-[7rem] font-extrabold leading-none tracking-[-0.06em] drop-shadow-[0_0_40px_rgba(192,38,211,0.35)] sm:text-[9.5rem]"
+          className="font-display text-gradient mt-10 text-[7rem] font-extrabold leading-none tracking-[-0.06em] drop-shadow-[0_0_40px_rgba(192,38,211,0.35)] sm:text-[9.5rem]"
         >
           {code}
         </motion.p>

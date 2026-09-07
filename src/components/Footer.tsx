@@ -121,7 +121,7 @@ export default function Footer() {
 
       {/* Giant watermark */}
       <div aria-hidden className="pointer-events-none relative h-24 select-none overflow-hidden sm:h-36">
-        <span className="absolute left-1/2 top-2 -translate-x-1/2 bg-gradient-to-b from-white/[0.07] to-transparent bg-clip-text font-heading text-[7rem] font-extrabold leading-none tracking-tighter text-transparent sm:text-[12rem]">
+        <span className="absolute left-1/2 top-2 -translate-x-1/2 bg-gradient-to-b from-white/[0.07] to-transparent bg-clip-text font-display text-[7rem] font-extrabold leading-none tracking-tighter text-transparent sm:text-[12rem]">
           LUBECH
         </span>
       </div>

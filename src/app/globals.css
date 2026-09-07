@@ -1,51 +1,120 @@
 @import "tailwindcss";
 
 /*
- * ── Brand typography (self-hosted) ──────────────────────────────────────────
+ * ── Brand typography (self-hosted, latin subset, woff2) ─────────────────────
  * Font files live in public/fonts/<family>/ — see public/fonts/README.md.
- *   Sora → headings   |   Sen → body text & numbers
- */
+ * Quicksand            → body copy, UI labels, numbers
+ * Bricolage Grotesque  → headings. Two optical sizes: "Bricolage Display" (36/48pt
+ *                        cuts, tighter + more contrast) for h1/h2 and big numerals,
+ *                        "Bricolage Text" (14pt cut) for h3–h6, nav and small labels.
+ * ──────────────────────────────────────────────────────────────────────────── */
 @font-face {
-  font-family: "Sora";
-  src: url("/fonts/sora/Sora-Variable.woff2") format("woff2");
-  font-weight: 100 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Sen";
-  src: url("/fonts/sen/sen-latin-400-normal.woff2") format("woff2");
+  font-family: "Quicksand";
+  src: url("/fonts/quicksand/quicksand-400.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Sen";
-  src: url("/fonts/sen/sen-latin-500-normal.woff2") format("woff2");
+  font-family: "Quicksand";
+  src: url("/fonts/quicksand/quicksand-500.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Sen";
-  src: url("/fonts/sen/sen-latin-600-normal.woff2") format("woff2");
+  font-family: "Quicksand";
+  src: url("/fonts/quicksand/quicksand-600.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Sen";
-  src: url("/fonts/sen/sen-latin-700-normal.woff2") format("woff2");
+  font-family: "Quicksand";
+  src: url("/fonts/quicksand/quicksand-700.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Sen";
-  src: url("/fonts/sen/sen-latin-800-normal.woff2") format("woff2");
+  font-family: "Bricolage Text";
+  src: url("/fonts/bricolage/bricolage-text-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bricolage Text";
+  src: url("/fonts/bricolage/bricolage-text-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bricolage Text";
+  src: url("/fonts/bricolage/bricolage-text-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bricolage Text";
+  src: url("/fonts/bricolage/bricolage-text-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bricolage Text";
+  src: url("/fonts/bricolage/bricolage-text-800.woff2") format("woff2");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
+}
+@font-face {
+  font-family: "Bricolage Display";
+  src: url("/fonts/bricolage/bricolage-display-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bricolage Display";
+  src: url("/fonts/bricolage/bricolage-display-600.woff2") format("woff2");
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bricolage Display";
+  src: url("/fonts/bricolage/bricolage-display-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bricolage Display";
+  src: url("/fonts/bricolage/bricolage-display-800.woff2") format("woff2");
+  font-weight: 800 900;
+  font-style: normal;
+  font-display: swap;
+}
+/* Metric-adjusted local fallbacks: keep line boxes stable before the woff2 arrives */
+@font-face {
+  font-family: "Quicksand Fallback";
+  src: local("Arial"), local("Helvetica Neue"), local("Roboto");
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+  size-adjust: 104%;
+}
+@font-face {
+  font-family: "Bricolage Fallback";
+  src: local("Arial Bold"), local("Helvetica Neue Bold"), local("Roboto Bold");
+  ascent-override: 93%;
+  descent-override: 27%;
+  line-gap-override: 0%;
+  size-adjust: 101%;
 }
 
 /*
@@ -65,8 +134,9 @@
   --color-brand-pink: #db2777;
 
   /* Typography */
-  --font-sans: "Sen", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-heading: "Sora", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: "Quicksand", "Quicksand Fallback", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: "Bricolage Text", "Bricolage Fallback", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Bricolage Display", "Bricolage Text", "Bricolage Fallback", ui-sans-serif, system-ui, sans-serif;
 
   /* Glows */
   --shadow-glow: 0 0 40px -8px rgba(124, 58, 237, 0.35);
@@ -175,6 +245,13 @@
     font-family: var(--font-heading);
     letter-spacing: -0.02em;
     text-wrap: balance;
+  }
+
+  /* Large headlines use the display optical size (36/48pt cuts) */
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
   }
 
   p {

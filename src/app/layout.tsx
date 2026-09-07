@@ -274,6 +274,10 @@ export default function RootLayout({
   return (
     <html lang="en-GB" className="dark">
       <head>
+        {/* Above-the-fold type: hero headline (display cut) + body/button weights */}
+        <link rel="preload" href="/fonts/bricolage/bricolage-display-800.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/quicksand/quicksand-400.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/quicksand/quicksand-600.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="icon" href="/web_favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <script

@@ -57,8 +57,8 @@ presentational.
 | ---------------- | -------------------------------------------------- |
 | Background       | `#05050A` → `#0A0A12`                              |
 | Accent gradient  | `#7C3AED` → `#C026D3` → `#DB2777`                  |
-| Headings         | Sora (self-hosted, `public/fonts/sora`)            |
-| Body             | Sen (self-hosted, `public/fonts/sen`)              |
+| Headings         | Bricolage Grotesque (self-hosted, `public/fonts/bricolage`) — 36/48 pt display cut for h1/h2, 14 pt text cut for h3–h6 |
+| Body             | Quicksand (self-hosted, `public/fonts/quicksand`)  |
 | Cards            | `.glow-card` – dark, 1px violet border, soft glow, cursor spotlight |
 | Buttons          | `.btn-gradient` (pill, gradient, glow) · `.btn-ghost` (frosted glass) |
 | Ambient light    | `<Orb />` radial-gradient orbs (no `filter: blur` → cheap to paint) |

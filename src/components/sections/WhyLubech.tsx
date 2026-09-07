@@ -57,7 +57,7 @@ export default function WhyLubech() {
           <div className="grid gap-px overflow-hidden rounded-[1.5rem] bg-white/[0.04] sm:grid-cols-2 lg:grid-cols-4">
             {HERO_STATS.map((s) => (
               <div key={s.label} className="bg-[#0a0a12]/80 px-6 py-8 text-center backdrop-blur-xl">
-                <p className="font-heading text-4xl font-extrabold text-gradient">{s.value}</p>
+                <p className="font-display text-4xl font-extrabold text-gradient">{s.value}</p>
                 <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/45">
                   {s.label}
                 </p>

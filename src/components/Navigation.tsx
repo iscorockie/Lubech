@@ -124,7 +124,7 @@ export default function Navigation() {
                   <a
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block py-3 font-heading text-3xl font-semibold text-white/85 transition-colors hover:text-white"
+                    className="block py-3 font-display text-3xl font-semibold text-white/85 transition-colors hover:text-white"
                   >
                     {link.label}
                   </a>
