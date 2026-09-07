@@ -513,6 +513,29 @@
     );
   }
 
+  /* Split-text headline reveal (see components/ui/SplitText.tsx) */
+  .split-text {
+    text-wrap: balance;
+  }
+  .split-line {
+    display: block;
+  }
+  .split-mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    /* room for descenders + the gradient glow; pulled back so line-height is unchanged */
+    padding: 0.06em 0.05em 0.14em;
+    margin: -0.06em -0.05em -0.14em;
+  }
+  .split-word {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+  .split-word::selection {
+    background: rgba(192, 38, 211, 0.4);
+  }
+
   /* Horizontal fade mask for marquees */
   .fade-x {
     -webkit-mask-image: linear-gradient(

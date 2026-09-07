@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import SplitText from "@/components/ui/SplitText";
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 
 interface SectionHeaderProps {
@@ -26,7 +27,7 @@ export default function SectionHeader({
 
   return (
     <motion.div
-      variants={staggerContainer(0.1)}
+      variants={staggerContainer(0.12)}
       initial="hidden"
       whileInView="visible"
       viewport={viewportOnce}
@@ -44,16 +45,17 @@ export default function SectionHeader({
         {eyebrow}
       </motion.span>
 
-      <motion.h2
-        variants={fadeUp}
+      <SplitText
+        as="h2"
         className="mt-5 text-3xl font-bold leading-[1.1] text-white sm:text-4xl md:text-5xl"
       >
         {title}
-      </motion.h2>
+      </SplitText>
 
       {description ? (
         <motion.p
           variants={fadeUp}
+          custom={0.35}
           className={cn(
             "mt-5 text-base leading-relaxed text-white/55 sm:text-lg",
             centered && "mx-auto max-w-2xl",

@@ -5,6 +5,7 @@ import { Quote, Star } from "lucide-react";
 import GlowCard from "@/components/ui/GlowCard";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { Orb, GridPattern } from "@/components/ui/Orbs";
+import CountUp from "@/components/ui/CountUp";
 import { REASONS, TESTIMONIALS, HERO_STATS } from "@/data/site";
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 
@@ -55,9 +56,11 @@ export default function WhyLubech() {
           className="relative mt-16 overflow-hidden rounded-[1.75rem] border border-fuchsia-400/20 bg-gradient-to-r from-violet-900/30 via-fuchsia-900/20 to-pink-900/30 p-1 shadow-[0_0_80px_-30px_rgba(192,38,211,0.7)]"
         >
           <div className="grid gap-px overflow-hidden rounded-[1.5rem] bg-white/[0.04] sm:grid-cols-2 lg:grid-cols-4">
-            {HERO_STATS.map((s) => (
+            {HERO_STATS.map((s, i) => (
               <div key={s.label} className="bg-[#0a0a12]/80 px-6 py-8 text-center backdrop-blur-xl">
-                <p className="font-display text-4xl font-extrabold text-gradient">{s.value}</p>
+                <p className="font-display text-4xl font-extrabold">
+                  <CountUp value={s.value} delay={i * 0.12} className="text-gradient" />
+                </p>
                 <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/45">
                   {s.label}
                 </p>

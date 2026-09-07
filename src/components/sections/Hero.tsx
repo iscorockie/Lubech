@@ -4,7 +4,9 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Code2, Play, Server, Smartphone, Sparkles } from "lucide-react";
 import Button from "@/components/ui/Button";
+import CountUp from "@/components/ui/CountUp";
 import { Orb } from "@/components/ui/Orbs";
+import SplitText, { Accent } from "@/components/ui/SplitText";
 import { HERO_STATS } from "@/data/site";
 import { EASE, fadeUp, staggerContainer } from "@/lib/animations";
 
@@ -67,19 +69,22 @@ export default function Hero() {
             <Sparkles className="h-3.5 w-3.5 text-fuchsia-300" aria-hidden />
           </motion.span>
 
-          <motion.h1
-            variants={fadeUp}
+          <SplitText
+            as="h1"
+            stagger={0.07}
+            duration={0.9}
             className="mt-7 text-[2.65rem] font-extrabold leading-[1.04] tracking-[-0.035em] text-white sm:text-6xl md:text-7xl lg:text-[5.25rem]"
           >
             Transform Your Ideas
             <br />
-            <span className="text-gradient drop-shadow-[0_0_30px_rgba(192,38,211,0.35)]">
+            <Accent className="text-gradient drop-shadow-[0_0_30px_rgba(192,38,211,0.35)]">
               Into Digital Reality
-            </span>
-          </motion.h1>
+            </Accent>
+          </SplitText>
 
           <motion.p
             variants={fadeUp}
+            custom={0.45}
             className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg md:text-xl"
           >
             We design and build stunning websites, cross-platform mobile apps and
@@ -89,6 +94,7 @@ export default function Hero() {
 
           <motion.div
             variants={fadeUp}
+            custom={0.5}
             className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
           >
             <Button href="#contact" size="lg" className="w-full sm:w-auto">
@@ -101,7 +107,7 @@ export default function Hero() {
             </Button>
           </motion.div>
 
-          <motion.p variants={fadeUp} className="mt-6 text-xs text-white/40">
+          <motion.p variants={fadeUp} custom={0.55} className="mt-6 text-xs text-white/40">
             Free discovery call · No commitment · Reply within 24 hours
           </motion.p>
         </motion.div>
@@ -171,7 +177,7 @@ export default function Hero() {
                     className="text-center"
                   >
                     <p className="font-heading text-xl font-bold text-white sm:text-2xl">
-                      <span className="text-gradient">{s.value}</span>
+                      <CountUp value={s.value} delay={0.2 + i * 0.1} className="text-gradient" />
                     </p>
                     <p className="mt-0.5 text-[11px] uppercase tracking-[0.12em] text-white/40">{s.label}</p>
                   </motion.div>

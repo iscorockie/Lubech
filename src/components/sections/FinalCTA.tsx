@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Loader2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { Orb } from "@/components/ui/Orbs";
+import SplitText, { Accent } from "@/components/ui/SplitText";
 import { SITE } from "@/data/site";
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 
@@ -75,20 +76,20 @@ export default function FinalCTA() {
             Let&apos;s build together
           </motion.span>
 
-          <motion.h2
-            variants={fadeUp}
+          <SplitText
+            as="h2"
             className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-[-0.03em] text-white sm:text-5xl md:text-6xl"
           >
             Ready to build something{" "}
-            <span className="text-gradient drop-shadow-[0_0_30px_rgba(192,38,211,0.35)]">amazing?</span>
-          </motion.h2>
+            <Accent className="text-gradient drop-shadow-[0_0_30px_rgba(192,38,211,0.35)]">amazing?</Accent>
+          </SplitText>
 
-          <motion.p variants={fadeUp} className="mx-auto mt-6 max-w-2xl text-base text-white/60 sm:text-lg">
+          <motion.p variants={fadeUp} custom={0.4} className="mx-auto mt-6 max-w-2xl text-base text-white/60 sm:text-lg">
             Tell us about your idea and we&apos;ll come back within 24 hours with next steps, a rough
             timeline and honest advice — no strings attached.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <motion.div variants={fadeUp} custom={0.45} className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button href="#project-form" size="lg" className="w-full sm:w-auto">
               Start Your Project <ArrowRight className="h-4 w-4" aria-hidden />
             </Button>

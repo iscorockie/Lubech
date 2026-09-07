@@ -37,7 +37,8 @@ src/
 │  ├─ StatusPage.tsx      # shared shell for the 404 / error routes
 │  ├─ Footer.tsx
 │  ├─ Providers.tsx
-│  ├─ ui/                 # primitives: Button, GlowCard, SectionHeader, Orbs/GridPattern
+│  ├─ ui/                 # primitives: Button, GlowCard, SectionHeader, Orbs/GridPattern,
+│  │                      # SplitText (word-mask headline reveal), CountUp (scroll-triggered numerals)
 │  ├─ three/Earth3D.tsx   # WebGL night-side Earth horizon (React Three Fiber), lazy-loaded
 │  └─ sections/           # Hero, Services, WhoItsFor, Process, Technologies,
 │                         # Projects, WhyLubech, Team, FinalCTA
@@ -69,6 +70,17 @@ Motion rules used throughout:
 - Entrances: `whileInView` + stagger, 0.3–0.7 s, custom expo-out easing (`EASE` in `lib/animations.ts`).
 - Scroll-linked effects use `useScroll` + `useTransform`/`useSpring` (hero parallax, process timeline).
 - Reduced motion is respected globally (`MotionConfig reducedMotion="user"` + a CSS fallback).
+
+### Text animations
+
+Headlines use `SplitText` (`src/components/ui/SplitText.tsx`): each word rises out of its own
+overflow-clipped line box, staggered left→right / line by line (`y: 110% → 0`, expo-out ease,
+~55 ms between words, 70 ms in the hero). The intact sentence is exposed via `aria-label`; the
+split spans are `aria-hidden`. Gradient runs (`<span className="text-gradient">` / `<Accent>`)
+are re-applied per word because `background-clip: text` does not survive a clipped parent in
+Chrome. Numbers in the stats bands use `CountUp`, which animates the first number in a string
+("30+", "100%", "24/7") when it scrolls into view. Both honour `prefers-reduced-motion`
+through the global `MotionConfig` (words render in place, numbers show their final value).
 
 ### Pinned "Our Process" timeline
 

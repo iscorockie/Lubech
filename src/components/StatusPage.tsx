@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { Orb } from "@/components/ui/Orbs";
+import SplitText from "@/components/ui/SplitText";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 
 interface StatusPageProps {
@@ -73,18 +74,15 @@ export default function StatusPage({
           {eyebrow}
         </motion.span>
 
-        <motion.h1
-          variants={fadeUp}
-          className="mt-6 text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-5xl"
-        >
+        <SplitText as="h1" className="mt-6 text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-5xl">
           {title}
-        </motion.h1>
+        </SplitText>
 
-        <motion.p variants={fadeUp} className="mt-5 max-w-md text-base leading-relaxed text-white/60 sm:text-lg">
+        <motion.p variants={fadeUp} custom={0.35} className="mt-5 max-w-md text-base leading-relaxed text-white/60 sm:text-lg">
           {description}
         </motion.p>
 
-        <motion.div variants={fadeUp} className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
+        <motion.div variants={fadeUp} custom={0.4} className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
           {actions}
         </motion.div>
 
