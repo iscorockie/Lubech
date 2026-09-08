@@ -102,7 +102,7 @@ Motion rules used throughout:
 Headings expose the intact sentence via `aria-label`, paragraphs carry a visually-hidden copy, and
 the animated spans are `aria-hidden`. Gradient runs (`<span className="text-gradient">` /
 `<Accent>`) are re-applied per word because `background-clip: text` does not survive a clipped
-parent in Chrome. Numbers in the stats bands use `CountUp`, which animates the first number in a
+parent in Chrome. Numbers in the "Why Lubech" stats band use `CountUp`, which animates the first number in a
 string ("30+", "100%", "24/7") when it scrolls into view. Everything honours
 `prefers-reduced-motion` through the global `MotionConfig` (text fades in place, numbers show
 their final value).

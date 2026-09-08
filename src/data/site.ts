@@ -78,7 +78,7 @@ export const NAV_LINKS = [
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
 
-export const HERO_STATS: Stat[] = [
+export const STATS: Stat[] = [
   { value: "30+", label: "Projects delivered" },
   { value: "7+", label: "Years of experience" },
   { value: "100%", label: "Client satisfaction" },
