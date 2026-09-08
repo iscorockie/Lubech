@@ -115,12 +115,12 @@ export const metadata: Metadata = {
     },
   },
 
-  // ── Verification (add your codes when ready) ──────────────────────────────
-  verification: {
-    google: "REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_CODE",
-    // yandex: "REPLACE_WITH_YANDEX_CODE",
-    // bing: "REPLACE_WITH_BING_CODE",
-  },
+  // ── Verification ──────────────────────────────────────────────────────────
+  // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION (Search Console → HTML tag method, the
+  // `content` value only). Left undefined, no meta tag is emitted at all.
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 // ── JSON-LD Structured Data ────────────────────────────────────────────────

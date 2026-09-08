@@ -17,7 +17,8 @@ Contact form e-mails are sent by `src/app/api/contact/route.ts` via Nodemailer. 
 
 ```
 SMTP_HOST= SMTP_PORT=587 SMTP_SECURE=false SMTP_USER= SMTP_PASS= CONTACT_TO=info@lubech.tech
-NEXT_PUBLIC_GA_ID=            # optional – Google Analytics
+NEXT_PUBLIC_GA_ID=                        # optional – Google Analytics
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=     # optional – Search Console "HTML tag" content value
 ```
 
 ## Project structure
