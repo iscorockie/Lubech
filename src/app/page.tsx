@@ -14,9 +14,12 @@ import FinalCTA from "@/components/sections/FinalCTA";
 export default function Home() {
   return (
     <>
+      <a href="#main" className="skip-link btn-gradient rounded-full px-5 py-2.5 text-sm font-semibold">
+        Skip to content
+      </a>
       <ScrollProgress />
       <Navigation />
-      <main className="relative">
+      <main id="main" className="relative">
         <Hero />
         <Services />
         <WhoItsFor />

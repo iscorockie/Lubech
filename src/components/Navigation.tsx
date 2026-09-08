@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useMediaQuery } from "@/lib/hooks";
 import { NAV_LINKS } from "@/data/site";
 import { EASE } from "@/lib/animations";
 
@@ -12,6 +13,7 @@ export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 24));
 
@@ -21,6 +23,22 @@ export default function Navigation() {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [open]);
+
+  // The overlay is `md:hidden`, so if the viewport grows past the breakpoint while it is open
+  // (tablet rotation, window resize) close it too — otherwise the scroll lock would linger.
+  useEffect(() => {
+    if (isDesktop) setOpen(false);
+  }, [isDesktop]);
+
+  // Escape closes the menu, as keyboard users expect from a modal overlay.
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
   return (

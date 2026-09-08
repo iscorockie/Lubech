@@ -454,6 +454,23 @@
     animation: shine 0.9s ease-out 1;
   }
 
+  /* "Skip to content" — parked above the viewport, slides in on keyboard focus */
+  .skip-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 70;
+    transform: translateY(-200%);
+    opacity: 0;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+  .skip-link:focus-visible {
+    transform: none;
+    opacity: 1;
+  }
+
   /* Secondary pill — frosted glass */
   .btn-ghost {
     color: rgba(255, 255, 255, 0.9);

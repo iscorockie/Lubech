@@ -71,6 +71,16 @@ Motion rules used throughout:
 - Scroll-linked effects use `useScroll` + `useTransform`/`useSpring` (hero parallax, process timeline).
 - Reduced motion is respected globally (`MotionConfig reducedMotion="user"` + a CSS fallback).
 
+### Accessibility
+
+- "Skip to content" link (first Tab stop, jumps to `<main id="main">`), visible focus rings, `aria-label`
+  on every icon-only control, `sr-only` copies behind the animated headlines / count-ups.
+- The mobile menu closes on **Escape** and when the viewport grows past the `md` breakpoint, and
+  restores body scrolling either way.
+- `prefers-reduced-motion` turns the entrance transforms into plain fades (Motion's `reducedMotion="user"`)
+  and swaps the pinned 3D timeline for the static stacked version.
+- Filled gradient surfaces keep white labels at ≥ 4.5:1 (WCAG AA) along the whole gradient.
+
 ### Text animations
 
 `SplitText` (`src/components/ui/SplitText.tsx`) has two modes:
