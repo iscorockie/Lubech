@@ -610,4 +610,11 @@
     background: rgba(255, 255, 255, 0.06);
     box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.16);
   }
+  /* Invalid state (set via aria-invalid after a failed submit) — rose ring, same geometry */
+  .field[aria-invalid="true"] {
+    border-color: rgba(251, 113, 133, 0.6);
+  }
+  .field[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.18);
+  }
 }

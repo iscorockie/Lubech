@@ -10,6 +10,23 @@ import { SITE } from "@/data/site";
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 
 type Status = "idle" | "sending" | "sent" | "error";
+type FieldName = "name" | "email" | "project" | "message";
+type FieldErrors = Partial<Record<FieldName, string>>;
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** Client-side mirror of the API's required-field / e-mail checks — saves a round-trip and
+ *  lets us point at the exact field instead of a generic "missing fields" message. */
+function validate(data: Record<string, FormDataEntryValue>): FieldErrors {
+  const errors: FieldErrors = {};
+  const text = (k: string) => (typeof data[k] === "string" ? (data[k] as string).trim() : "");
+  if (!text("name")) errors.name = "Please tell us your name.";
+  if (!text("email")) errors.email = "Please enter your e-mail address.";
+  else if (!EMAIL_RE.test(text("email"))) errors.email = "That e-mail address doesn't look right.";
+  if (!text("project")) errors.project = "Please pick a project type.";
+  if (!text("message")) errors.message = "Please tell us a little about the project.";
+  return errors;
+}
 
 const contactLinks = [
   { icon: Mail, label: SITE.email, href: `mailto:${SITE.email}` },
@@ -21,11 +38,23 @@ const contactLinks = [
 export default function FinalCTA() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
+
+    const invalid = validate(data);
+    setFieldErrors(invalid);
+    if (Object.keys(invalid).length) {
+      setStatus("idle");
+      setError("");
+      // Move focus to the first problem so keyboard / screen-reader users land on it.
+      const first = (["name", "email", "project", "message"] as const).find((k) => invalid[k]);
+      if (first) (form.elements.namedItem(first) as HTMLElement | null)?.focus();
+      return;
+    }
 
     setStatus("sending");
     setError("");
@@ -170,7 +199,18 @@ export default function FinalCTA() {
                       <label htmlFor="name" className="mb-1.5 block text-xs font-semibold text-white/60">
                         Name *
                       </label>
-                      <input id="name" name="name" required autoComplete="name" placeholder="Jane Doe" className="field" />
+                      <input
+                        id="name"
+                        name="name"
+                        required
+                        autoComplete="name"
+                        placeholder="Jane Doe"
+                        className="field"
+                        aria-invalid={fieldErrors.name ? true : undefined}
+                        aria-describedby={fieldErrors.name ? "name-error" : undefined}
+                        onChange={() => fieldErrors.name && setFieldErrors((f) => ({ ...f, name: undefined }))}
+                      />
+                      <FieldError id="name-error" message={fieldErrors.name} />
                     </div>
                     <div className="sm:col-span-1">
                       <label htmlFor="email" className="mb-1.5 block text-xs font-semibold text-white/60">
@@ -184,13 +224,26 @@ export default function FinalCTA() {
                         autoComplete="email"
                         placeholder="jane@company.com"
                         className="field"
+                        aria-invalid={fieldErrors.email ? true : undefined}
+                        aria-describedby={fieldErrors.email ? "email-error" : undefined}
+                        onChange={() => fieldErrors.email && setFieldErrors((f) => ({ ...f, email: undefined }))}
                       />
+                      <FieldError id="email-error" message={fieldErrors.email} />
                     </div>
                     <div className="sm:col-span-1">
                       <label htmlFor="project" className="mb-1.5 block text-xs font-semibold text-white/60">
                         Project type *
                       </label>
-                      <select id="project" name="project" required defaultValue="" className="field">
+                      <select
+                        id="project"
+                        name="project"
+                        required
+                        defaultValue=""
+                        className="field"
+                        aria-invalid={fieldErrors.project ? true : undefined}
+                        aria-describedby={fieldErrors.project ? "project-error" : undefined}
+                        onChange={() => fieldErrors.project && setFieldErrors((f) => ({ ...f, project: undefined }))}
+                      >
                         <option value="" disabled>
                           Select one
                         </option>
@@ -200,6 +253,7 @@ export default function FinalCTA() {
                         <option>Full product (web + mobile)</option>
                         <option>Something else</option>
                       </select>
+                      <FieldError id="project-error" message={fieldErrors.project} />
                     </div>
                     <div className="sm:col-span-1">
                       <label htmlFor="budget" className="mb-1.5 block text-xs font-semibold text-white/60">
@@ -224,7 +278,11 @@ export default function FinalCTA() {
                         rows={4}
                         placeholder="What are you building, who is it for and when do you need it?"
                         className="field resize-none"
+                        aria-invalid={fieldErrors.message ? true : undefined}
+                        aria-describedby={fieldErrors.message ? "message-error" : undefined}
+                        onChange={() => fieldErrors.message && setFieldErrors((f) => ({ ...f, message: undefined }))}
                       />
+                      <FieldError id="message-error" message={fieldErrors.message} />
                     </div>
 
                     {status === "error" ? (
@@ -255,5 +313,15 @@ export default function FinalCTA() {
         </motion.div>
       </div>
     </section>
+  );
+}
+
+/** Inline validation message under a field; `id` is referenced by the field's aria-describedby. */
+function FieldError({ id, message }: { id: string; message?: string }) {
+  if (!message) return null;
+  return (
+    <p id={id} className="mt-1.5 text-xs text-rose-300">
+      {message}
+    </p>
   );
 }
