@@ -44,11 +44,12 @@ function MarqueeRow({ items, reverse = false }: { items: Technology[]; reverse?:
 
 export default function Technologies() {
   return (
-    <section id="technologies" className="relative scroll-mt-24 overflow-hidden py-24 md:py-28">
+    <section id="technologies" aria-labelledby="technologies-title" className="relative scroll-mt-24 overflow-hidden py-24 md:py-28">
       <div className="hairline absolute inset-x-[10%] top-0" aria-hidden />
 
       <div className="container-x relative">
         <SectionHeader
+          titleId="technologies-title"
           eyebrow="Technologies we master"
           title={
             <>

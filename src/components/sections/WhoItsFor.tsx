@@ -11,11 +11,12 @@ import { staggerContainer, viewportOnce } from "@/lib/animations";
 
 export default function WhoItsFor() {
   return (
-    <section id="who-its-for" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
+    <section id="who-its-for" aria-labelledby="who-its-for-title" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
       <Orb tone="cyan" size={700} animate="drift" className="-right-[22%] top-1/4 opacity-40" />
 
       <div className="container-x relative">
         <SectionHeader
+          titleId="who-its-for-title"
           eyebrow="Who it's for"
           title={
             <>

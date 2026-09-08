@@ -18,11 +18,12 @@ const accentRing: Record<string, string> = {
 
 export default function Services() {
   return (
-    <section id="services" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
+    <section id="services" aria-labelledby="services-title" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
       <Orb tone="blue" size={700} animate="drift-slow" className="-left-[20%] top-1/3 opacity-40" />
 
       <div className="container-x relative">
         <SectionHeader
+          titleId="services-title"
           eyebrow="What we build"
           title={
             <>

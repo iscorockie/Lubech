@@ -18,12 +18,13 @@ const socialIcon = {
 
 export default function Team() {
   return (
-    <section id="team" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
+    <section id="team" aria-labelledby="team-title" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
       <div className="hairline absolute inset-x-[10%] top-0" aria-hidden />
       <Orb tone="sky" size={760} animate="drift-slow" className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30" />
 
       <div className="container-x relative">
         <SectionHeader
+          titleId="team-title"
           eyebrow="Meet the team"
           title={
             <>

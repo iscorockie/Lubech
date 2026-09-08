@@ -76,6 +76,8 @@ Motion rules used throughout:
 
 - "Skip to content" link (first Tab stop, jumps to `<main id="main">`), visible focus rings, `aria-label`
   on every icon-only control, `sr-only` copies behind the animated headlines / count-ups.
+- Every section is a named landmark (`<section aria-labelledby>` → its heading), so screen-reader users
+  can jump between "Services", "Our process", "Real products, real impact" … from the regions list.
 - The mobile menu closes on **Escape** and when the viewport grows past the `md` breakpoint, and
   restores body scrolling either way.
 - `prefers-reduced-motion` turns the entrance transforms into plain fades (Motion's `reducedMotion="user"`)

@@ -49,6 +49,8 @@ type Tag = "h1" | "h2" | "h3" | "p" | "span" | "div" | "blockquote";
 interface SplitTextProps {
   children: ReactNode;
   as?: Tag;
+  /** Forwarded to the rendered element (e.g. so a `<section aria-labelledby>` can point at the heading). */
+  id?: string;
   className?: string;
   /** `words` (headlines) or `lines` (paragraphs / long statements). */
   mode?: "words" | "lines";
@@ -113,6 +115,7 @@ const VIEWPORT = { once: true, margin: "0px 0px -60px 0px" } as const;
 export default function SplitText({
   children,
   as = "h2",
+  id,
   className,
   mode = "words",
   stagger = mode === "lines" ? 0.1 : 0.055,
@@ -131,6 +134,7 @@ export default function SplitText({
     return (
       <LineReveal
         as={as}
+        id={id}
         className={className}
         tokens={lines.flat()}
         stagger={stagger}
@@ -157,6 +161,7 @@ export default function SplitText({
 
   return (
     <MotionTag
+      id={id}
       aria-label={ariaLabel}
       variants={container}
       {...own}
@@ -184,6 +189,7 @@ export default function SplitText({
 
 interface LineRevealProps {
   as: Tag;
+  id?: string;
   className?: string;
   tokens: Token[];
   stagger: number;
@@ -201,7 +207,7 @@ interface LineRevealProps {
  * nothing shifts. Until the reveal starts, the wrapping is re-measured whenever the width or
  * the fonts change; once it has finished (`done`) the element renders plain text again.
  */
-function LineReveal({ as, className, tokens, stagger, delay, duration, onComplete, ariaLabel, srCopy }: LineRevealProps) {
+function LineReveal({ as, id, className, tokens, stagger, delay, duration, onComplete, ariaLabel, srCopy }: LineRevealProps) {
   const Host = as as "p";
   const hostRef = useRef<HTMLParagraphElement>(null);
   const probeRef = useRef<HTMLSpanElement>(null);
@@ -312,7 +318,7 @@ function LineReveal({ as, className, tokens, stagger, delay, duration, onComplet
   }
 
   return (
-    <Host ref={hostRef} aria-label={done ? undefined : ariaLabel} className={cn("split-text split-text--lines", className)}>
+    <Host ref={hostRef} id={id} aria-label={done ? undefined : ariaLabel} className={cn("split-text split-text--lines", className)}>
       {done ? null : srCopy}
       {content}
     </Host>

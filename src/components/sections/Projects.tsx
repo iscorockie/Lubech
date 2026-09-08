@@ -179,12 +179,13 @@ export default function Projects() {
   const total = filter === "all" ? PROJECTS.length : PROJECTS.filter((p) => p.category === filter).length;
 
   return (
-    <section id="work" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
+    <section id="work" aria-labelledby="work-title" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
       <Orb tone="sky" size={800} animate="drift" className="-right-[25%] top-0 opacity-35" />
       <Orb tone="blue" size={700} animate="drift-slow" className="-left-[20%] bottom-0 opacity-35" />
 
       <div className="container-x relative">
         <SectionHeader
+          titleId="work-title"
           eyebrow="Featured projects"
           title={
             <>

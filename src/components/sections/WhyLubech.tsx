@@ -12,13 +12,14 @@ import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 
 export default function WhyLubech() {
   return (
-    <section id="why-lubech" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
+    <section id="why-lubech" aria-labelledby="why-lubech-title" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
       <GridPattern className="opacity-40" />
       <Orb tone="blue" size={800} animate="drift-slow" className="-left-[25%] top-0 opacity-40" />
       <Orb tone="cyan" size={700} animate="drift" className="-right-[20%] bottom-0 opacity-35" />
 
       <div className="container-x relative">
         <SectionHeader
+          titleId="why-lubech-title"
           eyebrow="Why choose Lubech"
           title={
             <>

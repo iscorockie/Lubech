@@ -77,7 +77,7 @@ export default function FinalCTA() {
   }
 
   return (
-    <section id="contact" className="relative scroll-mt-24 overflow-hidden py-24 md:py-36">
+    <section id="contact" aria-labelledby="contact-title" className="relative scroll-mt-24 overflow-hidden py-24 md:py-36">
       {/* Background: planet horizon glow + orbs + stars */}
       <div
         aria-hidden
@@ -107,6 +107,7 @@ export default function FinalCTA() {
 
           <SplitText
             as="h2"
+            id="contact-title"
             className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-[-0.03em] text-white sm:text-5xl md:text-6xl"
           >
             Ready to build something{" "}

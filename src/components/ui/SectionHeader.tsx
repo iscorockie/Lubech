@@ -8,6 +8,8 @@ import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 interface SectionHeaderProps {
   eyebrow: string;
   title: React.ReactNode;
+  /** `id` for the <h2>, so the parent <section aria-labelledby> gets an accessible name. */
+  titleId?: string;
   description?: string;
   align?: "center" | "left";
   className?: string;
@@ -19,6 +21,7 @@ interface SectionHeaderProps {
 export default function SectionHeader({
   eyebrow,
   title,
+  titleId,
   description,
   align = "center",
   className,
@@ -47,6 +50,7 @@ export default function SectionHeader({
 
       <SplitText
         as="h2"
+        id={titleId}
         className="mt-5 text-3xl font-bold leading-[1.1] text-white sm:text-4xl md:text-5xl"
       >
         {title}

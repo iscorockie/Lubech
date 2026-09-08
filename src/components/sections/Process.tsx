@@ -114,6 +114,7 @@ function PinnedProcess() {
         <div className="container-x relative z-10 flex flex-1 flex-col justify-center pb-16 pt-24">
           <motion.div style={{ y: headerY }} className="[@media(max-height:760px)]:[&_p]:hidden">
             <SectionHeader
+              titleId="process-title"
               eyebrow="Our process"
               title={
                 <>
@@ -237,6 +238,7 @@ function StackedProcess() {
 
       <div className="container-x relative">
         <SectionHeader
+          titleId="process-title"
           eyebrow="Our process"
           title={
             <>
@@ -303,7 +305,7 @@ export default function Process() {
   const pinned = isDesktop && !reduced;
 
   return (
-    <section id="process" className={cn("relative", pinned ? "-scroll-mt-26" : "scroll-mt-24")}>
+    <section id="process" aria-labelledby="process-title" className={cn("relative", pinned ? "-scroll-mt-26" : "scroll-mt-24")}>
       {pinned ? <PinnedProcess /> : <StackedProcess />}
     </section>
   );

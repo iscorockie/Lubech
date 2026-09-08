@@ -28,6 +28,7 @@ export default function Hero() {
   return (
     <section
       id="home"
+      aria-labelledby="hero-title"
       ref={ref}
       className="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-32 pb-20 sm:pt-36 md:pb-24"
     >
@@ -71,6 +72,7 @@ export default function Hero() {
 
           <SplitText
             as="h1"
+            id="hero-title"
             stagger={0.07}
             duration={0.9}
             className="mt-7 text-[2.65rem] font-extrabold leading-[1.04] tracking-[-0.035em] text-white sm:text-6xl md:text-7xl lg:text-[5.25rem]"
