@@ -8,7 +8,7 @@ import { Orb, GridPattern } from "@/components/ui/Orbs";
 import CountUp from "@/components/ui/CountUp";
 import SplitText from "@/components/ui/SplitText";
 import { REASONS, TESTIMONIALS, STATS } from "@/data/site";
-import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
+import { fadeUp, staggerContainer, viewportReplay } from "@/lib/animations";
 
 export default function WhyLubech() {
   return (
@@ -35,7 +35,7 @@ export default function WhyLubech() {
           variants={staggerContainer(0.08)}
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportReplay}
           className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
           {REASONS.map(({ title, description, icon: Icon }) => (
@@ -56,7 +56,7 @@ export default function WhyLubech() {
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportReplay}
           className="relative mt-16 overflow-hidden rounded-[1.75rem] border border-sky-400/20 bg-gradient-to-r from-blue-900/30 via-sky-900/20 to-cyan-900/30 p-1 shadow-[0_0_80px_-30px_rgba(14,165,233,0.7)]"
         >
           <div className="grid gap-px overflow-hidden rounded-[1.5rem] bg-white/[0.04] sm:grid-cols-2 lg:grid-cols-4">
@@ -78,7 +78,7 @@ export default function WhyLubech() {
           variants={staggerContainer(0.12)}
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportReplay}
           className="mt-16 grid gap-5 lg:grid-cols-3"
         >
           {TESTIMONIALS.map((t) => (

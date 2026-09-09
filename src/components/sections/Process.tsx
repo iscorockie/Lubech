@@ -17,7 +17,7 @@ import SplitText from "@/components/ui/SplitText";
 import { GridPattern, Orb } from "@/components/ui/Orbs";
 import EarthHorizon from "@/components/three/EarthHorizon";
 import { PROCESS } from "@/data/site";
-import { EASE, viewportOnce } from "@/lib/animations";
+import { EASE, viewportReplay } from "@/lib/animations";
 import { useMediaQuery } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 
@@ -241,7 +241,7 @@ function StackedProcess() {
                 key={step}
                 initial={{ opacity: 0, y: 36 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={viewportOnce}
+                viewport={viewportReplay}
                 transition={{ duration: 0.6, ease: EASE, delay: i * 0.08 }}
                 className="relative flex gap-5"
               >

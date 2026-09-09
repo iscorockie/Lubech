@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { TECH_ROW_1, TECH_ROW_2 } from "@/data/site";
 import type { Technology } from "@/types";
-import { fadeIn, viewportOnce } from "@/lib/animations";
+import { fadeIn, viewportReplay } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
 function TechChip({ name, icon: Icon, color }: Technology) {
@@ -65,7 +65,7 @@ export default function Technologies() {
         variants={fadeIn}
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportReplay}
         className="relative mt-14 space-y-3"
       >
         <MarqueeRow items={TECH_ROW_1} />
@@ -82,7 +82,7 @@ export default function Technologies() {
             key={label}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportOnce}
+            viewport={viewportReplay}
             transition={{ duration: 0.5, delay: i * 0.08 }}
             className="rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 text-center"
           >

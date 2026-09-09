@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Play, Sparkles } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { Orb } from "@/components/ui/Orbs";
@@ -13,14 +13,38 @@ import { useMediaQuery } from "@/lib/hooks";
 /** Delay before the WebGL globe is requested – every entrance animation has finished by then. */
 const GLOBE_DELAY_MS = 2200;
 
+/**
+ * Replay the entrance when the user scrolls back up. The copy fades out with the parallax
+ * across the first 70 % of the hero scroll (`contentOpacity`), so: arm once the hero is
+ * definitely away (progress ≥ 0.8, copy invisible), and remount the copy block when the
+ * user returns past 0.68 (still invisible, ~0.03 opacity) — the whole reveal then plays
+ * again as the copy fades back in. A partial scroll-and-return (never armed) keeps the
+ * copy at rest instead of half-replaying.
+ */
+const REPLAY_ARM = 0.8;
+const REPLAY_REARM = 0.68;
+
 /** Whole-globe framing: diameter ≈ 80 % of the hero height (a touch smaller on phones,
  *  where only the CSS disc renders), centred just below the middle of the copy block. */
 const GLOBE_SIZE = { desktop: 0.8, mobile: 0.62 } as const;
 const GLOBE_OFFSET_Y = 0.04;
 
+/** Offset type straight from framer's `useScroll` options (not exported directly). */
+type ScrollOffset = NonNullable<Parameters<typeof useScroll>[0]>["offset"];
+
+/**
+ * "end start 0px" ≡ "end start" (framer's runtime parser reads only the first two tokens),
+ * but the extra token keeps the offset off framer-motion 12.23's native scroll-timeline
+ * fast path: plain "end start" matches a ViewTimeline preset, and that path binds the
+ * parallax transforms to the *document* timeline (the target ref isn't attached yet when
+ * they mount), so the fade tracks the whole page instead of the hero. The JS tracking
+ * path measures progress against the hero section itself.
+ */
+const HERO_OFFSET = ["start start", "end start 0px"] as ScrollOffset;
+
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const { scrollYProgress } = useScroll({ target: ref, offset: HERO_OFFSET });
 
   // Gentle parallax: background drifts slower than content, content fades as you leave.
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
@@ -45,6 +69,18 @@ export default function Hero() {
     return () => window.clearTimeout(id);
   }, [wantsGlobe]);
   const inView = useInView(ref, { margin: "20% 0px 20% 0px" });
+
+  // Entrance replay (see REPLAY_ARM / REPLAY_REARM above). Bumping the key remounts the
+  // copy block, re-running the staggered badge → headline → paragraph → CTA reveal.
+  const [revealKey, setRevealKey] = useState(0);
+  const armed = useRef(false);
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (v >= REPLAY_ARM) armed.current = true;
+    else if (armed.current && v <= REPLAY_REARM) {
+      armed.current = false;
+      setRevealKey((k) => k + 1);
+    }
+  });
 
   return (
     <section
@@ -87,7 +123,7 @@ export default function Hero() {
       <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(37,99,235,0.16),transparent_60%)]" />
 
       {/* ── Content ───────────────────────────────────────────────────────── */}
-      <motion.div style={{ y: contentY, opacity: contentOpacity }} className="container-x relative">
+      <motion.div key={revealKey} style={{ y: contentY, opacity: contentOpacity }} className="container-x relative">
         <motion.div
           variants={staggerContainer(0.13, 0.15)}
           initial="hidden"
@@ -124,6 +160,7 @@ export default function Hero() {
             as="p"
             mode="lines"
             delay={0.95}
+            replay={false}
             className="mx-auto mt-[min(1.75rem,3.5vh)] max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg md:text-[min(1.25rem,2.7vh)]"
           >
             We design and build stunning websites, cross-platform mobile apps and

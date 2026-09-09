@@ -7,7 +7,7 @@ import Button from "@/components/ui/Button";
 import { Orb } from "@/components/ui/Orbs";
 import SplitText, { Accent } from "@/components/ui/SplitText";
 import { SITE } from "@/data/site";
-import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
+import { fadeUp, staggerContainer, viewportReplay } from "@/lib/animations";
 
 type Status = "idle" | "sending" | "sent" | "error";
 type FieldName = "name" | "email" | "project" | "message";
@@ -94,7 +94,7 @@ export default function FinalCTA() {
           variants={staggerContainer(0.12)}
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportReplay}
           className="mx-auto max-w-3xl text-center"
         >
           <motion.span
@@ -134,7 +134,7 @@ export default function FinalCTA() {
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportReplay}
           className="relative mx-auto mt-16 max-w-5xl"
         >
           <div

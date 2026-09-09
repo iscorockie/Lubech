@@ -11,7 +11,7 @@ import Button from "@/components/ui/Button";
 import { Orb } from "@/components/ui/Orbs";
 import { PROJECTS } from "@/data/site";
 import type { Project } from "@/types";
-import { EASE, viewportOnce } from "@/lib/animations";
+import { EASE, viewportReplay } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
 type Filter = "all" | "web" | "mobile";
@@ -200,7 +200,7 @@ export default function Projects() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportOnce}
+            viewport={viewportReplay}
             transition={{ duration: 0.5 }}
             className="mx-auto mt-10 flex w-fit items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] p-1 backdrop-blur-md"
             role="tablist"

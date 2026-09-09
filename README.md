@@ -72,6 +72,20 @@ Motion rules used throughout:
 - Only `transform` and `opacity` are animated (60 fps, no layout thrash).
 - Entrances: `whileInView` + stagger, 0.3–0.7 s, custom expo-out easing (`EASE` in `lib/animations.ts`).
 - Scroll-linked effects use `useScroll` + `useTransform`/`useSpring` (hero parallax, process timeline).
+- Reveals **replay**: every `whileInView` uses `viewportReplay` (`once: false`, 80 px margin) and
+  `SplitText` line reveals re-arm while off-screen (the animated line boxes only exist while the
+  paragraph is on-screen and reveal mount-driven — `initial` hidden → `animate` shown, like the
+  headline words), so text rises again each time its section re-enters the viewport — including on
+  the way back up. The hero re-runs its whole entrance (badge → headline → paragraph → CTAs) when
+  you scroll back to the top, remounting the copy block only while it is fully faded out
+  (scroll-progress armed ≥ 0.8, re-triggered ≤ 0.68) so the swap is never visible.
+  `CountUp` stats likewise count up again on re-entry.
+- The hero scroll offset is `"end start 0px"` on purpose: plain `"end start"` matches a
+  ViewTimeline preset, and framer-motion 12.23's native scroll-timeline path then binds the
+  parallax transforms to the *document* timeline (the target ref isn't attached when they mount),
+  so the fade tracked the whole page instead of the hero in Chrome 115+. The `0px` suffix
+  (ignored by the runtime parser) opts back into the JS tracking path. The Process timeline is
+  unaffected — its progress runs through a `useSpring`.
 - Reduced motion is respected globally (`MotionConfig reducedMotion="user"` + a CSS fallback).
 
 ### Accessibility

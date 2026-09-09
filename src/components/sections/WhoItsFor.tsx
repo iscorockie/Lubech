@@ -7,7 +7,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import SplitText from "@/components/ui/SplitText";
 import { Orb } from "@/components/ui/Orbs";
 import { AUDIENCES } from "@/data/site";
-import { staggerContainer, viewportOnce } from "@/lib/animations";
+import { staggerContainer, viewportReplay } from "@/lib/animations";
 
 export default function WhoItsFor() {
   return (
@@ -31,7 +31,7 @@ export default function WhoItsFor() {
           variants={staggerContainer(0.16)}
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportReplay}
           className="mt-16 grid gap-6 lg:grid-cols-2"
         >
           {AUDIENCES.map(({ id, eyebrow, title, description, icon: Icon, points, cta }, i) => (

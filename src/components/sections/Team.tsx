@@ -8,7 +8,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import SplitText from "@/components/ui/SplitText";
 import { Orb } from "@/components/ui/Orbs";
 import { TEAM } from "@/data/site";
-import { staggerContainer, viewportOnce } from "@/lib/animations";
+import { staggerContainer, viewportReplay } from "@/lib/animations";
 
 const socialIcon = {
   linkedin: Linkedin,
@@ -38,7 +38,7 @@ export default function Team() {
           variants={staggerContainer(0.08)}
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportReplay}
           className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
         >
           {TEAM.map((m) => {

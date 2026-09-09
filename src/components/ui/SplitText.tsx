@@ -28,9 +28,11 @@ import { cn } from "@/lib/utils";
  *
  * mode="lines" (paragraphs, statements, quotes). The text is laid out normally first, the
  *   browser's own line breaks are read back, and the words are regrouped into one clipped box
- *   per *rendered* line; the lines then rise in sequence. It drives itself from the viewport
- *   (use `delay` to sequence it after a sibling headline) and swaps back to plain text once
- *   the reveal has finished, so later resizes simply re-wrap.
+ *   per *rendered* line; the lines then rise in sequence. The line boxes exist only while the
+ *   paragraph is on-screen and reveal mount-driven (`initial` hidden → `animate` shown, like the
+ *   headline words); the element swaps back to plain text once the reveal has finished so later
+ *   resizes simply re-wrap, and — unless `replay={false}` — re-arms while off-screen so the
+ *   paragraph rises again every time it re-enters the viewport.
  *
  * - Only `transform` + `opacity` animate → GPU-composited, no layout.
  * - Reduced motion: `MotionConfig reducedMotion="user"` in <Providers> turns the transforms
@@ -62,6 +64,10 @@ interface SplitTextProps {
   duration?: number;
   /** words mode: drive the reveal from the viewport instead of a parent variant. */
   inView?: boolean;
+  /** Re-run the reveal whenever the element re-enters the viewport (default true).
+   *  The hidden state only comes back once the element is off-screen, so the replay
+   *  is never visible mid-fade. Set false when a parent remounts to replay instead. */
+  replay?: boolean;
   /** Fires when this element owns the animation and it has finished (e.g. to chain a cursor). */
   onComplete?: () => void;
 }
@@ -110,7 +116,8 @@ function tokenize(children: ReactNode, inherited?: string): Line[] {
 
 const HIDDEN = { y: "110%", opacity: 0 } as const;
 const SHOWN = { y: "0%", opacity: 1 } as const;
-const VIEWPORT = { once: true, margin: "0px 0px -60px 0px" } as const;
+/** Shared viewport margin for self-driven reveals – enter ~60 px before the bottom edge. */
+const VIEWPORT_MARGIN = "0px 0px -60px 0px";
 
 export default function SplitText({
   children,
@@ -122,6 +129,7 @@ export default function SplitText({
   delay = 0,
   duration = mode === "lines" ? 0.85 : 0.75,
   inView = false,
+  replay = true,
   onComplete,
 }: SplitTextProps) {
   const lines = useMemo(() => tokenize(children), [children]);
@@ -140,6 +148,7 @@ export default function SplitText({
         stagger={stagger}
         delay={delay}
         duration={duration}
+        replay={replay}
         onComplete={onComplete}
         ariaLabel={ariaLabel}
         srCopy={srCopy}
@@ -157,7 +166,9 @@ export default function SplitText({
     hidden: HIDDEN,
     visible: { ...SHOWN, transition: { duration, ease: EASE } },
   };
-  const own = inView ? { initial: "hidden", whileInView: "visible", viewport: VIEWPORT } : {};
+  const own = inView
+    ? { initial: "hidden", whileInView: "visible", viewport: { once: !replay, margin: VIEWPORT_MARGIN } }
+    : {};
 
   return (
     <MotionTag
@@ -195,6 +206,7 @@ interface LineRevealProps {
   stagger: number;
   delay: number;
   duration: number;
+  replay: boolean;
   onComplete?: () => void;
   ariaLabel?: string;
   srCopy: ReactNode;
@@ -207,17 +219,32 @@ interface LineRevealProps {
  * nothing shifts. Until the reveal starts, the wrapping is re-measured whenever the width or
  * the fonts change; once it has finished (`done`) the element renders plain text again.
  */
-function LineReveal({ as, id, className, tokens, stagger, delay, duration, onComplete, ariaLabel, srCopy }: LineRevealProps) {
+function LineReveal({ as, id, className, tokens, stagger, delay, duration, replay, onComplete, ariaLabel, srCopy }: LineRevealProps) {
   const Host = as as "p";
   const hostRef = useRef<HTMLParagraphElement>(null);
   const probeRef = useRef<HTMLSpanElement>(null);
   const [groups, setGroups] = useState<Token[][] | null>(null);
   const [done, setDone] = useState(false);
-  const inView = useInView(hostRef, VIEWPORT);
+  // The host is watched to decide *when* the line boxes exist: they mount only once the
+  // paragraph is on screen (`once` = replay off) and unmount again when it leaves, so every
+  // entry is a fresh mount. The reveal itself is mount-driven — `initial` hidden → `animate`
+  // shown, exactly like the headline words — which is deterministic regardless of how the
+  // element entered (slow scroll, anchor jump, hero remount…).
+  const hostInView = useInView(hostRef, { once: !replay });
   const inViewRef = useRef(false);
   useEffect(() => {
-    inViewRef.current = inView;
-  }, [inView]);
+    inViewRef.current = hostInView;
+  }, [hostInView]);
+
+  // Replay mode: leaving the viewport un-latches the finished reveal, which swaps the
+  // content back to the measuring probe (below) and unmounts the line boxes — the next
+  // entry mounts fresh ones that rise again. The plain-text latch otherwise exists so
+  // resizes re-wrap the paragraph for good.
+  useEffect(() => {
+    if (replay && !hostInView && done) {
+      setDone(false);
+    }
+  }, [replay, hostInView, done]);
 
   const measure = useCallback(() => {
     const probe = probeRef.current;
@@ -269,8 +296,8 @@ function LineReveal({ as, id, className, tokens, stagger, delay, duration, onCom
     };
   }, []);
 
-  // Motion also reports "complete" for the no-op `animate={HIDDEN}` pass while the element is
-  // still off-screen (values already at target), so only the SHOWN definition counts.
+  // Defensive: only a genuine finish of the SHOWN animation may latch `done` (Motion also
+  // reports "complete" for no-op passes whose values are already at target).
   const handleComplete = useCallback(
     (definition: unknown) => {
       if (definition !== SHOWN) return;
@@ -288,22 +315,25 @@ function LineReveal({ as, id, className, tokens, stagger, delay, duration, onCom
   ));
 
   let content: ReactNode;
-  if (done) {
-    content = plainWords;
-  } else if (groups === null) {
+  // Probe (invisible, laid out) whenever the paragraph is off-screen or not yet measured;
+  // plain text once the reveal has latched; the animated line boxes in between.
+  if (!hostInView || groups === null) {
     content = (
       <span ref={probeRef} aria-hidden className="split-probe">
         {plainWords}
       </span>
     );
+  } else if (done) {
+    content = plainWords;
   } else {
     content = groups.map((g, li) => (
       <span key={li} className="split-linebox" aria-hidden>
         <motion.span
           initial={HIDDEN}
-          animate={inView ? SHOWN : HIDDEN}
+          animate={SHOWN}
           transition={{ duration, ease: EASE, delay: delay + li * stagger }}
           onAnimationComplete={li === groups.length - 1 ? handleComplete : undefined}
+
           className="split-lineinner"
         >
           {g.map((t, wi) => (

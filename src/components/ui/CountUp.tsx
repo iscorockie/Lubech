@@ -18,7 +18,9 @@ interface CountUpProps {
  */
 export default function CountUp({ value, className, duration = 1.6, delay = 0 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px 0px" });
+  // Replay: count again every time the stat re-enters the viewport (the reset happens
+  // while it is off-screen, so the digits never visibly snap back to zero).
+  const inView = useInView(ref, { once: false, margin: "-40px 0px" });
   const reduce = useReducedMotion();
 
   const match = value.match(/(\d[\d,]*(?:\.\d+)?)/);
@@ -37,7 +39,11 @@ export default function CountUp({ value, className, duration = 1.6, delay = 0 }:
       setDisplay(value);
       return;
     }
-    if (!inView) return;
+    if (!inView) {
+      // Off-screen: re-arm so the next entry counts up from zero again.
+      setDisplay(`${prefix}0${suffix}`);
+      return;
+    }
     const controls = animate(0, target, {
       duration,
       delay,

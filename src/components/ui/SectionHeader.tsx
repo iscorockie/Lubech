@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import SplitText from "@/components/ui/SplitText";
-import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
+import { fadeUp, staggerContainer, viewportReplay } from "@/lib/animations";
 
 interface SectionHeaderProps {
   eyebrow: string;
@@ -33,7 +33,7 @@ export default function SectionHeader({
       variants={staggerContainer(0.12)}
       initial="hidden"
       whileInView="visible"
-      viewport={viewportOnce}
+      viewport={viewportReplay}
       className={cn(
         "relative z-10 max-w-3xl",
         centered ? "mx-auto text-center" : "text-left",

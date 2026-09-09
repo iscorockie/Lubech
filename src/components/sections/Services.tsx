@@ -7,7 +7,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import SplitText from "@/components/ui/SplitText";
 import { Orb } from "@/components/ui/Orbs";
 import { SERVICES } from "@/data/site";
-import { staggerContainer, viewportOnce } from "@/lib/animations";
+import { staggerContainer, viewportReplay } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
 const accentRing: Record<string, string> = {
@@ -38,7 +38,7 @@ export default function Services() {
           variants={staggerContainer(0.14)}
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportReplay}
           className="mt-16 grid gap-6 md:grid-cols-3"
         >
           {SERVICES.map(({ id, title, description, icon: Icon, features, accent }, i) => (

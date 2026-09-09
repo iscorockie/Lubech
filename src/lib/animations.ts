@@ -47,8 +47,12 @@ export const staggerContainer = (stagger = 0.12, delayChildren = 0.08): Variants
   visible: { transition: { staggerChildren: stagger, delayChildren } },
 });
 
-/** Default `whileInView` viewport config – trigger once, slightly before fully visible. */
-export const viewportOnce = { once: true, margin: "-80px 0px -80px 0px" } as const;
+/**
+ * Default `viewport` config for `whileInView` reveals – replays every time the element
+ * re-enters the viewport (so scrolling back up re-runs the text reveals), flipping back to
+ * the hidden state only once the element is ~80 px off-screen (never visibly mid-fade).
+ */
+export const viewportReplay = { once: false, margin: "-80px 0px -80px 0px" } as const;
 
 /** Springy micro-interaction for buttons / chips. */
 export const springTap = { type: "spring", stiffness: 420, damping: 22 } as const;
