@@ -16,15 +16,16 @@ import type { MotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /**
- * 3D "planet horizon" used behind the pinned Process timeline.
+ * 3D "planet horizon" – used behind the hero and the pinned Process timeline
+ * (both through <EarthHorizon>, which adds the CSS arc that shows until this is ready).
  *
- * – Night-side Earth (brand-graded texture) rising from the bottom of the viewport,
- *   like the hero backdrop, with a fresnel rim + volumetric-looking atmosphere halo.
- * – Rotation = slow idle spin + extra turn driven by the section's scroll progress
- *   (read straight from a MotionValue inside useFrame → zero React re-renders).
- * – Only mounted when the section is near the viewport (see Process.tsx), the render
- *   loop pauses when off-screen, and everything degrades to a CSS fallback when WebGL
- *   is unavailable or the textures fail to load.
+ * – Night-side Earth (brand-graded texture) rising from the bottom of the canvas,
+ *   with a fresnel rim + volumetric-looking atmosphere halo.
+ * – Rotation = slow idle spin + extra turn driven by a scroll-progress MotionValue
+ *   (read straight from the MotionValue inside useFrame → zero React re-renders).
+ * – Mounted lazily by the caller, the render loop pauses when off-screen, and
+ *   everything degrades to the CSS fallback when WebGL is unavailable, the context is
+ *   lost or the textures fail to load.
  */
 
 const MAP_URL = "/textures/earth-night-blue.webp";
@@ -38,6 +39,51 @@ const SCROLL_TURN = Math.PI * 0.55;
 const IDLE_SPEED = 0.02;
 /** Atmosphere halo radius relative to the globe. */
 const HALO_SCALE = 1.14;
+
+/* Fixed camera (see <Canvas camera>). */
+const CAMERA_Z = 24;
+const CAMERA_FOV = 10;
+const CAMERA_NEAR = 0.5;
+const HALF_FOV_TAN = Math.tan((CAMERA_FOV / 2) * (Math.PI / 180));
+/** Largest globe whose halo still sits in front of the near plane. */
+const MAX_RADIUS = (CAMERA_Z - CAMERA_NEAR - 0.5) / HALO_SCALE;
+
+/**
+ * Planet radius (world units) for a canvas of `width` × `height` world units whose visible
+ * cap is `capFraction` of the height. At least 0.85 × width (the wide, flat horizon of the
+ * Process stage), and for shallow canvases the smallest sphere whose *perspective*
+ * silhouette still covers the bottom corners, so the arc always leaves through the sides
+ * (+3 % so the rim glow never pinches in a corner). With capFraction 0.5 the camera's
+ * optical axis is tangent to the sphere at its top point, so the horizon line sits exactly
+ * on the canvas centre line whatever the radius. Extremely wide canvases hit MAX_RADIUS and
+ * render a dome that exits through the bottom corners instead (hidden by the page fade).
+ * EarthHorizon's CSS disc uses the same rules, so the cross-fade doesn't morph.
+ */
+function horizonRadius(width: number, height: number, capFraction: number): number {
+  const aspect = width / height;
+  // Unit direction of the frustum's bottom-left corner ray (view space, camera at origin).
+  const len = Math.hypot(aspect * HALF_FOV_TAN, HALF_FOV_TAN, 1);
+  const uy = -HALF_FOV_TAN / len;
+  const uz = -1 / len;
+  const covers = (r: number) => {
+    const cy = -height / 2 + height * capFraction - r;
+    const cz = -CAMERA_Z;
+    const along = cy * uy + cz * uz;
+    return cy * cy + cz * cz - along * along <= r * r;
+  };
+  let fit = MAX_RADIUS;
+  if (covers(MAX_RADIUS)) {
+    let lo = 0;
+    let hi = MAX_RADIUS;
+    for (let i = 0; i < 28; i++) {
+      const mid = (lo + hi) / 2;
+      if (covers(mid)) hi = mid;
+      else lo = mid;
+    }
+    fit = hi * 1.03;
+  }
+  return Math.min(Math.max(fit, width * 0.85), MAX_RADIUS);
+}
 
 const VERT = /* glsl */ `
   varying vec3 vNormal;
@@ -86,10 +132,12 @@ interface GlobeProps {
   progress: MotionValue<number>;
   reduced: boolean;
   capFraction: number;
+  idleSpeed: number;
+  scrollTurn: number;
   onReady?: () => void;
 }
 
-function Globe({ progress, reduced, capFraction, onReady }: GlobeProps) {
+function Globe({ progress, reduced, capFraction, idleSpeed, scrollTurn, onReady }: GlobeProps) {
   const viewport = useThree((s) => s.viewport);
   const [map, lights] = useLoader(THREE.TextureLoader, [MAP_URL, LIGHTS_URL]);
 
@@ -105,12 +153,9 @@ function Globe({ progress, reduced, capFraction, onReady }: GlobeProps) {
     }
   }, [gl, map, lights]);
 
-  /*
-   * Frame the globe as a horizon: the visible cap takes `capFraction` of the canvas
-   * height and the radius is large enough for the arc to span (almost) the full width.
-   */
+  // Frame the globe as a horizon: the visible cap takes `capFraction` of the canvas height.
   const capH = viewport.height * capFraction;
-  const R = Math.max(viewport.width * 0.85, capH * 2.8);
+  const R = horizonRadius(viewport.width, viewport.height, capFraction);
   const centerY = -viewport.height / 2 + capH - R;
 
   const geometry = useMemo(() => new THREE.SphereGeometry(1, 96, 96), []);
@@ -173,7 +218,7 @@ function Globe({ progress, reduced, capFraction, onReady }: GlobeProps) {
     // Ease toward the scroll target so scrubbing feels weighty rather than 1:1 jittery.
     const target = progress.get();
     smoothed.current += (target - smoothed.current) * (1 - Math.exp(-Math.min(dt, 0.1) * 5));
-    mesh.rotation.y = 0.9 + smoothed.current * SCROLL_TURN + state.clock.elapsedTime * IDLE_SPEED;
+    mesh.rotation.y = 0.9 + smoothed.current * scrollTurn + state.clock.elapsedTime * idleSpeed;
   });
 
   return (
@@ -238,8 +283,14 @@ export interface Earth3DProps {
   reduced?: boolean;
   /** Fires once the textures are loaded and the first frame can be drawn. */
   onReady?: () => void;
+  /** Fires if the WebGL context is lost afterwards (the canvas unmounts itself). */
+  onLost?: () => void;
   /** Fraction of the canvas height covered by the visible cap of the globe (0–1). */
   capFraction?: number;
+  /** Idle spin speed in rad/s. */
+  idleSpeed?: number;
+  /** Extra rotation (radians) applied across `progress` 0 → 1. */
+  scrollTurn?: number;
   className?: string;
 }
 
@@ -248,7 +299,10 @@ export default function Earth3D({
   active = true,
   reduced = false,
   onReady,
+  onLost,
   capFraction = 0.3,
+  idleSpeed = IDLE_SPEED,
+  scrollTurn = SCROLL_TURN,
   className,
 }: Earth3DProps) {
   const [supported, setSupported] = useState(false);
@@ -259,12 +313,16 @@ export default function Earth3D({
 
   // If the browser drops the context (GPU reset, too many contexts…) unmount and let the
   // CSS horizon take over rather than leaving a blank canvas behind the timeline.
-  const handleCreated = useCallback(({ gl }: { gl: THREE.WebGLRenderer }) => {
-    gl.domElement.addEventListener("webglcontextlost", (e) => {
-      e.preventDefault();
-      setSupported(false);
-    });
-  }, []);
+  const handleCreated = useCallback(
+    ({ gl }: { gl: THREE.WebGLRenderer }) => {
+      gl.domElement.addEventListener("webglcontextlost", (e) => {
+        e.preventDefault();
+        setSupported(false);
+        onLost?.();
+      });
+    },
+    [onLost],
+  );
 
   if (!supported) return null;
 
@@ -275,7 +333,7 @@ export default function Earth3D({
           flat
           dpr={[1, 1.5]}
           frameloop={reduced ? "demand" : active ? "always" : "never"}
-          camera={{ position: [0, 0, 24], fov: 10, near: 0.5, far: 80 }}
+          camera={{ position: [0, 0, CAMERA_Z], fov: CAMERA_FOV, near: CAMERA_NEAR, far: 80 }}
           gl={{
             antialias: true,
             alpha: true,
@@ -286,7 +344,14 @@ export default function Earth3D({
           onCreated={handleCreated}
         >
           <Suspense fallback={null}>
-            <Globe progress={progress} reduced={reduced} capFraction={capFraction} onReady={onReady} />
+            <Globe
+              progress={progress}
+              reduced={reduced}
+              capFraction={capFraction}
+              idleSpeed={idleSpeed}
+              scrollTurn={scrollTurn}
+              onReady={onReady}
+            />
           </Suspense>
         </Canvas>
       </CanvasErrorBoundary>

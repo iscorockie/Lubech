@@ -502,6 +502,22 @@
   }
 
   /* Soft ambient orb (no filter:blur — radial gradients are cheap to paint) */
+  /* Planet horizon (three/EarthHorizon) – the CSS arc that shows until / instead of the WebGL globe. */
+  .horizon {
+    container-type: size;
+  }
+  /*
+   * Disc diameter = 2 × max(0.85 × width, r) where r is the radius of the circle whose top
+   * sits on the horizon line (mid-height) and which passes through the box's bottom corners,
+   * +3 % so the rim glow never pinches in a corner – the same rule Earth3D uses for the
+   * WebGL globe, so the cross-fade doesn't morph. With φ = atan2(h/2, w/2):
+   * r = (h/2) / (2 sin²φ) = (h/2) / (1 − cos 2φ). Browsers without CSS trig keep 170 %.
+   */
+  .horizon-disc {
+    width: 170%;
+    width: max(170cqw, calc(103cqh / (1 - cos(2 * atan2(50cqh, 50cqw)))));
+  }
+
   .orb {
     position: absolute;
     border-radius: 9999px;

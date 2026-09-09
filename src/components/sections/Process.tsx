@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useInView,
@@ -16,6 +15,7 @@ import { ChevronDown } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import SplitText from "@/components/ui/SplitText";
 import { GridPattern, Orb } from "@/components/ui/Orbs";
+import EarthHorizon from "@/components/three/EarthHorizon";
 import { PROCESS } from "@/data/site";
 import { EASE, viewportOnce } from "@/lib/animations";
 import { useMediaQuery } from "@/lib/hooks";
@@ -26,15 +26,13 @@ import { cn } from "@/lib/utils";
  *
  * Desktop (lg+, no reduced-motion): the section is `position: sticky` for ~2.2 viewports.
  * While pinned, scroll progress (0 → 1) drives, in lock-step:
- *   • the 3D Earth rising + rotating in the background (Three.js, see three/Earth3D),
+ *   • the 3D Earth rising + rotating in the background (Three.js, see three/EarthHorizon),
  *   • the gradient progress line growing across the track,
  *   • each glowing dot igniting and its card fading/rising into place.
  * Everything is a transform/opacity, read from MotionValues — no React re-renders on scroll.
  *
  * Mobile / reduced-motion: a plain vertical timeline with `whileInView` reveals.
  */
-
-const Earth3D = dynamic(() => import("@/components/three/Earth3D"), { ssr: false });
 
 const STEPS = PROCESS.length;
 const STEP_WINDOW = 0.75; // the four cards reveal within the first 75% of the pin
@@ -51,8 +49,6 @@ function PinnedProcess() {
   useEffect(() => {
     if (nearViewport) setMounted(true);
   }, [nearViewport]);
-  const [earthReady, setEarthReady] = useState(false);
-  const handleReady = useCallback(() => setEarthReady(true), []);
 
   // 0 → 1 across the whole pinned scroll distance (track = 220vh tall).
   const { scrollYProgress } = useScroll({ target: trackRef, offset: ["start start", "end end"] });
@@ -85,25 +81,7 @@ function PinnedProcess() {
           style={{ y: earthY, opacity: earthOpacity }}
           className="absolute inset-0 will-change-transform"
         >
-          {/* CSS horizon fallback – shown while the WebGL textures load, or if WebGL is unavailable */}
-          <div
-            className={cn(
-              "absolute inset-x-0 bottom-0 h-[60%] overflow-hidden transition-opacity duration-1000",
-              earthReady ? "opacity-0" : "opacity-100",
-            )}
-          >
-            <div className="absolute left-1/2 top-1/2 aspect-square w-[240vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,#0a1230_0%,#0c1738_90%,rgba(37,99,235,0.9)_97%,rgba(186,230,253,0.95)_99.4%,transparent_100%)] shadow-[0_0_90px_24px_rgba(59,130,246,0.4),0_0_220px_80px_rgba(37,99,235,0.2)]" />
-          </div>
-
-          {mounted ? (
-            <Earth3D
-              progress={progress}
-              active={nearViewport}
-              onReady={handleReady}
-              capFraction={0.5}
-              className="!top-auto h-[60%]"
-            />
-          ) : null}
+          <EarthHorizon progress={progress} enabled={mounted} active={nearViewport} className="h-[60%]" />
         </motion.div>
 
         {/* Readability veils: keep the copy crisp over the horizon */}

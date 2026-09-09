@@ -41,6 +41,7 @@ src/
 │  ├─ ui/                 # primitives: Button, GlowCard, SectionHeader, Orbs/GridPattern,
 │  │                      # SplitText (word-mask headline reveal), CountUp (scroll-triggered numerals)
 │  ├─ three/Earth3D.tsx   # WebGL night-side Earth horizon (React Three Fiber), lazy-loaded
+│  ├─ three/EarthHorizon.tsx # CSS arc + Earth3D cross-fade; used by the hero and the Process stage
 │  └─ sections/           # Hero, Services, WhoItsFor, Process, Technologies,
 │                         # Projects, WhyLubech, Team, FinalCTA
 ├─ data/site.ts           # ALL copy & content (services, projects, team, testimonials…)
@@ -125,11 +126,22 @@ the section comes within one viewport, the render loop pauses when it's off-scre
 (context loss is handled too). Phones/tablets and reduced-motion users get a vertical
 `whileInView` timeline with no WebGL at all.
 
+### Hero globe
+
+The same planet rises behind the hero copy (`three/EarthHorizon.tsx`, shared with the Process stage).
+The CSS arc paints immediately with the first frame; on desktop (≥ 1024 px, no reduced-motion) the WebGL
+globe is requested ~2 s later — after the headline reveal has finished — and cross-fades in on top, idle-spinning
+until the hero scrolls out of view (then its render loop pauses). Phones and reduced-motion keep the CSS arc.
+`EarthHorizon` sizes the arc with container-query trigonometry (`.horizon-disc` in `globals.css`) to the exact
+silhouette `Earth3D` computes for the same box, so the swap doesn't morph; browsers without CSS `cos()`/`atan2()`
+fall back to a fixed 170 % disc. The hero's vertical rhythm (`--cap`, `min(…, Nvh)` spacings) shrinks on short
+viewports so headline, CTAs and horizon all fit on a 1366 × 700 laptop screen.
+
 ## Assets
 
 - `public/space-blue.webp` – hero / CTA backdrop (blue-graded version of the original space photo; WebP q80, 46 kB).
 - `public/stars.svg` – tiling star field used as a subtle texture layer.
-- `public/textures/` – brand-graded Earth colour + city-lights maps for the 3D globe (see README there).
+- `public/textures/` – brand-graded Earth colour + city-lights maps for the 3D globe (hero + Process; see README there).
 - `public/projects/*.webp`, `public/staff/*.webp` – portfolio screenshots and team portraits, stored as
   WebP (≤ 1200 px, q 84). When adding new ones convert first, e.g.
   `npx sharp-cli -i shot.png -o public/projects/shot.webp -f webp -q 84 resize 1200` — the whole set is ~0.5 MB
@@ -145,8 +157,9 @@ the section comes within one viewport, the render loop pauses when it's off-scre
 - `yarn build` uses webpack rather than Turbopack on purpose: with Next 15.5 Turbopack emits the
   Motion runtime twice for this app (the `/` route and the shared 404/500 bundle each get their own copy),
   which is ~65 kB gz of duplicate JS on first load. Dev still uses `--turbopack`.
-- Initial JS is ~220 kB gz; Three.js/R3F (~240 kB gz) is only fetched when the Process section is about to
-  enter the viewport, and never on phones/tablets.
+- Initial JS is ~220 kB gz; Three.js/R3F (~240 kB gz) is fetched after the `load` event on desktop (for the
+  hero globe, ~2 s in) or when the Process section is about to enter the viewport — one shared chunk set,
+  one texture cache — and never on phones/tablets.
 - Lighthouse reports a *late* LCP that is an artefact of the entrance animations rather than slow
   rendering: Chrome ignores elements while they are transparent or translated out of their clip, so the
   first "counted" paint is the hero paragraph when its line reveal finishes (~2.4 s). Real first paint is
