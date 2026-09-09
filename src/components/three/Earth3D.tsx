@@ -16,11 +16,15 @@ import type { MotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /**
- * 3D "planet horizon" – used behind the hero and the pinned Process timeline
- * (both through <EarthHorizon>, which adds the CSS arc that shows until this is ready).
+ * 3D Earth – rendered either as a "planet horizon" (used by the pinned Process timeline
+ * through <EarthHorizon>) or as a whole globe (used by the hero through <GlobeBackdrop>;
+ * both wrappers add a CSS disc that shows until this is ready).
  *
- * – Night-side Earth (brand-graded texture) rising from the bottom of the canvas,
- *   with a fresnel rim + volumetric-looking atmosphere halo.
+ * – Night-side Earth (brand-graded texture), with a fresnel rim + volumetric-looking
+ *   atmosphere halo.
+ * – Horizon variant: the planet rises from the bottom of the canvas, visible cap taking
+ *   `capFraction` of the height. Sphere variant: the whole planet floats inside the
+ *   canvas, diameter `size` × height, centre shifted down by `offsetY` × height.
  * – Rotation = slow idle spin + extra turn driven by a scroll-progress MotionValue
  *   (read straight from the MotionValue inside useFrame → zero React re-renders).
  * – Mounted lazily by the caller, the render loop pauses when off-screen, and
@@ -131,13 +135,32 @@ const HALO_FRAG = /* glsl */ `
 interface GlobeProps {
   progress: MotionValue<number>;
   reduced: boolean;
+  /** "horizon": planet cap rising from the bottom · "sphere": whole globe in the canvas. */
+  variant: "horizon" | "sphere";
   capFraction: number;
+  /** Sphere variant: globe diameter as a fraction of the canvas height. */
+  size: number;
+  /** Sphere variant: centre shifted down by this fraction of the canvas height. */
+  offsetY: number;
   idleSpeed: number;
   scrollTurn: number;
+  /** City-lights emissive strength (the hero dims this to keep copy readable). */
+  emissiveIntensity: number;
   onReady?: () => void;
 }
 
-function Globe({ progress, reduced, capFraction, idleSpeed, scrollTurn, onReady }: GlobeProps) {
+function Globe({
+  progress,
+  reduced,
+  variant,
+  capFraction,
+  size,
+  offsetY,
+  idleSpeed,
+  scrollTurn,
+  emissiveIntensity,
+  onReady,
+}: GlobeProps) {
   const viewport = useThree((s) => s.viewport);
   const [map, lights] = useLoader(THREE.TextureLoader, [MAP_URL, LIGHTS_URL]);
 
@@ -153,10 +176,15 @@ function Globe({ progress, reduced, capFraction, idleSpeed, scrollTurn, onReady 
     }
   }, [gl, map, lights]);
 
-  // Frame the globe as a horizon: the visible cap takes `capFraction` of the canvas height.
+  // Frame the globe. Horizon: the visible cap takes `capFraction` of the canvas height.
+  // Sphere: the whole planet sits inside the canvas, `size` of its height across.
   const capH = viewport.height * capFraction;
-  const R = horizonRadius(viewport.width, viewport.height, capFraction);
-  const centerY = -viewport.height / 2 + capH - R;
+  const R =
+    variant === "horizon"
+      ? horizonRadius(viewport.width, viewport.height, capFraction)
+      : Math.min((viewport.height * size) / 2, MAX_RADIUS);
+  const centerY =
+    variant === "horizon" ? -viewport.height / 2 + capH - R : -viewport.height * offsetY;
 
   const geometry = useMemo(() => new THREE.SphereGeometry(1, 96, 96), []);
 
@@ -235,7 +263,7 @@ function Globe({ progress, reduced, capFraction, idleSpeed, scrollTurn, onReady 
             map={map}
             emissiveMap={lights}
             emissive="#e0f2fe"
-            emissiveIntensity={1.7}
+            emissiveIntensity={emissiveIntensity}
             roughness={0.95}
             metalness={0}
           />
@@ -285,12 +313,20 @@ export interface Earth3DProps {
   onReady?: () => void;
   /** Fires if the WebGL context is lost afterwards (the canvas unmounts itself). */
   onLost?: () => void;
-  /** Fraction of the canvas height covered by the visible cap of the globe (0–1). */
+  /** How the planet is framed: "horizon" (cap rising from the bottom) or "sphere" (whole globe). */
+  variant?: "horizon" | "sphere";
+  /** Horizon variant: fraction of the canvas height covered by the globe's visible cap (0–1). */
   capFraction?: number;
+  /** Sphere variant: globe diameter as a fraction of the canvas height (0–1). */
+  size?: number;
+  /** Sphere variant: centre shifted down by this fraction of the canvas height (0–1). */
+  offsetY?: number;
   /** Idle spin speed in rad/s. */
   idleSpeed?: number;
   /** Extra rotation (radians) applied across `progress` 0 → 1. */
   scrollTurn?: number;
+  /** City-lights emissive strength, 0–2+ (default 1.7; dim behind hero copy). */
+  emissiveIntensity?: number;
   className?: string;
 }
 
@@ -300,9 +336,13 @@ export default function Earth3D({
   reduced = false,
   onReady,
   onLost,
+  variant = "horizon",
   capFraction = 0.3,
+  size = 0.8,
+  offsetY = 0,
   idleSpeed = IDLE_SPEED,
   scrollTurn = SCROLL_TURN,
+  emissiveIntensity = 1.7,
   className,
 }: Earth3DProps) {
   const [supported, setSupported] = useState(false);
@@ -347,9 +387,13 @@ export default function Earth3D({
             <Globe
               progress={progress}
               reduced={reduced}
+              variant={variant}
               capFraction={capFraction}
+              size={size}
+              offsetY={offsetY}
               idleSpeed={idleSpeed}
               scrollTurn={scrollTurn}
+              emissiveIntensity={emissiveIntensity}
               onReady={onReady}
             />
           </Suspense>

@@ -40,8 +40,9 @@ src/
 │  ├─ Providers.tsx
 │  ├─ ui/                 # primitives: Button, GlowCard, SectionHeader, Orbs/GridPattern,
 │  │                      # SplitText (word-mask headline reveal), CountUp (scroll-triggered numerals)
-│  ├─ three/Earth3D.tsx   # WebGL night-side Earth horizon (React Three Fiber), lazy-loaded
-│  ├─ three/EarthHorizon.tsx # CSS arc + Earth3D cross-fade; used by the hero and the Process stage
+│  ├─ three/Earth3D.tsx   # WebGL night-side Earth (React Three Fiber), lazy-loaded — horizon or whole-globe framing
+│  ├─ three/EarthHorizon.tsx # CSS arc + Earth3D cross-fade; used by the Process stage
+│  ├─ three/GlobeBackdrop.tsx # CSS disc + Earth3D cross-fade, whole globe behind the hero copy
 │  └─ sections/           # Hero, Services, WhoItsFor, Process, Technologies,
 │                         # Projects, WhyLubech, Team, FinalCTA
 ├─ data/site.ts           # ALL copy & content (services, projects, team, testimonials…)
@@ -128,14 +129,13 @@ the section comes within one viewport, the render loop pauses when it's off-scre
 
 ### Hero globe
 
-The same planet rises behind the hero copy (`three/EarthHorizon.tsx`, shared with the Process stage).
-The CSS arc paints immediately with the first frame; on desktop (≥ 1024 px, no reduced-motion) the WebGL
-globe is requested ~2 s later — after the headline reveal has finished — and cross-fades in on top, idle-spinning
-until the hero scrolls out of view (then its render loop pauses). Phones and reduced-motion keep the CSS arc.
-`EarthHorizon` sizes the arc with container-query trigonometry (`.horizon-disc` in `globals.css`) to the exact
-silhouette `Earth3D` computes for the same box, so the swap doesn't morph; browsers without CSS `cos()`/`atan2()`
-fall back to a fixed 170 % disc. The hero's vertical rhythm (`--cap`, `min(…, Nvh)` spacings) shrinks on short
-viewports so headline, CTAs and horizon all fit on a 1366 × 700 laptop screen.
+The whole planet floats behind the hero copy (`three/GlobeBackdrop.tsx`): a pure-CSS disc paints immediately
+with the first frame; on desktop (≥ 1024 px, no reduced-motion) the WebGL globe is requested ~2 s later —
+after the headline reveal has finished — and cross-fades in on top (diameter ≈ 80 % of the hero height, dimmed
+city lights + a dark radial scrim so the headline stays crisp), idle-spinning until the hero scrolls out of view
+(then its render loop pauses). Phones and reduced-motion keep the CSS disc. The Process stage keeps its own
+planet *horizon* (`three/EarthHorizon.tsx`, `.horizon-disc` in `globals.css` sizes the CSS arc with
+container-query trigonometry to the exact silhouette `Earth3D` computes, so the swap doesn't morph).
 
 ## Assets
 

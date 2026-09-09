@@ -13,9 +13,8 @@ import { cn } from "@/lib/utils";
  * `className`. The globe's visible cap fills the lower half of the box and the upper
  * half is head-room for the atmosphere halo, so a `h-[40vh]` box shows a 20vh cap.
  *
- * Shared by the hero (WebGL idle-loaded after the entrance, desktop only) and the pinned
- * Process timeline (loaded when the section nears the viewport) — one dynamic import,
- * one chunk, one texture cache.
+ * Used by the pinned Process timeline (the hero shows the whole globe instead, via
+ * three/GlobeBackdrop) — one dynamic import, one chunk, one texture cache either way.
  */
 
 const Earth3D = dynamic(() => import("@/components/three/Earth3D"), { ssr: false });

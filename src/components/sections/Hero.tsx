@@ -1,24 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Play, Sparkles } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { Orb } from "@/components/ui/Orbs";
 import SplitText, { Accent } from "@/components/ui/SplitText";
-import EarthHorizon from "@/components/three/EarthHorizon";
+import GlobeBackdrop from "@/components/three/GlobeBackdrop";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 import { useMediaQuery } from "@/lib/hooks";
 
 /** Delay before the WebGL globe is requested – every entrance animation has finished by then. */
 const GLOBE_DELAY_MS = 2200;
 
-/**
- * Height of the planet's visible cap. Scales with the viewport but shrinks faster on short
- * screens (≈ 21 % at 900 px, 17 % at 700 px) so the copy, the CTAs *and* the horizon all
- * fit on a laptop's first screen. The horizon box is twice this (head-room for the halo).
- */
-const HORIZON_CAP = "clamp(6.5rem, 32.5svh - 102px, 17rem)";
+/** Whole-globe framing: diameter ≈ 80 % of the hero height (a touch smaller on phones,
+ *  where only the CSS disc renders), centred just below the middle of the copy block. */
+const GLOBE_SIZE = { desktop: 0.8, mobile: 0.62 } as const;
+const GLOBE_OFFSET_Y = 0.04;
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -28,14 +26,15 @@ export default function Hero() {
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  // The planet sinks a little slower than the page and fades out as the hero leaves.
-  const earthY = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
-  const earthOpacity = useTransform(scrollYProgress, [0.35, 0.9], [1, 0]);
+  // The globe sinks a little slower than the page and fades out as the hero leaves.
+  const globeY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const globeOpacity = useTransform(scrollYProgress, [0.35, 0.9], [1, 0]);
 
-  // 3D Earth: desktop only (phones get the CSS horizon), never before the entrance has
+  // 3D globe: desktop only (phones get the CSS disc), never before the entrance has
   // played, and its render loop pauses as soon as the hero is scrolled out of view.
   const reduced = useReducedMotion() ?? false;
-  const wantsGlobe = useMediaQuery("(min-width: 1024px)") && !reduced;
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const wantsGlobe = isDesktop && !reduced;
   const [globeEnabled, setGlobeEnabled] = useState(false);
   useEffect(() => {
     if (!wantsGlobe) {
@@ -52,8 +51,7 @@ export default function Hero() {
       id="home"
       aria-labelledby="hero-title"
       ref={ref}
-      style={{ "--cap": HORIZON_CAP } as CSSProperties}
-      className="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-28 pb-[calc(var(--cap)+min(7vh,4rem))] sm:pt-[min(9rem,17vh)]"
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-28 pb-[min(9vh,5rem)] sm:pt-[min(9rem,17vh)]"
     >
       {/* ── Background: blue space photo + orbs + stars ─────────────────── */}
       <motion.div aria-hidden style={{ y: bgY }} className="absolute inset-[-10%] -z-30 will-change-transform">
@@ -69,10 +67,20 @@ export default function Hero() {
       <Orb tone="sky" size={680} animate="drift-slow" className="-right-[14%] top-[5%] opacity-70" />
       <Orb tone="cyan" size={560} animate="float" className="bottom-[-18%] left-[28%] opacity-60" />
 
-      {/* ── Planet horizon: night-side Earth rising behind the copy ─────── */}
-      <motion.div aria-hidden style={{ y: earthY, opacity: earthOpacity }} className="absolute inset-0 -z-10 will-change-transform">
-        <EarthHorizon enabled={globeEnabled} active={inView} idleSpeed={0.035} className="h-[calc(var(--cap)*2)]" />
+      {/* ── 3D globe: night-side Earth glowing behind the copy ──────────── */}
+      <motion.div aria-hidden style={{ y: globeY, opacity: globeOpacity }} className="absolute inset-0 -z-10 will-change-transform">
+        <GlobeBackdrop
+          enabled={globeEnabled}
+          active={inView}
+          idleSpeed={0.03}
+          emissiveIntensity={1.35}
+          size={isDesktop ? GLOBE_SIZE.desktop : GLOBE_SIZE.mobile}
+          offsetY={GLOBE_OFFSET_Y}
+        />
       </motion.div>
+
+      {/* Readability scrim – darkens the planet + halo just where the copy sits. */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_75%_58%_at_50%_52%,rgba(5,5,10,0.62),transparent_72%)]" />
 
       {/* Fades into the page background so sections blend */}
       <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent via-[#05050a]/60 to-[#05050a]" />
