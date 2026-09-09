@@ -1,36 +1,182 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lubech — Web & Mobile App Development Agency
 
-## Getting Started
+Marketing site for [lubech.tech](https://lubech.tech): a dark, premium landing page built with
+**Next.js 15 (App Router) · React 19 · Tailwind CSS v4 · Framer Motion · Three.js (React Three Fiber)**.
 
-First, run the development server:
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn install
+yarn dev        # http://localhost:3000
+yarn build      # production build (webpack — dedupes shared chunks; dev uses Turbopack)
+yarn lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Contact form e-mails are sent by `src/app/api/contact/route.ts` via Nodemailer. Set these env vars
+(e.g. in `.env.local` / Vercel project settings):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+SMTP_HOST= SMTP_PORT=587 SMTP_SECURE=false SMTP_USER= SMTP_PASS= CONTACT_TO=info@lubech.tech
+NEXT_PUBLIC_GA_ID=                        # optional – Google Analytics
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=     # optional – Search Console "HTML tag" content value
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project structure
 
-## Learn More
+```
+src/
+├─ app/
+│  ├─ layout.tsx          # metadata, JSON-LD, <Providers> (MotionConfig reducedMotion="user")
+│  ├─ page.tsx            # section order for the landing page
+│  ├─ not-found.tsx       # branded 404 (also used for stale links from the old site)
+│  ├─ error.tsx           # branded client error boundary with "Try again"
+│  ├─ globals.css         # design tokens (@theme), base styles, component classes
+│  └─ api/contact/        # e-mail endpoint
+├─ components/
+│  ├─ Navigation.tsx      # floating glass pill nav + full-screen mobile menu
+│  ├─ ScrollProgress.tsx  # gradient scroll bar (transform-only)
+│  ├─ StatusPage.tsx      # shared shell for the 404 / error routes
+│  ├─ Footer.tsx
+│  ├─ Providers.tsx
+│  ├─ ui/                 # primitives: Button, GlowCard, SectionHeader, Orbs/GridPattern,
+│  │                      # SplitText (word-mask headline reveal), CountUp (scroll-triggered numerals)
+│  ├─ three/Earth3D.tsx   # WebGL night-side Earth (React Three Fiber), lazy-loaded — horizon or whole-globe framing
+│  ├─ three/EarthHorizon.tsx # CSS arc + Earth3D cross-fade; used by the Process stage
+│  ├─ three/GlobeBackdrop.tsx # CSS disc + Earth3D cross-fade, whole globe behind the hero copy
+│  └─ sections/           # Hero, Services, WhoItsFor, Process, Technologies,
+│                         # Projects, WhyLubech, Team, FinalCTA
+├─ data/site.ts           # ALL copy & content (services, projects, team, testimonials…)
+├─ lib/animations.ts      # shared Motion variants / easing / viewport config
+├─ lib/hooks.ts           # useMediaQuery (SSR-safe)
+├─ lib/utils.ts           # cn()
+└─ types/index.ts
+```
 
-To learn more about Next.js, take a look at the following resources:
+To change copy, projects or team members edit **`src/data/site.ts`** — components are purely
+presentational.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design system
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Token            | Value                                              |
+| ---------------- | -------------------------------------------------- |
+| Background       | `#05050A` → `#0A0A12`                              |
+| Accent gradient  | `#2563eb` → `#0ea5e9` → `#22d3ee` (blue → sky → cyan; filled buttons/badges use the deeper `#2563eb → #0369a1 → #0e7490` run so white labels meet WCAG AA (≥ 4.5:1) along the whole gradient) |
+| Headings         | Bricolage Grotesque (self-hosted, `public/fonts/bricolage`) — 36/48 pt display cut for h1/h2, 14 pt text cut for h3–h6 |
+| Body             | Quicksand (self-hosted, `public/fonts/quicksand`)  |
+| Cards            | `.glow-card` – dark, 1px blue border, soft glow, cursor spotlight |
+| Buttons          | `.btn-gradient` (pill, gradient, glow) · `.btn-ghost` (frosted glass) |
+| Ambient light    | `<Orb />` radial-gradient orbs (no `filter: blur` → cheap to paint) |
 
-## Deploy on Vercel
+Motion rules used throughout:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Only `transform` and `opacity` are animated (60 fps, no layout thrash).
+- Entrances: `whileInView` + stagger, 0.3–0.7 s, custom expo-out easing (`EASE` in `lib/animations.ts`).
+- Scroll-linked effects use `useScroll` + `useTransform`/`useSpring` (hero parallax, process timeline).
+- Reveals **replay**: every `whileInView` uses `viewportReplay` (`once: false`, 80 px margin) and
+  `SplitText` line reveals re-arm while off-screen (the animated line boxes only exist while the
+  paragraph is on-screen and reveal mount-driven — `initial` hidden → `animate` shown, like the
+  headline words), so text rises again each time its section re-enters the viewport — including on
+  the way back up. The hero re-runs its whole entrance (badge → headline → paragraph → CTAs) when
+  you scroll back to the top, remounting the copy block only while it is fully faded out
+  (scroll-progress armed ≥ 0.8, re-triggered ≤ 0.68) so the swap is never visible.
+  `CountUp` stats likewise count up again on re-entry.
+- The hero scroll offset is `"end start 0px"` on purpose: plain `"end start"` matches a
+  ViewTimeline preset, and framer-motion 12.23's native scroll-timeline path then binds the
+  parallax transforms to the *document* timeline (the target ref isn't attached when they mount),
+  so the fade tracked the whole page instead of the hero in Chrome 115+. The `0px` suffix
+  (ignored by the runtime parser) opts back into the JS tracking path. The Process timeline is
+  unaffected — its progress runs through a `useSpring`.
+- Reduced motion is respected globally (`MotionConfig reducedMotion="user"` + a CSS fallback).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Accessibility
+
+- "Skip to content" link (first Tab stop, jumps to `<main id="main">`), visible focus rings, `aria-label`
+  on every icon-only control, `sr-only` copies behind the animated headlines / count-ups.
+- Every section is a named landmark (`<section aria-labelledby>` → its heading), so screen-reader users
+  can jump between "Services", "Our process", "Real products, real impact" … from the regions list.
+- The mobile menu closes on **Escape** and when the viewport grows past the `md` breakpoint, and
+  restores body scrolling either way.
+- `prefers-reduced-motion` turns the entrance transforms into plain fades (Motion's `reducedMotion="user"`)
+  and swaps the pinned 3D timeline for the static stacked version.
+- Filled gradient surfaces keep white labels at ≥ 4.5:1 (WCAG AA) along the whole gradient.
+
+### Text animations
+
+`SplitText` (`src/components/ui/SplitText.tsx`) has two modes:
+
+- **`mode="words"`** (default) – every word rises out of its own overflow-clipped box, staggered
+  left→right / line by line (`y: 110% → 0`, expo-out ease, ~55 ms between words, 70 ms in the
+  hero). Used for the hero h1, every section h2, card / project / step titles and team names.
+  Inside a `staggerContainer` it joins the parent cascade; standalone, pass `inView`.
+- **`mode="lines"`** – for paragraphs and quotes. The text is laid out normally first, the
+  browser's own line breaks are read back (`offsetTop` of each word), and the words are regrouped
+  into one clip box per *rendered* line, which then rise in sequence (`delay` sequences it after
+  a sibling headline). Nothing moves between the passes, so there is no layout shift; the wrapping
+  is re-measured on resize / font swap until the reveal starts, and the element drops back to plain
+  text once it has finished. Used for the hero / CTA / section descriptions and the testimonials.
+
+Headings expose the intact sentence via `aria-label`, paragraphs carry a visually-hidden copy, and
+the animated spans are `aria-hidden`. Gradient runs (`<span className="text-gradient">` /
+`<Accent>`) are re-applied per word because `background-clip: text` does not survive a clipped
+parent in Chrome. Numbers in the "Why Lubech" stats band use `CountUp`, which animates the first number in a
+string ("30+", "100%", "24/7") when it scrolls into view. Everything honours
+`prefers-reduced-motion` through the global `MotionConfig` (text fades in place, numbers show
+their final value).
+
+### Pinned "Our Process" timeline
+
+On desktop (≥ 1024 px wide, ≥ 640 px tall, no reduced-motion) the Process section is a
+`position: sticky` stage that stays pinned for ~2.4 viewports. Section scroll progress (0 → 1,
+smoothed with `useSpring`) drives everything in lock-step, with no React re-renders:
+
+| Layer | Driven by progress |
+| --- | --- |
+| 3D Earth (`three/Earth3D.tsx`) | rises into place, then rotates (idle spin + scroll-driven turn, read from the MotionValue inside `useFrame`) |
+| Gradient timeline | `scaleX` fill + a travelling glowing tip |
+| Four steps | each dot ignites, then its card fades/rises within its own slice of the scroll |
+
+The Three.js code (~240 kB gz, split into a few long-cached chunks) is `next/dynamic`-loaded only when
+the section comes within one viewport, the render loop pauses when it's off-screen, textures are brand-graded WebP
+(`public/textures`), and a pure-CSS horizon renders while textures load or if WebGL is missing
+(context loss is handled too). Phones/tablets and reduced-motion users get a vertical
+`whileInView` timeline with no WebGL at all.
+
+### Hero globe
+
+The whole planet floats behind the hero copy (`three/GlobeBackdrop.tsx`): a pure-CSS disc paints immediately
+with the first frame; on desktop (≥ 1024 px, no reduced-motion) the WebGL globe is requested ~2 s later —
+after the headline reveal has finished — and cross-fades in on top (diameter ≈ 80 % of the hero height, dimmed
+city lights + a dark radial scrim so the headline stays crisp), idle-spinning until the hero scrolls out of view
+(then its render loop pauses). Phones and reduced-motion keep the CSS disc. The Process stage keeps its own
+planet *horizon* (`three/EarthHorizon.tsx`, `.horizon-disc` in `globals.css` sizes the CSS arc with
+container-query trigonometry to the exact silhouette `Earth3D` computes, so the swap doesn't morph).
+
+## Assets
+
+- `public/space-blue.webp` – hero / CTA backdrop (blue-graded version of the original space photo; WebP q80, 46 kB).
+- `public/stars.svg` – tiling star field used as a subtle texture layer.
+- `public/textures/` – brand-graded Earth colour + city-lights maps for the 3D globe (hero + Process; see README there).
+- `public/projects/*.webp`, `public/staff/*.webp` – portfolio screenshots and team portraits, stored as
+  WebP (≤ 1200 px, q 84). When adding new ones convert first, e.g.
+  `npx sharp-cli -i shot.png -o public/projects/shot.webp -f webp -q 84 resize 1200` — the whole set is ~0.5 MB
+  instead of the 5 MB of source PNG/JPEGs it replaced.
+- `public/og.png` – 1200×630 social-share card (Open Graph / Twitter), rendered from the hero design.
+- `public/web_favicon.svg` (SVG favicon + Safari mask icon), `public/icon-512.png` (PWA, maskable-safe),
+  `public/apple-touch-icon.png`, `src/app/favicon.ico` (multi-size, served automatically by the App Router).
+  All carry the blue → cyan version of the Lubech mark; `public/techvector.svg` is the white word-mark used in the nav/footer.
+- `public/projects/*`, `public/staff/*` – portfolio screenshots and team portraits.
+
+## Performance notes
+
+- `yarn build` uses webpack rather than Turbopack on purpose: with Next 15.5 Turbopack emits the
+  Motion runtime twice for this app (the `/` route and the shared 404/500 bundle each get their own copy),
+  which is ~65 kB gz of duplicate JS on first load. Dev still uses `--turbopack`.
+- Initial JS is ~220 kB gz; Three.js/R3F (~240 kB gz) is fetched after the `load` event on desktop (for the
+  hero globe, ~2 s in) or when the Process section is about to enter the viewport — one shared chunk set,
+  one texture cache — and never on phones/tablets.
+- Lighthouse reports a *late* LCP that is an artefact of the entrance animations rather than slow
+  rendering: Chrome ignores elements while they are transparent or translated out of their clip, so the
+  first "counted" paint is the hero paragraph when its line reveal finishes (~2.4 s). Real first paint is
+  ~0.25 s; CLS is 0 and TBT is 0 ms.
+
+Deployed on Vercel (`vercel.json`).
