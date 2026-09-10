@@ -69,11 +69,11 @@ export const SITE = {
 };
 
 export const NAV_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Work", href: "#work" },
-  { label: "Why Us", href: "#why-lubech" },
-  { label: "Team", href: "#team" },
+  { label: "Services", href: "/#services" },
+  { label: "Process", href: "/#process" },
+  { label: "Work", href: "/#work" },
+  { label: "Why Us", href: "/#why-lubech" },
+  { label: "Team", href: "/#team" },
 ];
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
