@@ -80,7 +80,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       <Link
         href={`/project/${project.id}`}
         aria-label={`View the ${project.title} case study`}
-        className="relative block aspect-[16/11] overflow-hidden rounded-t-[2rem] border-b border-white/[0.06]"
+        className="relative block aspect-[16/10] overflow-hidden rounded-t-[2rem] border-b border-white/[0.06]"
       >
         <span className="sr-only">View the {project.title} case study</span>
         {project.image ? (
@@ -88,7 +88,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             src={project.image}
             alt=""
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 25vw"
             className="object-cover object-bottom transition-transform duration-700 ease-out group-hover:scale-[1.05]"
           />
         ) : (
@@ -98,42 +98,42 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
         <span
           aria-hidden
-          className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white/85 backdrop-blur-md"
+          className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-2.5 py-[3px] text-[10px] font-bold uppercase tracking-[0.14em] text-white/85 backdrop-blur-md"
         >
           {isWeb ? <Globe className="h-3 w-3" aria-hidden /> : <Smartphone className="h-3 w-3" aria-hidden />}
           {isWeb ? "Web app" : "Mobile app"}
         </span>
 
-        <span className="absolute right-4 top-4 flex h-9 w-9 translate-y-1 items-center justify-center rounded-full bg-white text-[#0a0a12] opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="absolute right-3 top-3 flex h-8 w-8 translate-y-1 items-center justify-center rounded-full bg-white text-[#0a0a12] opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
           <ChevronRight className="h-4 w-4" aria-hidden />
         </span>
       </Link>
 
       {/* Body */}
-      <div className="flex flex-1 flex-col p-6">
-        <SplitText as="h3" inView delay={0.15 + Math.min(index, 5) * 0.06} className="font-heading text-lg font-bold text-white">
+      <div className="flex flex-1 flex-col p-5">
+        <SplitText as="h3" inView delay={0.15 + Math.min(index, 5) * 0.06} className="font-heading text-base font-bold text-white">
           {project.title}
         </SplitText>
-        <p className="mt-2 text-sm leading-relaxed text-white/55">{project.description}</p>
+        <p className="mt-1.5 text-[13px] leading-relaxed text-white/55">{project.description}</p>
 
-        <ul className="mt-4 flex flex-wrap gap-1.5">
+        <ul className="mt-3.5 flex flex-wrap gap-1.5">
           {project.technologies.map((t) => (
             <li
               key={t}
-              className="rounded-full border border-blue-400/20 bg-blue-500/[0.08] px-2.5 py-1 text-[11px] font-medium text-blue-100/80"
+              className="rounded-full border border-blue-400/20 bg-blue-500/[0.08] px-2 py-[3px] text-[10.5px] font-medium text-blue-100/80"
             >
               {t}
             </li>
           ))}
         </ul>
 
-        <div className="mt-auto flex items-center gap-3 pt-6">
+        <div className="mt-auto flex flex-wrap items-center gap-2.5 pt-5">
           {project.liveUrl ? (
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-sky-200/90 transition-colors hover:text-white"
+              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-sky-200/90 transition-colors hover:text-white"
             >
               View live <ChevronRight className="h-4 w-4" aria-hidden />
             </a>
@@ -144,7 +144,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title} on the App Store`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-white/80 transition-all hover:border-sky-400/40 hover:text-white"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-semibold text-white/80 transition-all hover:border-sky-400/40 hover:text-white"
             >
               <FaApple className="h-3.5 w-3.5" aria-hidden /> App Store
             </a>
@@ -155,7 +155,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title} on Google Play`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-white/80 transition-all hover:border-sky-400/40 hover:text-white"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-semibold text-white/80 transition-all hover:border-sky-400/40 hover:text-white"
             >
               <FaGooglePlay className="h-3 w-3" aria-hidden /> Google Play
             </a>
@@ -236,7 +236,7 @@ export default function Projects() {
         </LayoutGroup>
 
         {/* Grid */}
-        <motion.div layout className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <motion.div layout className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           <AnimatePresence mode="popLayout">
             {visible.map((p, i) => (
               <ProjectCard key={p.id} project={p} index={i} />
