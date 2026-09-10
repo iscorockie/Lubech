@@ -108,22 +108,22 @@ export default function ProjectPage({ project }: { project: Project }) {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={viewportReplay}
               transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
-              className="relative mx-auto mt-10 max-w-4xl"
+              className="relative mx-auto mt-8 max-w-3xl"
             >
-              <div className="overflow-hidden rounded-[2rem] border border-sky-400/20 bg-gradient-to-r from-blue-900/30 via-sky-900/20 to-cyan-900/30 p-1 shadow-[0_40px_120px_-40px_rgba(14,165,233,0.65)]">
-                <div className="relative overflow-hidden rounded-[1.75rem] bg-[#0a0a12]">
+              <div className="overflow-hidden rounded-[1.75rem] border border-sky-400/20 bg-gradient-to-r from-blue-900/30 via-sky-900/20 to-cyan-900/30 p-1 shadow-[0_40px_120px_-40px_rgba(14,165,233,0.65)]">
+                <div className="relative overflow-hidden rounded-[1.5rem] bg-[#0a0a12]">
                   {project.image ? (
-                    <div className="relative aspect-[16/10]">
+                    <div className="relative aspect-[16/9]">
                       <Image
                         src={project.image}
                         alt={`${project.title} — project preview`}
                         fill
-                        sizes="(max-width: 1024px) 100vw, 896px"
-                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 768px"
+                        className="object-cover object-top"
                       />
                     </div>
                   ) : (
-                    <div className="h-[320px] sm:h-[380px]">
+                    <div className="h-[260px] sm:h-[300px]">
                       <PhoneArt project={project} />
                     </div>
                   )}
@@ -235,7 +235,7 @@ export default function ProjectPage({ project }: { project: Project }) {
               initial="hidden"
               whileInView="visible"
               viewport={viewportReplay}
-              className="mx-auto mt-12 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3"
+              className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3"
             >
               {others.map((o) => (
                 <Link

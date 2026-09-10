@@ -43,8 +43,12 @@ next-env.d.ts
 # local production-audit build
 /.next-*/
 
-# raw design mockups / screenshots dropped in the repo root (source art,
-# not used by the site — keep them out of git)
+# raw design mockups, screenshots and source art dropped in the repo root
+# (not used by the site — the assets it serves live in public/)
 /*MOCKUP.png
 /*Mockup.png
 /*mock.png
+/Screenshot*.png
+/*.jpg
+/*.jpeg
+/*.svg
