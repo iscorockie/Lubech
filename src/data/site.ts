@@ -354,7 +354,7 @@ export const PROJECTS: Project[] = [
     title: "The Actualisation Project",
     description:
       "Immersive wellness website for a spiritual growth community — “a space for real connection” for those ready to go deeper, with programmes and a contact flow.",
-    image: "/projects/actualisation-project.webp",
+    image: "/projects/actualisation-project.webp?v=2",
     technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
     category: "web",
   },
