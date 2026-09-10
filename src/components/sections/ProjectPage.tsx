@@ -108,22 +108,22 @@ export default function ProjectPage({ project }: { project: Project }) {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={viewportReplay}
               transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
-              className="relative mx-auto mt-12 max-w-5xl"
+              className="relative mx-auto mt-10 max-w-4xl"
             >
-              <div className="overflow-hidden rounded-[2.5rem] border border-sky-400/20 bg-gradient-to-r from-blue-900/30 via-sky-900/20 to-cyan-900/30 p-1 shadow-[0_40px_120px_-40px_rgba(14,165,233,0.65)]">
-                <div className="relative overflow-hidden rounded-[2.25rem] bg-[#0a0a12]">
+              <div className="overflow-hidden rounded-[2rem] border border-sky-400/20 bg-gradient-to-r from-blue-900/30 via-sky-900/20 to-cyan-900/30 p-1 shadow-[0_40px_120px_-40px_rgba(14,165,233,0.65)]">
+                <div className="relative overflow-hidden rounded-[1.75rem] bg-[#0a0a12]">
                   {project.image ? (
-                    <div className="relative aspect-[16/11]">
+                    <div className="relative aspect-[16/10]">
                       <Image
                         src={project.image}
                         alt={`${project.title} — project preview`}
                         fill
-                        sizes="(max-width: 1024px) 100vw, 1024px"
+                        sizes="(max-width: 1024px) 100vw, 896px"
                         className="object-cover"
                       />
                     </div>
                   ) : (
-                    <div className="h-[420px] sm:h-[480px]">
+                    <div className="h-[320px] sm:h-[380px]">
                       <PhoneArt project={project} />
                     </div>
                   )}
@@ -132,7 +132,7 @@ export default function ProjectPage({ project }: { project: Project }) {
                     aria-hidden
                     className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a12]/60 via-transparent to-transparent"
                   />
-                  <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white/85 backdrop-blur-md">
+                  <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-2.5 py-[3px] text-[10px] font-bold uppercase tracking-[0.14em] text-white/85 backdrop-blur-md">
                     {web ? <Globe className="h-3 w-3" aria-hidden /> : <Smartphone className="h-3 w-3" aria-hidden />}
                     {web ? "Web app" : "Mobile app"}
                   </span>
@@ -235,7 +235,7 @@ export default function ProjectPage({ project }: { project: Project }) {
               initial="hidden"
               whileInView="visible"
               viewport={viewportReplay}
-              className="mx-auto mt-14 grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3"
+              className="mx-auto mt-12 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3"
             >
               {others.map((o) => (
                 <Link
@@ -243,7 +243,7 @@ export default function ProjectPage({ project }: { project: Project }) {
                   href={`/project/${o.id}`}
                   className="glow-card group block overflow-hidden text-left"
                 >
-                  <div className="relative aspect-[16/11] overflow-hidden">
+                  <div className="relative aspect-[16/10] overflow-hidden">
                     {o.image ? (
                       <Image
                         src={o.image}
@@ -268,18 +268,18 @@ export default function ProjectPage({ project }: { project: Project }) {
                     )}
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a12]/70 via-transparent to-transparent" />
                   </div>
-                  <div className="flex items-center justify-between gap-3 p-5">
+                  <div className="flex items-center justify-between gap-3 p-4">
                     <div>
-                      <p className="font-heading text-sm font-bold text-white">{o.title}</p>
-                      <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white/40">
+                      <p className="font-heading text-[13px] font-bold text-white">{o.title}</p>
+                      <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white/40">
                         {o.category === "web" ? "Web app" : "Mobile app"}
                       </p>
                     </div>
                     <span
                       aria-hidden
-                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/60 transition-all duration-300 group-hover:border-sky-400/50 group-hover:text-white"
+                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/60 transition-all duration-300 group-hover:border-sky-400/50 group-hover:text-white"
                     >
-                      <ChevronRight className="h-4 w-4" aria-hidden />
+                      <ChevronRight className="h-3.5 w-3.5" aria-hidden />
                     </span>
                   </div>
                 </Link>
