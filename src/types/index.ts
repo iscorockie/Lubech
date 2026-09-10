@@ -86,4 +86,5 @@ export interface Testimonial {
   role: string;
   company: string;
   content: string;
+  rating?: number;
 }

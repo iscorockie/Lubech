@@ -302,6 +302,16 @@ export const PROJECTS: Project[] = [
     liveUrl: "https://www.mashongatea.com",
   },
   {
+    id: "gill-international-school",
+    title: "Gill International School",
+    description:
+      "Complete website for a Cambridge International school in Najjera, Kampala — admissions with enquiry form, termly fees, staff directory, events calendar and filterable gallery.",
+    image: "/projects/gill-international-school.webp",
+    technologies: ["HTML", "CSS", "JavaScript", "OpenStreetMap"],
+    category: "web",
+    liveUrl: "https://gill.ac.ug",
+  },
+  {
     id: "glam-n-go",
     title: "Glam n' Go",
     description:
@@ -452,29 +462,63 @@ export const TEAM: TeamMember[] = [
 
 /* ── Testimonials ────────────────────────────────────────────────────────── */
 
+/*
+ * Ordered like the old lubech.tech site: row 1 = [0..2] (scrolls left),
+ * row 2 = [3..5] (scrolls right) — see components/sections/Reviews.tsx.
+ */
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: "1",
+    name: "Sarah Johnson",
+    role: "CEO",
+    company: "Labour Experts",
+    content:
+      "Lubech transformed our vision into a powerful platform. Their expertise in web development and attention to detail exceeded our expectations. The team delivered on time and within budget.",
+    rating: 5,
+  },
+  {
+    id: "2",
     name: "Barbara Kenyana",
     role: "Founder",
     company: "Glam n' Go",
     content:
       "Working with Lubech was a game-changer. They built our e-commerce app with such professionalism and care. Our app has over 5K downloads and growing.",
+    rating: 5,
   },
   {
-    id: "2",
+    id: "3",
     name: "James Ochen",
     role: "Director",
     company: "Tuwe Technologies",
     content:
       "The team understood our community management needs perfectly and created a robust platform that serves thousands of users. Their backend expertise is outstanding.",
+    rating: 5,
   },
   {
-    id: "3",
+    id: "4",
+    name: "Emily Rodriguez",
+    role: "Director",
+    company: "Ordnancity",
+    content:
+      "Lubech's technical skills and creative approach helped us build a cutting-edge city management platform. Their support throughout the project was exceptional.",
+    rating: 5,
+  },
+  {
+    id: "5",
     name: "Isaac Sekatawa",
     role: "Co-Founder",
     company: "Easy Gas",
     content:
       "From concept to launch, Lubech was with us every step of the way. Our delivery app is now live on both stores and users love it. Truly world-class work.",
+    rating: 5,
+  },
+  {
+    id: "6",
+    name: "Amara Jaffer",
+    role: "Owner",
+    company: "Cafe Jaf'n",
+    content:
+      "We needed a food ordering app fast, and Lubech delivered beyond what we imagined. Clean UI, smooth payments, and zero issues after launch. Amazing team.",
+    rating: 5,
   },
 ];

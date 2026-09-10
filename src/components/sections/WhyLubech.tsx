@@ -1,13 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Quote, Star } from "lucide-react";
 import GlowCard from "@/components/ui/GlowCard";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { Orb, GridPattern } from "@/components/ui/Orbs";
 import CountUp from "@/components/ui/CountUp";
 import SplitText from "@/components/ui/SplitText";
-import { REASONS, TESTIMONIALS, STATS } from "@/data/site";
+import { REASONS, STATS } from "@/data/site";
 import { fadeUp, staggerContainer, viewportReplay } from "@/lib/animations";
 
 export default function WhyLubech() {
@@ -71,42 +70,6 @@ export default function WhyLubech() {
               </div>
             ))}
           </div>
-        </motion.div>
-
-        {/* Testimonials */}
-        <motion.div
-          variants={staggerContainer(0.12)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportReplay}
-          className="mt-16 grid gap-5 lg:grid-cols-3"
-        >
-          {TESTIMONIALS.map((t) => (
-            <GlowCard key={t.id} as="article" hoverLift={false} className="flex h-full flex-col p-7">
-              <div className="flex items-center justify-between">
-                <div className="flex gap-0.5" role="img" aria-label="5 out of 5 stars">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-sky-400 text-sky-400" aria-hidden />
-                  ))}
-                </div>
-                <Quote className="h-6 w-6 text-white/15" aria-hidden />
-              </div>
-              <SplitText as="blockquote" mode="lines" stagger={0.07} className="mt-5 flex-1 text-[15px] leading-relaxed text-white/75">
-                {`“${t.content}”`}
-              </SplitText>
-              <figcaption className="mt-6 flex items-center gap-3 border-t border-white/[0.06] pt-5">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-700 font-heading text-sm font-bold text-white">
-                  {t.name.split(" ").map((n) => n[0]).join("")}
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-white">{t.name}</p>
-                  <p className="text-xs text-white/45">
-                    {t.role}, {t.company}
-                  </p>
-                </div>
-              </figcaption>
-            </GlowCard>
-          ))}
         </motion.div>
       </div>
     </section>
