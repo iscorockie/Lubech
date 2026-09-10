@@ -35,7 +35,7 @@ export default function Services() {
           viewport={viewportReplay}
           className="mt-16 grid gap-6 md:grid-cols-3"
         >
-          {SERVICES.map(({ id, title, description, icon: Icon }, i) => (
+          {SERVICES.map(({ id, title, description, icon: Icon, slug }, i) => (
             <GlowCard key={id} as="article" className="group flex h-full flex-col p-7 sm:p-8">
               {/* top gradient edge */}
               <span
@@ -58,7 +58,7 @@ export default function Services() {
               <p className="mt-3 text-[15px] leading-relaxed text-white/55">{description}</p>
 
               <a
-                href="#contact"
+                href={`/${slug}`}
                 className="mt-auto inline-flex items-center gap-1.5 pt-8 text-sm font-semibold text-sky-200/90 transition-colors hover:text-white"
               >
                 Discuss {title.toLowerCase()}

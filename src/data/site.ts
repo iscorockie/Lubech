@@ -90,9 +90,12 @@ export const STATS: Stat[] = [
 export const SERVICES: Service[] = [
   {
     id: "web",
+    slug: "webdevelopment",
     title: "Web Development",
     description:
       "High-performance websites and web apps built with React and Next.js — fast, accessible, SEO-ready and designed to convert.",
+    pageIntro:
+      "From marketing sites to complex web platforms, we design and build the full front-end — and the full stack behind it. Every page is performance-tuned, accessible and optimised to turn visitors into customers.",
     icon: Code2,
     accent: "blue",
     features: [
@@ -104,9 +107,12 @@ export const SERVICES: Service[] = [
   },
   {
     id: "mobile",
+    slug: "mobileapps",
     title: "Mobile Apps",
     description:
       "Cross-platform iOS and Android apps with React Native and Flutter — native feel, one codebase, shipped to both stores.",
+    pageIntro:
+      "One codebase, both stores, native feel. We build cross-platform apps your users will actually keep on their home screen — with payments, maps, push notifications and offline-first sync baked in from day one.",
     icon: Smartphone,
     accent: "sky",
     features: [
@@ -118,9 +124,12 @@ export const SERVICES: Service[] = [
   },
   {
     id: "backend",
+    slug: "backendsystems",
     title: "Backend Systems",
     description:
       "Secure, scalable APIs, databases and cloud infrastructure that quietly power everything your product needs to do.",
+    pageIntro:
+      "The invisible half of your product, done right. We architect secure, scalable APIs and data layers — then deploy, monitor and scale them so your front-end never has to worry about what happens at 3am.",
     icon: Server,
     accent: "cyan",
     features: [

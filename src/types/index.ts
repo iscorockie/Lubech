@@ -11,8 +11,10 @@ export type Icon = ComponentType<IconProps>;
 
 export interface Service {
   id: string;
+  slug: string;
   title: string;
   description: string;
+  pageIntro?: string;
   icon: Icon;
   features: string[];
   accent: "blue" | "sky" | "cyan";
