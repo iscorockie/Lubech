@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import AudiencePage from "@/components/sections/AudiencePage";
 
 export const metadata: Metadata = {
-  title: "Scale Your Platform | Lubech",
+  title: "Scale Your Platform",
   description:
     "Modernise, automate and scale with confidence. We rebuild legacy platforms, connect your systems and deliver software your customers and teams love to use.",
 };

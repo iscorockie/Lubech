@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ServicePage from "@/components/sections/ServicePage";
 
 export const metadata: Metadata = {
-  title: "Backend Systems | Lubech",
+  title: "Backend Systems",
   description:
     "Secure, scalable APIs, databases and cloud infrastructure that quietly power everything your product needs to do.",
 };

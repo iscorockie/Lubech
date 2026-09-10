@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { ChevronRight, Globe, Smartphone } from "lucide-react";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
@@ -23,7 +24,7 @@ const FILTERS: { id: Filter; label: string }[] = [
 ];
 
 /** Stylised phone mock-up used for mobile projects without a screenshot. */
-function PhoneArt({ project }: { project: Project }) {
+export function PhoneArt({ project }: { project: Project }) {
   const initials =
     project.mock?.initials ??
     project.title
@@ -65,7 +66,6 @@ function PhoneArt({ project }: { project: Project }) {
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const isWeb = project.category === "web";
-  const primaryHref = project.liveUrl ?? project.playStoreUrl ?? project.appStoreUrl ?? "#contact";
 
   return (
     <motion.article
@@ -76,14 +76,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       transition={{ duration: 0.55, ease: EASE, delay: Math.min(index, 5) * 0.06 }}
       className="glow-card group flex flex-col overflow-hidden"
     >
-      {/* Thumbnail */}
-      <a
-        href={primaryHref}
-        target="_blank"
-        rel="noopener noreferrer"
+      {/* Thumbnail — opens the project's own page */}
+      <Link
+        href={`/project/${project.id}`}
+        aria-label={`View the ${project.title} case study`}
         className="relative block aspect-[16/11] overflow-hidden rounded-t-[2rem] border-b border-white/[0.06]"
       >
-        <span className="sr-only">Open {project.title} (opens in a new tab)</span>
+        <span className="sr-only">View the {project.title} case study</span>
         {project.image ? (
           <Image
             src={project.image}
@@ -108,7 +107,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <span className="absolute right-4 top-4 flex h-9 w-9 translate-y-1 items-center justify-center rounded-full bg-white text-[#0a0a12] opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
           <ChevronRight className="h-4 w-4" aria-hidden />
         </span>
-      </a>
+      </Link>
 
       {/* Body */}
       <div className="flex flex-1 flex-col p-6">

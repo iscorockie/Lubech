@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { PROJECTS } from "@/data/site";
 
 const BASE_URL = "https://lubech.tech";
 
@@ -40,5 +41,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    ...PROJECTS.map((p) => ({
+      url: `${BASE_URL}/project/${p.id}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
   ];
 }
