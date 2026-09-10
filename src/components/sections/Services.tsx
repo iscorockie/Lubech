@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import GlowCard from "@/components/ui/GlowCard";
 import SectionHeader from "@/components/ui/SectionHeader";
 import SplitText from "@/components/ui/SplitText";
@@ -62,8 +62,8 @@ export default function Services() {
                 className="mt-auto inline-flex items-center gap-1.5 pt-8 text-sm font-semibold text-sky-200/90 transition-colors hover:text-white"
               >
                 Discuss {title.toLowerCase()}
-                <ArrowUpRight
-                  className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                <ChevronRight
+                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                   aria-hidden
                 />
               </a>

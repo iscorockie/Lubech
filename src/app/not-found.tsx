@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, Mail } from "lucide-react";
+import { ChevronRight, Mail } from "lucide-react";
 import Button from "@/components/ui/Button";
 import StatusPage from "@/components/StatusPage";
 import { SITE } from "@/data/site";
@@ -24,7 +24,7 @@ export default function NotFound() {
       actions={
         <>
           <Button href="/" size="lg">
-            Back to home <ArrowRight className="h-4 w-4" aria-hidden />
+            Back to home <ChevronRight className="h-4 w-4" aria-hidden />
           </Button>
           <Button href="/#contact" variant="ghost" size="lg">
             <Mail className="h-4 w-4" aria-hidden /> Contact us

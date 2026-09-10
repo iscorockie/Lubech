@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, ChevronRight, Loader2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { CheckCircle2, ChevronRight, Loader2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { Orb } from "@/components/ui/Orbs";
 import SplitText, { Accent } from "@/components/ui/SplitText";
@@ -301,7 +301,7 @@ export default function FinalCTA() {
                           </>
                         ) : (
                           <>
-                            Send message <ArrowRight className="h-4 w-4" aria-hidden />
+                            Send message <ChevronRight className="h-4 w-4" aria-hidden />
                           </>
                         )}
                       </Button>

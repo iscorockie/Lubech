@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { ChevronRight, Check } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import ScrollProgress from "@/components/ScrollProgress";
 import Footer from "@/components/Footer";
@@ -233,7 +233,7 @@ export default function AudiencePage({ slug }: { slug: string }) {
                   className="btn-gradient inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
                 >
                   {audience.cta}
-                  <ArrowRight className="h-4 w-4" aria-hidden />
+                  <ChevronRight className="h-4 w-4" aria-hidden />
                 </Link>
               </motion.div>
             </div>

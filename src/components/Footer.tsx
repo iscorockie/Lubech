@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUp, Linkedin, Mail, MessageCircle } from "lucide-react";
+import { ChevronUp, Linkedin, Mail, MessageCircle } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/data/site";
 
 const serviceLinks = [
@@ -115,7 +115,7 @@ export default function Footer() {
             href="/"
             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs font-semibold text-white/70 transition-all hover:border-sky-400/50 hover:text-white"
           >
-            Back to top <ArrowUp className="h-3.5 w-3.5" aria-hidden />
+            Back to top <ChevronUp className="h-3.5 w-3.5" aria-hidden />
           </Link>
         </div>
       </div>

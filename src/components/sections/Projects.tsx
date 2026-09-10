@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import { ArrowUpRight, Globe, Smartphone } from "lucide-react";
+import { ChevronRight, Globe, Smartphone } from "lucide-react";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import SectionHeader from "@/components/ui/SectionHeader";
 import SplitText from "@/components/ui/SplitText";
@@ -106,7 +106,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </span>
 
         <span className="absolute right-4 top-4 flex h-9 w-9 translate-y-1 items-center justify-center rounded-full bg-white text-[#0a0a12] opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-          <ArrowUpRight className="h-4 w-4" aria-hidden />
+          <ChevronRight className="h-4 w-4" aria-hidden />
         </span>
       </a>
 
@@ -136,7 +136,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-sky-200/90 transition-colors hover:text-white"
             >
-              View live <ArrowUpRight className="h-4 w-4" aria-hidden />
+              View live <ChevronRight className="h-4 w-4" aria-hidden />
             </a>
           ) : null}
           {project.appStoreUrl ? (
