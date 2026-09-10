@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Loader2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, Loader2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { Orb } from "@/components/ui/Orbs";
 import SplitText, { Accent } from "@/components/ui/SplitText";
@@ -121,7 +121,7 @@ export default function FinalCTA() {
 
           <motion.div variants={fadeUp} custom={0.8} className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button href="#project-form" size="lg" className="w-full sm:w-auto">
-              Start a project <ArrowRight className="h-4 w-4" aria-hidden />
+              Start a project <ChevronRight className="h-4 w-4" aria-hidden />
             </Button>
             <Button href={SITE.whatsapp} external variant="ghost" size="lg" className="w-full sm:w-auto">
               <MessageCircle className="h-4 w-4" aria-hidden /> Chat on WhatsApp

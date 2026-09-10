@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ChevronRight, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/lib/hooks";
 import { NAV_LINKS } from "@/data/site";
@@ -99,7 +99,7 @@ export default function Navigation() {
               className="btn-ghost hidden items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold md:inline-flex"
             >
               Start a project
-              <ArrowRight className="h-4 w-4" aria-hidden />
+              <ChevronRight className="h-4 w-4" aria-hidden />
             </MotionLink>
 
             <button
@@ -160,7 +160,7 @@ export default function Navigation() {
                   onClick={() => setOpen(false)}
                   className="btn-gradient inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-semibold"
                 >
-                  Start a project <ArrowRight className="h-4 w-4" aria-hidden />
+                  Start a project <ChevronRight className="h-4 w-4" aria-hidden />
                 </Link>
               </motion.li>
             </motion.ul>

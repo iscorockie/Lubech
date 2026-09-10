@@ -84,7 +84,7 @@ function TeamCard({ m }: { m: TeamMember }) {
   ][];
 
   return (
-    <div className="team-glass flex h-full flex-col items-center px-6 pb-7 pt-9 text-center sm:px-7">
+    <div className="team-glass mx-auto flex h-full max-w-[20.5rem] flex-col items-center px-6 pb-7 pt-9 text-center sm:px-7">
       <div className="rounded-full bg-gradient-to-b from-sky-300/70 via-blue-500/30 to-cyan-400/50 p-[2px] shadow-[0_0_40px_-10px_rgba(56,189,248,0.55)]">
         <div className="overflow-hidden rounded-full">
           <Image

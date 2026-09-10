@@ -399,7 +399,7 @@
      user prefers reduced transparency — with a more opaque fallback fill. */
   .team-glass {
     position: relative;
-    border-radius: 1.75rem;
+    border-radius: 2.25rem;
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%),
       rgba(17, 25, 40, 0.55);
