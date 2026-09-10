@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import GlowCard from "@/components/ui/GlowCard";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -34,7 +35,7 @@ export default function WhoItsFor() {
           viewport={viewportReplay}
           className="mt-16 grid gap-6 lg:grid-cols-2"
         >
-          {AUDIENCES.map(({ id, eyebrow, title, description, icon: Icon, points, cta }, i) => (
+          {AUDIENCES.map(({ id, eyebrow, title, description, icon: Icon, points, cta, slug }, i) => (
             <GlowCard key={id} as="article" className="group relative overflow-hidden p-8 sm:p-10">
               {/* corner glow */}
               <span
@@ -79,13 +80,13 @@ export default function WhoItsFor() {
                   ))}
                 </ul>
 
-                <a
-                  href="#contact"
+                <Link
+                  href={slug ? `/${slug}` : "#contact"}
                   className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:border-sky-400/50 hover:bg-white/[0.07] hover:shadow-[0_0_30px_-10px_rgba(14,165,233,0.7)]"
                 >
                   {cta}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
-                </a>
+                </Link>
               </div>
             </GlowCard>
           ))}

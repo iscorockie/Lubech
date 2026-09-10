@@ -22,9 +22,12 @@ export interface Service {
 
 export interface Audience {
   id: string;
+  slug?: string;
   eyebrow: string;
   title: string;
   description: string;
+  pageTitle?: string;
+  pageIntro?: string;
   icon: Icon;
   points: string[];
   cta: string;

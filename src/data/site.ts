@@ -146,10 +146,14 @@ export const SERVICES: Service[] = [
 export const AUDIENCES: Audience[] = [
   {
     id: "startups",
+    slug: "build-my-mvp",
     eyebrow: "For Startups & Founders",
     title: "Launch your MVP fast — without cutting corners.",
     description:
       "You have the vision and the urgency. We bring a senior product team that turns your idea into a polished, investor-ready product in weeks, not months.",
+    pageTitle: "Build your MVP",
+    pageIntro:
+      "From first call to a polished, investor-ready product — we scope, design and ship your MVP in weeks. A senior product team, weekly demos, and an architecture that's ready for the scale-up.",
     icon: Rocket,
     points: [
       "MVP scoping & rapid prototyping",
