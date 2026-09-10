@@ -96,7 +96,7 @@ export default function Navigation() {
               href="/#contact"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="btn-gradient hidden items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold md:inline-flex"
+              className="btn-ghost hidden items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold md:inline-flex"
             >
               Start a project
               <ArrowRight className="h-4 w-4" aria-hidden />
