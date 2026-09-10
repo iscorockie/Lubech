@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { PROJECTS } from "@/data/site";
+import { PROJECTS, SITE } from "@/data/site";
 import ProjectPage from "@/components/sections/ProjectPage";
 
 interface Props {
@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: project.title,
     description: project.description,
+    alternates: { canonical: `${SITE.url}/project/${project.id}` },
   };
 }
 

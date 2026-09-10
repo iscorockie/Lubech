@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import GlowCard from "@/components/ui/GlowCard";
@@ -57,7 +58,7 @@ export default function Services() {
               </SplitText>
               <p className="mt-3 text-[15px] leading-relaxed text-white/55">{description}</p>
 
-              <a
+              <Link
                 href={`/${slug}`}
                 className="mt-auto inline-flex items-center gap-1.5 pt-8 text-sm font-semibold text-sky-200/90 transition-colors hover:text-white"
               >
@@ -66,7 +67,7 @@ export default function Services() {
                   className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                   aria-hidden
                 />
-              </a>
+              </Link>
             </GlowCard>
           ))}
         </motion.div>

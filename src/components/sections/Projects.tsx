@@ -202,7 +202,7 @@ export default function Projects() {
             viewport={viewportReplay}
             transition={{ duration: 0.5 }}
             className="mx-auto mt-10 flex w-fit items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] p-1 backdrop-blur-md"
-            role="tablist"
+            role="group"
             aria-label="Filter projects"
           >
             {FILTERS.map((f) => {
@@ -210,8 +210,7 @@ export default function Projects() {
               return (
                 <button
                   key={f.id}
-                  role="tab"
-                  aria-selected={active}
+                  aria-pressed={active}
                   type="button"
                   onClick={() => {
                     setFilter(f.id);

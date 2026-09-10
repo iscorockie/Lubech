@@ -7,9 +7,9 @@ import type { Technology } from "@/types";
 import { fadeIn, viewportReplay } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
-function TechChip({ name, icon: Icon, color }: Technology) {
+function TechChip({ name, icon: Icon, color, hidden }: Technology & { hidden?: boolean }) {
   return (
-    <li className="shrink-0 pr-3">
+    <li className="shrink-0 pr-3" aria-hidden={hidden || undefined}>
       <div className="group flex items-center gap-3 rounded-full border border-white/[0.08] bg-white/[0.03] py-2.5 pl-3 pr-5 backdrop-blur-sm transition-all duration-300 hover:border-sky-400/40 hover:bg-white/[0.06] hover:shadow-[0_0_28px_-8px_rgba(14,165,233,0.6)]">
         <span
           className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0a0a12] ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-110"
@@ -35,7 +35,7 @@ function MarqueeRow({ items, reverse = false }: { items: Technology[]; reverse?:
         aria-label={reverse ? "More technologies" : "Technologies"}
       >
         {doubled.map((t, i) => (
-          <TechChip key={`${t.name}-${i}`} {...t} />
+          <TechChip key={`${t.name}-${i}`} {...t} hidden={i >= items.length} />
         ))}
       </ul>
     </div>
