@@ -46,11 +46,6 @@ export const metadata: Metadata = {
   publisher: "Lubech",
   category: "Technology",
 
-  // ── Canonical ─────────────────────────────────────────────────────────────
-  alternates: {
-    canonical: BASE_URL,
-  },
-
   // ── Open Graph ────────────────────────────────────────────────────────────
   openGraph: {
     type: "website",

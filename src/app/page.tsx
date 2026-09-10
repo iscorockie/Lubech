@@ -9,6 +9,7 @@ import Technologies from "@/components/sections/Technologies";
 import Projects from "@/components/sections/Projects";
 import WhyLubech from "@/components/sections/WhyLubech";
 import Team from "@/components/sections/Team";
+import Reviews from "@/components/sections/Reviews";
 import FinalCTA from "@/components/sections/FinalCTA";
 
 export default function Home() {
@@ -28,6 +29,7 @@ export default function Home() {
         <Projects />
         <WhyLubech />
         <Team />
+        <Reviews />
         <FinalCTA />
       </main>
       <Footer />

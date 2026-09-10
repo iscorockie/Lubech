@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Loader2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { CheckCircle2, ChevronRight, Loader2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { Orb } from "@/components/ui/Orbs";
 import SplitText, { Accent } from "@/components/ui/SplitText";
@@ -21,8 +21,8 @@ function validate(data: Record<string, FormDataEntryValue>): FieldErrors {
   const errors: FieldErrors = {};
   const text = (k: string) => (typeof data[k] === "string" ? (data[k] as string).trim() : "");
   if (!text("name")) errors.name = "Please tell us your name.";
-  if (!text("email")) errors.email = "Please enter your e-mail address.";
-  else if (!EMAIL_RE.test(text("email"))) errors.email = "That e-mail address doesn't look right.";
+  if (!text("email")) errors.email = "Please enter your email address.";
+  else if (!EMAIL_RE.test(text("email"))) errors.email = "That email address doesn't look right.";
   if (!text("project")) errors.project = "Please pick a project type.";
   if (!text("message")) errors.message = "Please tell us a little about the project.";
   return errors;
@@ -121,7 +121,7 @@ export default function FinalCTA() {
 
           <motion.div variants={fadeUp} custom={0.8} className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button href="#project-form" size="lg" className="w-full sm:w-auto">
-              Start Your Project <ArrowRight className="h-4 w-4" aria-hidden />
+              Start a project <ChevronRight className="h-4 w-4" aria-hidden />
             </Button>
             <Button href={SITE.whatsapp} external variant="ghost" size="lg" className="w-full sm:w-auto">
               <MessageCircle className="h-4 w-4" aria-hidden /> Chat on WhatsApp
@@ -141,8 +141,8 @@ export default function FinalCTA() {
             aria-hidden
             className="absolute inset-x-16 -bottom-8 h-28 rounded-full bg-gradient-to-r from-blue-600/40 via-sky-500/40 to-cyan-400/40 blur-3xl"
           />
-          <div className="glow-card relative overflow-hidden !rounded-[2rem] p-2">
-            <div className="grid overflow-hidden rounded-[1.6rem] lg:grid-cols-[1fr_1.4fr]">
+          <div className="glow-card relative overflow-hidden !rounded-[2.5rem] p-2">
+            <div className="grid overflow-hidden rounded-[2rem] lg:grid-cols-[1fr_1.4fr]">
               {/* Left: details */}
               <div className="relative bg-gradient-to-br from-blue-700/40 via-sky-600/25 to-cyan-600/30 p-8 sm:p-10">
                 <div aria-hidden className="absolute inset-0 bg-[url('/stars.svg')] bg-[length:500px_500px] opacity-25" />
@@ -162,7 +162,7 @@ export default function FinalCTA() {
                           rel={external ? "noopener noreferrer" : undefined}
                           className="group flex items-center gap-3 text-sm text-white/80 transition-colors hover:text-white"
                         >
-                          <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/10 backdrop-blur-md transition-all group-hover:border-white/40 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+                          <span className="flex h-10 w-10 items-center justify-center rounded-[1.25rem] border border-white/15 bg-white/10 backdrop-blur-md transition-all group-hover:border-white/40 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]">
                             <Icon className="h-4 w-4" aria-hidden />
                           </span>
                           {label}
@@ -171,10 +171,10 @@ export default function FinalCTA() {
                     ))}
                   </ul>
 
-                  <div className="mt-10 rounded-2xl border border-white/10 bg-black/20 p-4 backdrop-blur-md">
+                  <div className="mt-10 rounded-[1.5rem] border border-white/10 bg-black/20 p-4 backdrop-blur-md">
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/50">Office hours</p>
-                    <p className="mt-1.5 text-sm text-white/80">Mon – Fri · 09:00 – 18:00 GMT</p>
-                    <p className="text-sm text-white/80">Sat · 10:00 – 16:00 GMT</p>
+                    <p className="mt-1.5 text-sm text-white/80">Mon–Fri · 09:00–18:00 GMT</p>
+                    <p className="text-sm text-white/80">Sat · 10:00–16:00 GMT</p>
                   </div>
                 </div>
               </div>
@@ -263,8 +263,8 @@ export default function FinalCTA() {
                       <select id="budget" name="budget" defaultValue="" className="field">
                         <option value="">Not sure yet</option>
                         <option>Under £5k</option>
-                        <option>£5k – £15k</option>
-                        <option>£15k – £40k</option>
+                        <option>£5k–£15k</option>
+                        <option>£15k–£40k</option>
                         <option>£40k+</option>
                       </select>
                     </div>
@@ -301,7 +301,7 @@ export default function FinalCTA() {
                           </>
                         ) : (
                           <>
-                            Send message <ArrowRight className="h-4 w-4" aria-hidden />
+                            Send message <ChevronRight className="h-4 w-4" aria-hidden />
                           </>
                         )}
                       </Button>

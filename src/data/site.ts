@@ -69,11 +69,11 @@ export const SITE = {
 };
 
 export const NAV_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Work", href: "#work" },
-  { label: "Why Us", href: "#why-lubech" },
-  { label: "Team", href: "#team" },
+  { label: "Services", href: "/#services" },
+  { label: "Process", href: "/#process" },
+  { label: "Work", href: "/#work" },
+  { label: "Why Us", href: "/#why-lubech" },
+  { label: "Team", href: "/#team" },
 ];
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
@@ -90,9 +90,14 @@ export const STATS: Stat[] = [
 export const SERVICES: Service[] = [
   {
     id: "web",
+    slug: "webdevelopment",
     title: "Web Development",
     description:
       "High-performance websites and web apps built with React and Next.js — fast, accessible, SEO-ready and designed to convert.",
+    pageIntro:
+      "From marketing sites to complex web platforms, we design and build the full front-end — and the full stack behind it. Every page is performance-tuned, accessible and optimised to turn visitors into customers.",
+    pageIncludedHighlight: "website",
+    pageCtaHighlight: "build your website",
     icon: Code2,
     accent: "blue",
     features: [
@@ -104,9 +109,14 @@ export const SERVICES: Service[] = [
   },
   {
     id: "mobile",
+    slug: "mobileapps",
     title: "Mobile Apps",
     description:
       "Cross-platform iOS and Android apps with React Native and Flutter — native feel, one codebase, shipped to both stores.",
+    pageIntro:
+      "One codebase, both stores, native feel. We build cross-platform apps your users will actually keep on their home screen — with payments, maps, push notifications and offline-first sync baked in from day one.",
+    pageIncludedHighlight: "app",
+    pageCtaHighlight: "build your app",
     icon: Smartphone,
     accent: "sky",
     features: [
@@ -118,9 +128,14 @@ export const SERVICES: Service[] = [
   },
   {
     id: "backend",
+    slug: "backendsystems",
     title: "Backend Systems",
     description:
       "Secure, scalable APIs, databases and cloud infrastructure that quietly power everything your product needs to do.",
+    pageIntro:
+      "The invisible half of your product, done right. We architect secure, scalable APIs and data layers — then deploy, monitor and scale them so your front-end never has to worry about what happens at 3am.",
+    pageIncludedHighlight: "backend",
+    pageCtaHighlight: "build your backend",
     icon: Server,
     accent: "cyan",
     features: [
@@ -137,10 +152,16 @@ export const SERVICES: Service[] = [
 export const AUDIENCES: Audience[] = [
   {
     id: "startups",
+    slug: "build-my-mvp",
     eyebrow: "For Startups & Founders",
     title: "Launch your MVP fast — without cutting corners.",
     description:
       "You have the vision and the urgency. We bring a senior product team that turns your idea into a polished, investor-ready product in weeks, not months.",
+    pageTitle: "Build your MVP",
+    pageIntro:
+      "From first call to a polished, investor-ready product — we scope, design and ship your MVP in weeks. A senior product team, weekly demos, and an architecture that's ready for the scale-up.",
+    pageIncludedHighlight: "launch",
+    pageCtaHighlight: "build your MVP",
     icon: Rocket,
     points: [
       "MVP scoping & rapid prototyping",
@@ -152,10 +173,17 @@ export const AUDIENCES: Audience[] = [
   },
   {
     id: "businesses",
+    slug: "scale-my-platform",
     eyebrow: "For Growing Businesses",
     title: "Modernise, automate and scale with confidence.",
     description:
       "Your business has outgrown its tools. We rebuild legacy platforms, connect your systems and deliver software your customers and teams love to use.",
+    pageTitle: "Scale your platform",
+    pageIntro:
+      "Your business has outgrown its tools. We modernise legacy platforms, connect the systems you already run, and ship software your customers and teams will actually love using — without stopping the machine while we do it.",
+    pageIncludedHighlight: "grow",
+    pageProcessTitle: "How we'll modernise, connect and scale",
+    pageCtaHighlight: "scale your platform",
     icon: Building2,
     points: [
       "Legacy platform modernisation",
@@ -300,6 +328,35 @@ export const PROJECTS: Project[] = [
     technologies: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
     category: "web",
     liveUrl: "https://www.mashongatea.com",
+  },
+  {
+    id: "gill-international-school",
+    title: "Gill International School",
+    description:
+      "Complete website for a Cambridge International school in Najjera, Kampala — admissions with enquiry form, termly fees, staff directory, events calendar and filterable gallery.",
+    image: "/projects/gill-international-school.webp",
+    technologies: ["HTML", "CSS", "JavaScript", "OpenStreetMap"],
+    category: "web",
+    liveUrl: "https://gill.ac.ug",
+  },
+  {
+    id: "chikwafu",
+    title: "Chikwafu Technology",
+    description:
+      "E-commerce store for home appliances in Kampala — genuine stock, real pricing, same-day delivery and ordering online or straight over WhatsApp.",
+    image: "/projects/chikwafu.webp",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
+    category: "web",
+    liveUrl: "https://chikwafu.com",
+  },
+  {
+    id: "actualisation-project",
+    title: "The Actualisation Project",
+    description:
+      "Immersive wellness website for a spiritual growth community — “a space for real connection” for those ready to go deeper, with programmes and a contact flow.",
+    image: "/projects/actualisation-project.webp?v=2",
+    technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
+    category: "web",
   },
   {
     id: "glam-n-go",
@@ -452,29 +509,63 @@ export const TEAM: TeamMember[] = [
 
 /* ── Testimonials ────────────────────────────────────────────────────────── */
 
+/*
+ * Ordered like the old lubech.tech site: row 1 = [0..2] (scrolls left),
+ * row 2 = [3..5] (scrolls right) — see components/sections/Reviews.tsx.
+ */
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: "1",
+    name: "Sarah Johnson",
+    role: "CEO",
+    company: "Labour Experts",
+    content:
+      "Lubech transformed our vision into a powerful platform. Their expertise in web development and attention to detail exceeded our expectations. The team delivered on time and within budget.",
+    rating: 5,
+  },
+  {
+    id: "2",
     name: "Barbara Kenyana",
     role: "Founder",
     company: "Glam n' Go",
     content:
       "Working with Lubech was a game-changer. They built our e-commerce app with such professionalism and care. Our app has over 5K downloads and growing.",
+    rating: 5,
   },
   {
-    id: "2",
+    id: "3",
     name: "James Ochen",
     role: "Director",
     company: "Tuwe Technologies",
     content:
       "The team understood our community management needs perfectly and created a robust platform that serves thousands of users. Their backend expertise is outstanding.",
+    rating: 5,
   },
   {
-    id: "3",
+    id: "4",
+    name: "Emily Rodriguez",
+    role: "Director",
+    company: "Ordnancity",
+    content:
+      "Lubech's technical skills and creative approach helped us build a cutting-edge city management platform. Their support throughout the project was exceptional.",
+    rating: 5,
+  },
+  {
+    id: "5",
     name: "Isaac Sekatawa",
     role: "Co-Founder",
     company: "Easy Gas",
     content:
       "From concept to launch, Lubech was with us every step of the way. Our delivery app is now live on both stores and users love it. Truly world-class work.",
+    rating: 5,
+  },
+  {
+    id: "6",
+    name: "Amara Jaffer",
+    role: "Owner",
+    company: "Cafe Jaf'n",
+    content:
+      "We needed a food ordering app fast, and Lubech delivered beyond what we imagined. Clean UI, smooth payments, and zero issues after launch. Amazing team.",
+    rating: 5,
   },
 ];

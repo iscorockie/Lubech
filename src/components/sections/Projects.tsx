@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import { ArrowUpRight, Globe, Smartphone } from "lucide-react";
+import { ChevronRight, Globe, Smartphone } from "lucide-react";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import SectionHeader from "@/components/ui/SectionHeader";
 import SplitText from "@/components/ui/SplitText";
@@ -23,7 +24,7 @@ const FILTERS: { id: Filter; label: string }[] = [
 ];
 
 /** Stylised phone mock-up used for mobile projects without a screenshot. */
-function PhoneArt({ project }: { project: Project }) {
+export function PhoneArt({ project }: { project: Project }) {
   const initials =
     project.mock?.initials ??
     project.title
@@ -40,13 +41,13 @@ function PhoneArt({ project }: { project: Project }) {
     >
       <div className="absolute inset-0 bg-[url('/stars.svg')] bg-[length:600px_600px] opacity-30" />
       {/* floating accent chips */}
-      <span aria-hidden className="absolute left-[12%] top-[22%] h-10 w-10 rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-md" style={{ animation: "float 7s ease-in-out infinite" }} />
+      <span aria-hidden className="absolute left-[12%] top-[22%] h-10 w-10 rounded-[1.25rem] border border-white/10 bg-white/[0.06] backdrop-blur-md" style={{ animation: "float 7s ease-in-out infinite" }} />
       <span aria-hidden className="absolute right-[12%] top-[38%] h-7 w-7 rounded-full border border-sky-300/30 bg-sky-500/20 backdrop-blur-md" style={{ animation: "float 9s ease-in-out infinite 1.5s" }} />
 
-      <div className="relative h-[86%] w-[46%] translate-y-6 rounded-[2rem] border border-white/15 bg-[#0a0a12] p-2 shadow-[0_30px_80px_-20px_rgba(14,165,233,0.6)] transition-transform duration-700 group-hover:-translate-y-1 group-hover:rotate-[-2deg]">
-        <div className={cn("flex h-full flex-col rounded-[1.5rem] bg-gradient-to-b p-3", gradient)}>
+      <div className="relative h-[86%] w-[46%] translate-y-6 rounded-[2.5rem] border border-white/15 bg-[#0a0a12] p-2 shadow-[0_30px_80px_-20px_rgba(14,165,233,0.6)] transition-transform duration-700 group-hover:-translate-y-1 group-hover:rotate-[-2deg]">
+        <div className={cn("flex h-full flex-col rounded-[2rem] bg-gradient-to-b p-3", gradient)}>
           <span className="mx-auto mt-1 h-1.5 w-12 rounded-full bg-black/60" />
-          <div className="mt-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-white font-heading text-sm font-extrabold text-blue-700 shadow-lg">
+          <div className="mt-5 flex h-11 w-11 items-center justify-center rounded-[1.25rem] bg-white font-heading text-sm font-extrabold text-blue-700 shadow-lg">
             {initials}
           </div>
           <div className="mt-4 space-y-2">
@@ -54,8 +55,8 @@ function PhoneArt({ project }: { project: Project }) {
             <span className="block h-2 w-1/2 rounded-full bg-white/40" />
           </div>
           <div className="mt-auto grid grid-cols-2 gap-2">
-            <span className="h-12 rounded-xl bg-white/15" />
-            <span className="h-12 rounded-xl bg-white/15" />
+            <span className="h-12 rounded-[1.25rem] bg-white/15" />
+              <span className="h-12 rounded-[1.25rem] bg-white/15" />
           </div>
         </div>
       </div>
@@ -65,7 +66,6 @@ function PhoneArt({ project }: { project: Project }) {
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const isWeb = project.category === "web";
-  const primaryHref = project.liveUrl ?? project.playStoreUrl ?? project.appStoreUrl ?? "#contact";
 
   return (
     <motion.article
@@ -76,14 +76,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       transition={{ duration: 0.55, ease: EASE, delay: Math.min(index, 5) * 0.06 }}
       className="glow-card group flex flex-col overflow-hidden"
     >
-      {/* Thumbnail */}
-      <a
-        href={primaryHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="relative block aspect-[16/11] overflow-hidden rounded-t-[1.5rem] border-b border-white/[0.06]"
+      {/* Thumbnail — opens the project's own page */}
+      <Link
+        href={`/project/${project.id}`}
+        aria-label={`View the ${project.title} case study`}
+        className="relative block aspect-[16/11] overflow-hidden rounded-t-[2rem] border-b border-white/[0.06]"
       >
-        <span className="sr-only">Open {project.title} (opens in a new tab)</span>
+        <span className="sr-only">View the {project.title} case study</span>
         {project.image ? (
           <Image
             src={project.image}
@@ -106,9 +105,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </span>
 
         <span className="absolute right-4 top-4 flex h-9 w-9 translate-y-1 items-center justify-center rounded-full bg-white text-[#0a0a12] opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-          <ArrowUpRight className="h-4 w-4" aria-hidden />
+          <ChevronRight className="h-4 w-4" aria-hidden />
         </span>
-      </a>
+      </Link>
 
       {/* Body */}
       <div className="flex flex-1 flex-col p-6">
@@ -136,7 +135,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-sky-200/90 transition-colors hover:text-white"
             >
-              View live <ArrowUpRight className="h-4 w-4" aria-hidden />
+              View live <ChevronRight className="h-4 w-4" aria-hidden />
             </a>
           ) : null}
           {project.appStoreUrl ? (
@@ -203,7 +202,7 @@ export default function Projects() {
             viewport={viewportReplay}
             transition={{ duration: 0.5 }}
             className="mx-auto mt-10 flex w-fit items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] p-1 backdrop-blur-md"
-            role="tablist"
+            role="group"
             aria-label="Filter projects"
           >
             {FILTERS.map((f) => {
@@ -211,8 +210,7 @@ export default function Projects() {
               return (
                 <button
                   key={f.id}
-                  role="tab"
-                  aria-selected={active}
+                  aria-pressed={active}
                   type="button"
                   onClick={() => {
                     setFilter(f.id);

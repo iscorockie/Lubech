@@ -70,13 +70,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
   if (!EMAIL_RE.test(email)) {
-    return NextResponse.json({ error: "Please enter a valid e-mail address" }, { status: 400 });
+    return NextResponse.json({ error: "Please enter a valid email address" }, { status: 400 });
   }
 
   if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
     console.error("Contact form: SMTP_* environment variables are not configured");
     return NextResponse.json(
-      { error: "The contact form is temporarily unavailable. Please e-mail us directly." },
+      { error: "The contact form is temporarily unavailable. Please email us directly." },
       { status: 503 },
     );
   }

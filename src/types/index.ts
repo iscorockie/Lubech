@@ -11,8 +11,14 @@ export type Icon = ComponentType<IconProps>;
 
 export interface Service {
   id: string;
+  slug: string;
   title: string;
   description: string;
+  pageIntro?: string;
+  /** Gradient word in "Everything your <word> needs". */
+  pageIncludedHighlight?: string;
+  /** Gradient phrase in the final CTA: "Ready to <phrase>?" */
+  pageCtaHighlight?: string;
   icon: Icon;
   features: string[];
   accent: "blue" | "sky" | "cyan";
@@ -20,9 +26,18 @@ export interface Service {
 
 export interface Audience {
   id: string;
+  slug?: string;
   eyebrow: string;
   title: string;
   description: string;
+  pageTitle?: string;
+  pageIntro?: string;
+  /** Gradient highlight word in "Everything you need to <word>". */
+  pageIncludedHighlight?: string;
+  /** Custom process heading; falls back to the default "from idea to live" one. */
+  pageProcessTitle?: string;
+  /** Gradient highlight in the final CTA: "Ready to <word>?" */
+  pageCtaHighlight?: string;
   icon: Icon;
   points: string[];
   cta: string;
@@ -86,4 +101,5 @@ export interface Testimonial {
   role: string;
   company: string;
   content: string;
+  rating?: number;
 }

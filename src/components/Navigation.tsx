@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ChevronRight, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/lib/hooks";
 import { NAV_LINKS } from "@/data/site";
 import { EASE } from "@/lib/animations";
+
+const MotionLink = motion.create(Link);
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
@@ -60,7 +63,7 @@ export default function Navigation() {
           )}
         >
           {/* Brand */}
-          <a href="#home" className="group flex shrink-0 items-center gap-2" aria-label="Lubech — home">
+          <Link href="/" className="group flex shrink-0 items-center gap-2" aria-label="Lubech — home">
             <span className="relative block h-8 w-[104px] sm:h-9 sm:w-[118px]">
               <Image
                 src="/techvector.svg"
@@ -71,33 +74,33 @@ export default function Navigation() {
                 className="object-contain object-left"
               />
             </span>
-          </a>
+          </Link>
 
           {/* Desktop links */}
           <ul className="hidden items-center gap-1 md:flex">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   className="relative rounded-full px-4 py-2 text-sm font-medium text-white/65 transition-colors hover:text-white"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
 
           {/* CTA */}
           <div className="flex items-center gap-2">
-            <motion.a
-              href="#contact"
+            <MotionLink
+              href="/#contact"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="btn-gradient hidden items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold md:inline-flex"
+              className="btn-ghost hidden items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold md:inline-flex"
             >
               Start a project
-              <ArrowRight className="h-4 w-4" aria-hidden />
-            </motion.a>
+              <ChevronRight className="h-4 w-4" aria-hidden />
+            </MotionLink>
 
             <button
               type="button"
@@ -139,26 +142,26 @@ export default function Navigation() {
                   key={link.href}
                   variants={{ hidden: { opacity: 0, x: -16 }, visible: { opacity: 1, x: 0 } }}
                 >
-                  <a
+                  <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
                     className="block py-3 font-display text-3xl font-semibold text-white/85 transition-colors hover:text-white"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
               <motion.li
                 variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}
                 className="mt-6"
               >
-                <a
-                  href="#contact"
+                <Link
+                  href="/#contact"
                   onClick={() => setOpen(false)}
                   className="btn-gradient inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-semibold"
                 >
-                  Start Your Project <ArrowRight className="h-4 w-4" aria-hidden />
-                </a>
+                  Start a project <ChevronRight className="h-4 w-4" aria-hidden />
+                </Link>
               </motion.li>
             </motion.ul>
           </motion.div>

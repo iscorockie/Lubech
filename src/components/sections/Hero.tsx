@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Play, Sparkles } from "lucide-react";
+import { ChevronRight, Play, Sparkles } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { Orb } from "@/components/ui/Orbs";
 import SplitText, { Accent } from "@/components/ui/SplitText";
@@ -174,12 +174,12 @@ export default function Hero() {
             className="mt-[min(2.5rem,4.8vh)] flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
           >
             <Button href="#contact" size="lg" className="w-full sm:w-auto">
-              Start Your Project
-              <ArrowRight className="h-4 w-4" aria-hidden />
+              Start a project
+              <ChevronRight className="h-4 w-4" aria-hidden />
             </Button>
             <Button href="#work" variant="ghost" size="lg" className="w-full sm:w-auto">
               <Play className="h-4 w-4 fill-current" aria-hidden />
-              See Our Work
+              See our work
             </Button>
           </motion.div>
 
