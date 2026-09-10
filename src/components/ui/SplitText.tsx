@@ -85,7 +85,19 @@ type Line = Token[];
 function tokenize(children: ReactNode, inherited?: string): Line[] {
   const lines: Line[] = [[]];
   let n = 0;
-  const push = (word: string, cls?: string) => lines[lines.length - 1].push({ word, className: cls, key: `${word}-${n++}` });
+  let lead = ""; // punctuation that arrived before the first real word (e.g. an opening quote)
+  const push = (word: string, cls?: string) => {
+    const line = lines[lines.length - 1];
+    if (!/\p{L}|\p{N}/u.test(word)) {
+      // Punctuation-only fragment (e.g. the "?" after an inline <span>): glue it to an
+      // adjacent word so it can never animate — or space itself — as a standalone word.
+      if (line.length) line[line.length - 1].word += word;
+      else lead += word;
+      return;
+    }
+    line.push({ word: lead + word, className: cls, key: `${lead + word}-${n++}` });
+    lead = "";
+  };
   const walk = (node: ReactNode, cls?: string) => {
     Children.forEach(node, (child) => {
       if (child == null || typeof child === "boolean") return;

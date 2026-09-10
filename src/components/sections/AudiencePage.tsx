@@ -72,7 +72,7 @@ export default function AudiencePage({ slug }: { slug: string }) {
                 className="mt-9 flex flex-wrap items-center justify-center gap-4"
               >
                 <Link href="/#contact" className="btn-gradient rounded-full px-7 py-3 text-sm font-semibold">
-                  Start your project
+                  Start a project
                 </Link>
                 <Link href="/#work" className="btn-ghost rounded-full px-7 py-3 text-sm font-semibold">
                   See our work

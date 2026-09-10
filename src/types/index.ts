@@ -15,6 +15,10 @@ export interface Service {
   title: string;
   description: string;
   pageIntro?: string;
+  /** Gradient word in "Everything your <word> needs". */
+  pageIncludedHighlight?: string;
+  /** Gradient phrase in the final CTA: "Ready to <phrase>?" */
+  pageCtaHighlight?: string;
   icon: Icon;
   features: string[];
   accent: "blue" | "sky" | "cyan";

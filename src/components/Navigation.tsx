@@ -160,7 +160,7 @@ export default function Navigation() {
                   onClick={() => setOpen(false)}
                   className="btn-gradient inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-semibold"
                 >
-                  Start Your Project <ArrowRight className="h-4 w-4" aria-hidden />
+                  Start a project <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </motion.li>
             </motion.ul>

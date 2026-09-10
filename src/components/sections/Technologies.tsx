@@ -9,16 +9,16 @@ import { cn } from "@/lib/utils";
 
 function TechChip({ name, icon: Icon, color }: Technology) {
   return (
-    <li
-      className="group flex shrink-0 items-center gap-3 rounded-full border border-white/[0.08] bg-white/[0.03] py-2.5 pl-3 pr-5 backdrop-blur-sm transition-all duration-300 hover:border-sky-400/40 hover:bg-white/[0.06] hover:shadow-[0_0_28px_-8px_rgba(14,165,233,0.6)]"
-    >
-      <span
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0a0a12] ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-110"
-        style={{ color }}
-      >
-        <Icon className="h-[18px] w-[18px]" aria-hidden />
-      </span>
-      <span className="whitespace-nowrap text-sm font-semibold text-white/80">{name}</span>
+    <li className="shrink-0 pr-3">
+      <div className="group flex items-center gap-3 rounded-full border border-white/[0.08] bg-white/[0.03] py-2.5 pl-3 pr-5 backdrop-blur-sm transition-all duration-300 hover:border-sky-400/40 hover:bg-white/[0.06] hover:shadow-[0_0_28px_-8px_rgba(14,165,233,0.6)]">
+        <span
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0a0a12] ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-110"
+          style={{ color }}
+        >
+          <Icon className="h-[18px] w-[18px]" aria-hidden />
+        </span>
+        <span className="whitespace-nowrap text-sm font-semibold text-white/80">{name}</span>
+      </div>
     </li>
   );
 }
@@ -29,7 +29,7 @@ function MarqueeRow({ items, reverse = false }: { items: Technology[]; reverse?:
     <div className="fade-x relative overflow-hidden py-2">
       <ul
         className={cn(
-          "flex w-max gap-3 hover:[animation-play-state:paused]",
+          "flex w-max hover:[animation-play-state:paused]",
           reverse ? "animate-marquee-reverse" : "animate-marquee",
         )}
         aria-label={reverse ? "More technologies" : "Technologies"}

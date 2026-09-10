@@ -72,7 +72,7 @@ export default function ServicePage({ slug }: { slug: string }) {
                 className="mt-9 flex flex-wrap items-center justify-center gap-4"
               >
                 <Link href="/#contact" className="btn-gradient rounded-full px-7 py-3 text-sm font-semibold">
-                  Start your project
+                  Start a project
                 </Link>
                 <Link href="/#work" className="btn-ghost rounded-full px-7 py-3 text-sm font-semibold">
                   See our work
@@ -102,7 +102,11 @@ export default function ServicePage({ slug }: { slug: string }) {
                 id="included-title"
                 className="mt-5 text-3xl font-bold leading-[1.1] text-white sm:text-4xl md:text-5xl"
               >
-                Everything your <span className="text-gradient">{service.title.toLowerCase()}</span> needs
+                Everything your{" "}
+                <span className="text-gradient">
+                  {service.pageIncludedHighlight ?? service.title.toLowerCase()}
+                </span>{" "}
+                needs
               </SplitText>
               <SplitText
                 as="p"
@@ -206,7 +210,7 @@ export default function ServicePage({ slug }: { slug: string }) {
                 id="service-cta-title"
                 className="text-3xl font-bold leading-[1.1] text-white sm:text-4xl md:text-5xl"
               >
-                Ready to build your <span className="text-gradient">{service.title.toLowerCase()}</span>?
+                Ready to <span className="text-gradient">{service.pageCtaHighlight ?? `build your ${service.title.toLowerCase()}`}</span>?
               </SplitText>
               <SplitText
                 as="p"

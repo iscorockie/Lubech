@@ -21,8 +21,8 @@ function validate(data: Record<string, FormDataEntryValue>): FieldErrors {
   const errors: FieldErrors = {};
   const text = (k: string) => (typeof data[k] === "string" ? (data[k] as string).trim() : "");
   if (!text("name")) errors.name = "Please tell us your name.";
-  if (!text("email")) errors.email = "Please enter your e-mail address.";
-  else if (!EMAIL_RE.test(text("email"))) errors.email = "That e-mail address doesn't look right.";
+  if (!text("email")) errors.email = "Please enter your email address.";
+  else if (!EMAIL_RE.test(text("email"))) errors.email = "That email address doesn't look right.";
   if (!text("project")) errors.project = "Please pick a project type.";
   if (!text("message")) errors.message = "Please tell us a little about the project.";
   return errors;
@@ -121,7 +121,7 @@ export default function FinalCTA() {
 
           <motion.div variants={fadeUp} custom={0.8} className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button href="#project-form" size="lg" className="w-full sm:w-auto">
-              Start Your Project <ArrowRight className="h-4 w-4" aria-hidden />
+              Start a project <ArrowRight className="h-4 w-4" aria-hidden />
             </Button>
             <Button href={SITE.whatsapp} external variant="ghost" size="lg" className="w-full sm:w-auto">
               <MessageCircle className="h-4 w-4" aria-hidden /> Chat on WhatsApp
@@ -173,8 +173,8 @@ export default function FinalCTA() {
 
                   <div className="mt-10 rounded-2xl border border-white/10 bg-black/20 p-4 backdrop-blur-md">
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/50">Office hours</p>
-                    <p className="mt-1.5 text-sm text-white/80">Mon – Fri · 09:00 – 18:00 GMT</p>
-                    <p className="text-sm text-white/80">Sat · 10:00 – 16:00 GMT</p>
+                    <p className="mt-1.5 text-sm text-white/80">Mon–Fri · 09:00–18:00 GMT</p>
+                    <p className="text-sm text-white/80">Sat · 10:00–16:00 GMT</p>
                   </div>
                 </div>
               </div>
@@ -263,8 +263,8 @@ export default function FinalCTA() {
                       <select id="budget" name="budget" defaultValue="" className="field">
                         <option value="">Not sure yet</option>
                         <option>Under £5k</option>
-                        <option>£5k – £15k</option>
-                        <option>£15k – £40k</option>
+                        <option>£5k–£15k</option>
+                        <option>£15k–£40k</option>
                         <option>£40k+</option>
                       </select>
                     </div>

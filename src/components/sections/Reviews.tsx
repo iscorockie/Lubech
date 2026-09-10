@@ -57,17 +57,19 @@ function MarqueeRow({
 
   return (
     <div className="fade-x overflow-hidden py-2.5">
+      {/* Spacing is trailing padding (not gap) so the -50% loop lands exactly on
+          the duplicate set — a flex gap would leave a half-gap seam per cycle. */}
       <ul
         aria-label={label}
         className={cn(
-          "flex w-max gap-5 hover:[animation-play-state:paused]",
+          "flex w-max hover:[animation-play-state:paused]",
           reverse ? "animate-marquee-reverse" : "animate-marquee",
         )}
       >
         {doubled.map((t, i) => (
           <li
             key={`${t.id}-${i}`}
-            className="w-[21rem] shrink-0 sm:w-[24rem]"
+            className="w-[21rem] shrink-0 pr-5 sm:w-[24rem]"
             aria-hidden={i >= items.length || undefined}
           >
             <TestimonialCard t={t} />
