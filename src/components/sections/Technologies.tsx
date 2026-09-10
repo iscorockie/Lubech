@@ -84,7 +84,7 @@ export default function Technologies() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportReplay}
             transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 text-center"
+            className="rounded-[1.5rem] border border-white/[0.06] bg-white/[0.02] px-5 py-4 text-center"
           >
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-sky-200/80">{label}</p>
             <p className="mt-1.5 text-sm text-white/55">{stack}</p>

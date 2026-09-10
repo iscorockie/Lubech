@@ -70,7 +70,7 @@ export default function WhoItsFor() {
                   {points.map((p) => (
                     <li
                       key={p}
-                      className="flex items-start gap-3 rounded-xl border border-white/[0.06] bg-white/[0.025] px-3.5 py-3 text-sm text-white/75"
+                      className="flex items-start gap-3 rounded-[1.25rem] border border-white/[0.06] bg-white/[0.025] px-3.5 py-3 text-sm text-white/75"
                     >
                       <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-700 shadow-[0_0_12px_rgba(14,165,233,0.6)]">
                         <Check className="h-3 w-3 text-white" strokeWidth={3} aria-hidden />

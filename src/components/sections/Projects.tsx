@@ -40,13 +40,13 @@ function PhoneArt({ project }: { project: Project }) {
     >
       <div className="absolute inset-0 bg-[url('/stars.svg')] bg-[length:600px_600px] opacity-30" />
       {/* floating accent chips */}
-      <span aria-hidden className="absolute left-[12%] top-[22%] h-10 w-10 rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-md" style={{ animation: "float 7s ease-in-out infinite" }} />
+      <span aria-hidden className="absolute left-[12%] top-[22%] h-10 w-10 rounded-[1.25rem] border border-white/10 bg-white/[0.06] backdrop-blur-md" style={{ animation: "float 7s ease-in-out infinite" }} />
       <span aria-hidden className="absolute right-[12%] top-[38%] h-7 w-7 rounded-full border border-sky-300/30 bg-sky-500/20 backdrop-blur-md" style={{ animation: "float 9s ease-in-out infinite 1.5s" }} />
 
-      <div className="relative h-[86%] w-[46%] translate-y-6 rounded-[2rem] border border-white/15 bg-[#0a0a12] p-2 shadow-[0_30px_80px_-20px_rgba(14,165,233,0.6)] transition-transform duration-700 group-hover:-translate-y-1 group-hover:rotate-[-2deg]">
-        <div className={cn("flex h-full flex-col rounded-[1.5rem] bg-gradient-to-b p-3", gradient)}>
+      <div className="relative h-[86%] w-[46%] translate-y-6 rounded-[2.5rem] border border-white/15 bg-[#0a0a12] p-2 shadow-[0_30px_80px_-20px_rgba(14,165,233,0.6)] transition-transform duration-700 group-hover:-translate-y-1 group-hover:rotate-[-2deg]">
+        <div className={cn("flex h-full flex-col rounded-[2rem] bg-gradient-to-b p-3", gradient)}>
           <span className="mx-auto mt-1 h-1.5 w-12 rounded-full bg-black/60" />
-          <div className="mt-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-white font-heading text-sm font-extrabold text-blue-700 shadow-lg">
+          <div className="mt-5 flex h-11 w-11 items-center justify-center rounded-[1.25rem] bg-white font-heading text-sm font-extrabold text-blue-700 shadow-lg">
             {initials}
           </div>
           <div className="mt-4 space-y-2">
@@ -54,8 +54,8 @@ function PhoneArt({ project }: { project: Project }) {
             <span className="block h-2 w-1/2 rounded-full bg-white/40" />
           </div>
           <div className="mt-auto grid grid-cols-2 gap-2">
-            <span className="h-12 rounded-xl bg-white/15" />
-            <span className="h-12 rounded-xl bg-white/15" />
+            <span className="h-12 rounded-[1.25rem] bg-white/15" />
+              <span className="h-12 rounded-[1.25rem] bg-white/15" />
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         href={primaryHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative block aspect-[16/11] overflow-hidden rounded-t-[1.5rem] border-b border-white/[0.06]"
+        className="relative block aspect-[16/11] overflow-hidden rounded-t-[2rem] border-b border-white/[0.06]"
       >
         <span className="sr-only">Open {project.title} (opens in a new tab)</span>
         {project.image ? (

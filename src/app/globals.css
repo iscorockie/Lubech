@@ -269,7 +269,7 @@
   :focus-visible {
     outline: 2px solid rgba(125, 211, 252, 0.8);
     outline-offset: 3px;
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
   }
 
   ::-webkit-scrollbar {
@@ -349,7 +349,7 @@
   .glow-card {
     position: relative;
     isolation: isolate;
-    border-radius: 1.5rem;
+    border-radius: 2rem;
     background:
       linear-gradient(
         180deg,
@@ -452,7 +452,7 @@
     justify-content: center;
     width: 3.25rem;
     height: 3.25rem;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     color: #bae6fd;
     background:
       linear-gradient(#111120, #111120) padding-box,
@@ -658,7 +658,7 @@
   /* Form controls */
   .field {
     width: 100%;
-    border-radius: 0.9rem;
+    border-radius: 1.25rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.04);
     padding: 0.8rem 1rem;

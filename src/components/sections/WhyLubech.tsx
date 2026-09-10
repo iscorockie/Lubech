@@ -39,7 +39,7 @@ export default function WhyLubech() {
         >
           {REASONS.map(({ title, description, icon: Icon }) => (
             <GlowCard key={title} as="article" className="group p-6 sm:p-7">
-              <span className="icon-tile !h-12 !w-12 !rounded-2xl">
+              <span className="icon-tile !h-12 !w-12 !rounded-[1.5rem]">
                 <Icon className="h-5 w-5" aria-hidden />
               </span>
               <SplitText as="h3" delay={0.2} className="mt-6 font-heading text-lg font-bold text-white">
@@ -56,9 +56,9 @@ export default function WhyLubech() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportReplay}
-          className="relative mt-16 overflow-hidden rounded-[1.75rem] border border-sky-400/20 bg-gradient-to-r from-blue-900/30 via-sky-900/20 to-cyan-900/30 p-1 shadow-[0_0_80px_-30px_rgba(14,165,233,0.7)]"
+          className="relative mt-16 overflow-hidden rounded-[2.25rem] border border-sky-400/20 bg-gradient-to-r from-blue-900/30 via-sky-900/20 to-cyan-900/30 p-1 shadow-[0_0_80px_-30px_rgba(14,165,233,0.7)]"
         >
-          <div className="grid gap-px overflow-hidden rounded-[1.5rem] bg-white/[0.04] sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-px overflow-hidden rounded-[2rem] bg-white/[0.04] sm:grid-cols-2 lg:grid-cols-4">
             {STATS.map((s, i) => (
               <div key={s.label} className="bg-[#0a0a12]/80 px-6 py-8 text-center backdrop-blur-xl">
                 <p className="font-display text-4xl font-extrabold">

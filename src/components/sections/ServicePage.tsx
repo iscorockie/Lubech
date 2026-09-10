@@ -181,9 +181,9 @@ export default function ServicePage({ slug }: { slug: string }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewportReplay}
               transition={{ duration: 0.7 }}
-              className="relative overflow-hidden rounded-[1.75rem] border border-sky-400/20 bg-gradient-to-r from-blue-900/30 via-sky-900/20 to-cyan-900/30 p-1 shadow-[0_0_80px_-30px_rgba(14,165,233,0.7)]"
+              className="relative overflow-hidden rounded-[2.25rem] border border-sky-400/20 bg-gradient-to-r from-blue-900/30 via-sky-900/20 to-cyan-900/30 p-1 shadow-[0_0_80px_-30px_rgba(14,165,233,0.7)]"
             >
-              <div className="grid gap-px overflow-hidden rounded-[1.5rem] bg-white/[0.04] sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid gap-px overflow-hidden rounded-[2rem] bg-white/[0.04] sm:grid-cols-2 lg:grid-cols-4">
                 {STATS.map((s, i) => (
                   <div key={s.label} className="bg-[#0a0a12]/80 px-6 py-8 text-center backdrop-blur-xl">
                     <p className="font-display text-4xl font-extrabold">
