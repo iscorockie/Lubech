@@ -102,7 +102,8 @@ export default function AudiencePage({ slug }: { slug: string }) {
                 id="included-title"
                 className="mt-5 text-3xl font-bold leading-[1.1] text-white sm:text-4xl md:text-5xl"
               >
-                Everything you need to <span className="text-gradient">launch</span>
+                Everything you need to{" "}
+                <span className="text-gradient">{audience.pageIncludedHighlight ?? "launch"}</span>
               </SplitText>
               <SplitText
                 as="p"
@@ -144,7 +145,11 @@ export default function AudiencePage({ slug }: { slug: string }) {
                 id="process-title"
                 className="text-3xl font-bold leading-[1.1] text-white sm:text-4xl md:text-5xl"
               >
-                How we&apos;ll take it <span className="text-gradient">from idea to live</span>
+                {audience.pageProcessTitle ?? (
+                  <>
+                    How we&apos;ll take it <span className="text-gradient">from idea to live</span>
+                  </>
+                )}
               </SplitText>
             </div>
 
@@ -206,7 +211,7 @@ export default function AudiencePage({ slug }: { slug: string }) {
                 id="audience-cta-title"
                 className="text-3xl font-bold leading-[1.1] text-white sm:text-4xl md:text-5xl"
               >
-                Ready to <span className="text-gradient">build your MVP</span>?
+                Ready to <span className="text-gradient">{audience.pageCtaHighlight ?? "build your MVP"}</span>?
               </SplitText>
               <SplitText
                 as="p"
@@ -227,7 +232,7 @@ export default function AudiencePage({ slug }: { slug: string }) {
                   href="/#contact"
                   className="btn-gradient inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
                 >
-                  Start your MVP
+                  {audience.cta}
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </motion.div>

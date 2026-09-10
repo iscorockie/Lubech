@@ -154,6 +154,8 @@ export const AUDIENCES: Audience[] = [
     pageTitle: "Build your MVP",
     pageIntro:
       "From first call to a polished, investor-ready product — we scope, design and ship your MVP in weeks. A senior product team, weekly demos, and an architecture that's ready for the scale-up.",
+    pageIncludedHighlight: "launch",
+    pageCtaHighlight: "build your MVP",
     icon: Rocket,
     points: [
       "MVP scoping & rapid prototyping",
@@ -165,10 +167,17 @@ export const AUDIENCES: Audience[] = [
   },
   {
     id: "businesses",
+    slug: "scale-my-platform",
     eyebrow: "For Growing Businesses",
     title: "Modernise, automate and scale with confidence.",
     description:
       "Your business has outgrown its tools. We rebuild legacy platforms, connect your systems and deliver software your customers and teams love to use.",
+    pageTitle: "Scale your platform",
+    pageIntro:
+      "Your business has outgrown its tools. We modernise legacy platforms, connect the systems you already run, and ship software your customers and teams will actually love using — without stopping the machine while we do it.",
+    pageIncludedHighlight: "grow",
+    pageProcessTitle: "How we'll modernise, connect and scale",
+    pageCtaHighlight: "scale your platform",
     icon: Building2,
     points: [
       "Legacy platform modernisation",

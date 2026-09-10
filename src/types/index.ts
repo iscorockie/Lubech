@@ -28,6 +28,12 @@ export interface Audience {
   description: string;
   pageTitle?: string;
   pageIntro?: string;
+  /** Gradient highlight word in "Everything you need to <word>". */
+  pageIncludedHighlight?: string;
+  /** Custom process heading; falls back to the default "from idea to live" one. */
+  pageProcessTitle?: string;
+  /** Gradient highlight in the final CTA: "Ready to <word>?" */
+  pageCtaHighlight?: string;
   icon: Icon;
   points: string[];
   cta: string;
