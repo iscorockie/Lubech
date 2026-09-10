@@ -120,10 +120,41 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Giant watermark */}
+      {/* Giant watermark wordmark — "Lub" + "ech" ringed by a round stroke */}
       <div aria-hidden className="pointer-events-none relative h-24 select-none overflow-hidden sm:h-36">
-        <span className="absolute left-1/2 top-2 -translate-x-1/2 bg-gradient-to-b from-white/[0.07] to-transparent bg-clip-text font-display text-[7rem] font-extrabold leading-none tracking-tighter text-transparent sm:text-[12rem]">
-          LUBECH
+        <span className="absolute left-1/2 top-2 -translate-x-1/2 whitespace-nowrap font-display text-[7rem] font-extrabold leading-none tracking-tighter sm:text-[12rem]">
+          <span className="bg-gradient-to-b from-white/[0.07] to-transparent bg-clip-text text-transparent">
+            Lub
+          </span>
+          <span className="relative inline-block">
+            <span className="bg-gradient-to-b from-white/[0.07] to-transparent bg-clip-text text-transparent">
+              ech
+            </span>
+            {/* round stroke around "ech" — stretched to the text box, uniform
+                2px via non-scaling-stroke, slight hand-set rotation */}
+            <svg
+              className="absolute -inset-x-[0.06em] -inset-y-[0.16em] -rotate-2"
+              viewBox="0 0 200 100"
+              preserveAspectRatio="none"
+            >
+              <ellipse
+                cx="100"
+                cy="52"
+                rx="95"
+                ry="46"
+                fill="none"
+                stroke="url(#lubech-ring)"
+                strokeWidth="2"
+                vectorEffect="non-scaling-stroke"
+              />
+              <defs>
+                <linearGradient id="lubech-ring" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="rgba(255,255,255,0.18)" />
+                  <stop offset="100%" stopColor="rgba(255,255,255,0.04)" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
         </span>
       </div>
     </footer>
