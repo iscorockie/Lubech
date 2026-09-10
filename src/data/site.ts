@@ -340,6 +340,25 @@ export const PROJECTS: Project[] = [
     liveUrl: "https://gill.ac.ug",
   },
   {
+    id: "chikwafu",
+    title: "Chikwafu Technology",
+    description:
+      "E-commerce store for home appliances in Kampala — genuine stock, real pricing, same-day delivery and ordering online or straight over WhatsApp.",
+    image: "/projects/chikwafu.webp",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
+    category: "web",
+    liveUrl: "https://chikwafu.com",
+  },
+  {
+    id: "actualisation-project",
+    title: "The Actualisation Project",
+    description:
+      "Immersive wellness website for a spiritual growth community — “a space for real connection” for those ready to go deeper, with programmes and a contact flow.",
+    image: "/projects/actualisation-project.webp",
+    technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
+    category: "web",
+  },
+  {
     id: "glam-n-go",
     title: "Glam n' Go",
     description:
