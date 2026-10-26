@@ -2,8 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // Allow the sandbox / preview proxy host to load dev assets (HMR, /_next/*).
-  allowedDevOrigins: ["*.e2b.app", "localhost"],
+  // Allow the sandbox / preview proxy host and common local loopback hosts to
+  // load dev assets (HMR, /_next/*).
+  allowedDevOrigins: ["*.e2b.app", "localhost", "127.0.0.1", "[::1]"],
   images: {
     formats: ["image/avif", "image/webp"],
     // Local images are allowed by default, but query strings on them

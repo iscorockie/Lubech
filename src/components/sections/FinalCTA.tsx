@@ -203,6 +203,7 @@ export default function FinalCTA() {
                       <input
                         id="name"
                         name="name"
+                        type="text"
                         required
                         autoComplete="name"
                         placeholder="Jane Doe"

@@ -79,7 +79,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       {/* Thumbnail — opens the project's own page */}
       <Link
         href={`/project/${project.id}`}
-        aria-label={`View the ${project.title} case study`}
+        aria-label={`View the ${project.title} case study — ${isWeb ? "Web app" : "Mobile app"}`}
         className="relative block aspect-[16/10] overflow-hidden rounded-t-[2rem] border-b border-white/[0.06]"
       >
         <span className="sr-only">View the {project.title} case study</span>
