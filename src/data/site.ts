@@ -330,16 +330,6 @@ export const PROJECTS: Project[] = [
     liveUrl: "https://www.mashongatea.com",
   },
   {
-    id: "gill-international-school",
-    title: "Gill International School",
-    description:
-      "Complete website for a Cambridge International school in Najjera, Kampala — admissions with enquiry form, termly fees, staff directory, events calendar and filterable gallery.",
-    image: "/projects/gill-international-school.webp",
-    technologies: ["HTML", "CSS", "JavaScript", "OpenStreetMap"],
-    category: "web",
-    liveUrl: "https://gill.ac.ug",
-  },
-  {
     id: "chikwafu",
     title: "Chikwafu Technology",
     description:
