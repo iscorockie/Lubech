@@ -33,7 +33,7 @@ export default function Footer() {
           <div>
             <Link href="/" aria-label="Lubech — home" className="inline-block">
               <span className="relative block h-10 w-32">
-                <Image src="/techvector.svg" alt="Lubech" fill unoptimized className="object-contain object-left" />
+                <Image src="/techvector.svg" alt="Lubech" fill priority unoptimized className="object-contain object-left" />
               </span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/50">

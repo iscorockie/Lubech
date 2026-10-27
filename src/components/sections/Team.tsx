@@ -166,6 +166,7 @@ export default function Team() {
               alt="Lubech"
               width={267}
               height={82}
+              priority
               className="h-10 w-auto md:h-12"
             />
           </span>
@@ -194,15 +195,14 @@ export default function Team() {
         </div>
 
         {/* Carousel */}
-        <motion.div
+        <motion.section
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={viewportReplay}
           className="relative mt-14"
-          role="region"
           aria-roledescription="carousel"
-          aria-label="Meet the team"
+          aria-label="Team member carousel"
         >
           <div className="overflow-hidden">
             <motion.div
@@ -224,8 +224,11 @@ export default function Team() {
                     key={m.id}
                     className="shrink-0 px-2.5 sm:px-3"
                     style={{ width: `${slideW}%` }}
-                    aria-hidden={!inView || undefined}
+                    role="group"
+                    aria-roledescription="slide"
                     aria-label={`${i + 1} of ${TEAM.length}`}
+                    aria-hidden={!inView || undefined}
+                    inert={!inView || undefined}
                   >
                     <TeamCard m={m} />
                   </div>
@@ -279,7 +282,7 @@ export default function Team() {
             Showing team members {safeIndex + 1}–{Math.min(safeIndex + visible, TEAM.length)} of{" "}
             {TEAM.length}
           </p>
-        </motion.div>
+        </motion.section>
       </div>
     </section>
   );

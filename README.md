@@ -21,6 +21,10 @@ NEXT_PUBLIC_GA_ID=                        # optional – Google Analytics
 NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=     # optional – Search Console "HTML tag" content value
 ```
 
+`three` and `@types/three` are pinned to `0.182.0` because React Three Fiber 9.x still
+constructs `THREE.Clock`, deprecated from Three.js r183. This keeps the console free of the
+upstream deprecation warning until a stable R3F release migrates to `THREE.Timer`.
+
 ## Project structure
 
 ```
